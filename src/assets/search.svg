@@ -1,0 +1,10 @@
+
+<svg width="20px" height="20px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <g id="Foundation" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Elements:-Icons" transform="translate(-1342.000000, -340.000000)" fill="#002F34">
+            <g id="element/icon/search/thick-" transform="translate(1342.000000, 340.000000)">
+                <path d="M8.5,15 C4.916,15 2,12.084 2,8.5 C2,4.916 4.916,2 8.5,2 C12.084,2 15,4.916 15,8.5 C15,12.084 12.084,15 8.5,15 L8.5,15 Z M18.729,17.315 L18.729,17.3155 L15.1685,13.7545 C16.3115,12.3065 17,10.484 17,8.5 C17,3.813 13.187,0 8.5,0 C3.813,0 0,3.813 0,8.5 C0,13.187 3.813,17 8.5,17 C10.4835,17 12.3065,16.3115 13.754,15.1685 L17.9505,19.3645 L18.5855,20 L20,20 L20,18.586 L18.729,17.315 Z" id="Fill-1"></path>
+            </g>
+        </g>
+    </g>
+</svg>
