@@ -7,7 +7,7 @@ const Footer = () => {
 
     return ( 
         <footer className='p-5 bg-[#f1f4f5] text-sm'>
-            <div className='flex gap-40 items-start py-5'>
+            <div className='flex gap-40 items-start py-5 justify-center'>
                 <ul className='flex flex-col gap-2'>
                     <a href=""><li className='mb-2 font-[500]'>INFORMACIJE I KONTAKT</li></a>
                     <a href=""><li>O nama</li></a>
@@ -42,7 +42,7 @@ const Footer = () => {
                     </a>
                 </div>
             </div>
-            <div className='py-5'>
+            <div className='py-5 text-center'>
                 <p>Copyright © 2009 - {date.getFullYear()} Pik d.o.o. Sva prava zadržana.</p>
             </div>
         </footer>

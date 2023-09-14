@@ -9,3 +9,27 @@ body{
 .txt-color{
     color:#002f34;
 }
+.swiper {
+  width: 100%;
+  height: 100%;
+}
+
+
+.swiper-slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.mySwiper{
+  background-color: #002f34;
+  max-height: 600px;
+  font-weight: 600;
+  color: rgb(255, 255, 255);
+}
+.swiper-button-next{
+  color: #fafafa;
+}
+.swiper-button-prev{
+  color: #fafafa;
+}

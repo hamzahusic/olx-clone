@@ -1,0 +1,10 @@
+
+<svg width="20px" height="20px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <g id="Foundation" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Elements:-Icons" transform="translate(-887.000000, -340.000000)" fill="#002F34">
+            <g id="element/icon/message/thick-" transform="translate(887.000000, 340.000000)">
+                <path d="M9,2.01060595 C5.14,2.01060595 2,5.16725728 2,9.04772676 L2,17.4741763 L4.5525,16.190907 L5,16.0848476 L11,16.0848476 C14.86,16.0848476 18,12.9281962 18,9.04772676 C18,5.16725728 14.86,2.01060595 11,2.01060595 L9,2.01060595 Z M1.4475,20 L0,19.1007565 L0,9.04772676 C0,4.05891075 4.0375,0 9,0 L11,0 C15.9625,0 20,4.05891075 20,9.04772676 C20,14.0365428 15.9625,18.0954535 11,18.0954535 L5.236,18.0954535 L1.4475,20 Z" id="Fill-1"></path>
+            </g>
+        </g>
+    </g>
+</svg>

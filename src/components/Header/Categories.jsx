@@ -81,8 +81,8 @@ const Categories = () => {
                 <p className="text-sm font-[600]">Kategorije</p>
             </a>
             {
-                categories.map((categorie) => (
-                    <a href="/" className="flex flex-col justify-center items-center max-w-[100px] max-h-[100px]">
+                categories.map((categorie,index) => (
+                    <a href="/" key={index} className="flex flex-col justify-center items-center max-w-[100px] max-h-[100px]">
                         <div className={`bg-[#3276c0] rounded-full mb-3`}>
                             <img src={categorie.img} className="p-2 hover:scale-110" width={65}/>
                         </div>

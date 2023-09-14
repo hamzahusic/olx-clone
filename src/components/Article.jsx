@@ -1,6 +1,8 @@
-const Article = ({image,title,tags,time,price,available}) => {
+import { Link } from "react-router-dom";
+
+const Article = ({image,title,tags,time,price,available,id}) => {
     return ( 
-        <a href="/" className="shadow-md inline-block rounded-t-md overflow-hidden max-w-[280px] bg-white">
+        <Link to={`/article/${id}`} className="shadow-md inline-block rounded-t-md overflow-hidden max-w-[280px] bg-white">
             <div className="relative">
                 <img src={image} className=" w-full max-w-[280px]"/>
                 {available && <div className="absolute right-0 bottom-0 text-white text-[12px] bg-[#002f34] p-1 rounded-t-sm ">DOSTUPNO ODMAH</div>}
@@ -19,7 +21,7 @@ const Article = ({image,title,tags,time,price,available}) => {
                     <p className="font-bold">{price}</p>
                 </div>
             </div>
-        </a>
+        </Link>
      );
 }
  
