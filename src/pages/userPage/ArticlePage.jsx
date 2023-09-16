@@ -17,11 +17,13 @@ import 'swiper/css/navigation';
 
 
 import { useState } from "react";
+import Article from "../../components/Article";
 
 const ArticlePage = () => {
-
+    const image = "https://images.unsplash.com/photo-1502877338535-766e1452684a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2072&q=80"
     const {id} = useParams();
     const [save,setSave] = useState(false);
+    const [articleImages,setArticleImages] = useState([slikaTest,slikaTest,slikaTest,slikaTest])
     const [artcileInfo,setArticleInfo] = useState([
         {
             name:"Tuzla",
@@ -47,7 +49,91 @@ const ArticlePage = () => {
             value:2507,
         }
     ])
-
+    const [articleDetails,setArticleDetails] = useState([
+        {
+            "name" : "Proizvodjač",
+            "value" : "Volkswagen"
+        },
+        {
+            "name" : "Proizvodjač",
+            "value" : "Volkswagen"
+        },
+        {
+            "name" : "Proizvodjač",
+            "value" : "Volkswagen"
+        },
+        {
+            "name" : "Proizvodjač",
+            "value" : "Volkswagen"
+        },
+        {
+            "name" : "Proizvodjač",
+            "value" : "Volkswagen"
+        },
+        {
+            "name" : "Proizvodjač",
+            "value" : "Volkswagen"
+        },
+        {
+            "name" : "Proizvodjač",
+            "value" : "Volkswagen"
+        },
+    ])
+    const [arcitleTraits,setTraits] = useState([
+        {
+            name:"Veličina felgi",
+            value:17
+        },
+        {
+            name:"Veličina felgi",
+            value:17
+        },
+        {
+            name:"Veličina felgi",
+            value:17
+        },
+        {
+            name:"Veličina felgi",
+            value:17
+        },
+        {
+            name:"Veličina felgi",
+            value:17
+        },
+        {
+            name:"Veličina felgi",
+            value:17
+        },
+        {
+            name:"Veličina felgi",
+            value:17
+        },
+        {
+            name:"Veličina felgi",
+            value:17
+        },
+        {
+            name:"Veličina felgi",
+            value:17
+        },
+        {
+            name:"Veličina felgi",
+            value:17
+        },
+        {
+            name:"Veličina felgi",
+            value:17
+        },
+        {
+            name:"Veličina felgi",
+            value:17
+        },
+        {
+            name:"Veličina felgi",
+            value:17
+        }
+    ])
+    const [textDetail,setTextDetail] = useState("Golf 2.0TDI Highline Uvoz njemacka! Placeno sve do registacije!");
 
     const saveArticle = () => {
         setSave(!save)
@@ -84,13 +170,15 @@ const ArticlePage = () => {
                                 }}
                                 navigation={true}
                                 modules={[Pagination, Navigation]}
-                                className="mySwiper"
+                                className="mySwiper lg:min-h-[600px]"
                             >
-                                <SwiperSlide>
-                                    <img src={slikaTest} alt="" />
-                                </SwiperSlide>
-                                <SwiperSlide>Slide 2</SwiperSlide>
-                                
+                                {
+                                    articleImages.map((image) => (
+                                        <SwiperSlide>
+                                            <img src={image} alt=""/>
+                                        </SwiperSlide>
+                                    ))
+                                }
                             </Swiper>
                         </div>
                     </div>
@@ -98,21 +186,58 @@ const ArticlePage = () => {
                         <div className="flex gap-2">
                                 {
                                     artcileInfo.map((article) => (
-                                        <p className="py-1 px-3 text-[12px] font-semibold border-[1px] border-gray-400 rounded-sm">
+                                        <p className="py-1 px-3 text-[12px] font-semibold border-[1px] border-gray-300 rounded-md">
                                             {article.name} {article?.value ? ': ' + article.value : ''}
                                         </p>
                                     ))
                                 }
                         </div>
+                        <div className=" grid grid-cols-2 gap-4 py-6 border-b-[1px] border-gray-300">
+                            {
+                                articleDetails.map((detail) => (
+                                    <div className="p-2 border-[1px] border-gray-300 rounded-md text-sm flex gap-3 items-center">
+                                        <img src={logo} alt="" width={40} className=" bg-black px-2 py-[14px] rounded-full"/>
+                                        <div>
+                                            <p className="p-0 m-0">{detail.name}</p>
+                                            <p className=" font-semibold p-0 m-0">{detail.value}</p>
+                                        </div>
+                                    </div>
+                                ))
+                            }
+                        </div>
+                        <div className="py-6">
+                            <h2 className="text-2xl pb-1">Osobine</h2>
+                            <div className="grid grid-cols-2 py-4">
+                                {
+                                    arcitleTraits.map((trait) => (
+                                        <div className=" grid grid-cols-2 text-sm py-1">
+                                            <p>{trait.name}</p>
+                                            <p className=" font-semibold">{trait.value}</p>
+                                        </div>
+                                    ))
+                                }
+                            </div>
+                        </div>
                         <div>
-                            
+                                <h2 className="text-2xl pb-1">Detaljni opis</h2>
+                                <p className="py-3 px-4">{textDetail}</p>
                         </div>
                     </div>
                     <div className="bg-white p-4">
-                        OSTALO
+                        <h2 className="text-2xl pb-1">Postavi pitanje</h2>
+                        {/* PITANJA OD SVIH KORISNIKA*/}  
+                        <textarea type="text" rows={7} rese className="bg-gray-100 p-4 w-full outline-none my-3 resize-none font-light" placeholder="Postavi pitanje korisniku"></textarea>
+                        <button className="txt-color border-2 border-[#002f34] py-3 px-4 rounded-md text-sm">Postavi pitanje</button>
                     </div>
                     <div className="bg-white p-4">
-                        KRAJ
+                        <h2 className="text-2xl pb-1">Ostali oglasi korisnika</h2>
+                        <div className="flex justify-evenly max-w-3xl gap-4 py-4">
+                            <Article id={1} image={image} title={"GARMIN WATCH"} time={"prije 2 minute"} price={"150KM"} tags={['Dizel','Novo']} available={true}/>
+                            <Article id={2} image={image} title={"GARMIN WATCH"} time={"prije 2 minute"} price={"150KM"} tags={['Dizel','Novo']} available={true}/>
+                            <Article id={3} image={image} title={"GARMIN WATCH"} time={"prije 2 minute"} price={"150KM"} tags={['Dizel','Novo']} available={true}/>
+                            <Article id={4} image={image} title={"GARMIN WATCH"} time={"prije 2 minute"} price={"150KM"} tags={['Dizel','Novo']} available={true}/>
+                
+                        </div>
                     </div>
                 </div>
                 <div className="flex flex-col gap-4">

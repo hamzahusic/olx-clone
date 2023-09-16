@@ -1,12 +1,13 @@
 import googleIcon from '../../assets/footerImg/googlestore.svg'
 import appStoreIcon from '../../assets/footerImg/appstore.svg'
 import phoneIcon from '../../assets/footerImg/phone.svg'
+
 const Footer = () => {
 
     const date = new Date();
 
     return ( 
-        <footer className='p-5 bg-[#f1f4f5] text-sm'>
+        <footer className={`p-5  text-sm bg-white`}>
             <div className='flex gap-40 items-start py-5 justify-center'>
                 <ul className='flex flex-col gap-2'>
                     <a href=""><li className='mb-2 font-[500]'>INFORMACIJE I KONTAKT</li></a>
