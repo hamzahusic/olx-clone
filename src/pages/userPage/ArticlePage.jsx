@@ -18,6 +18,7 @@ import 'swiper/css/navigation';
 
 import { useState } from "react";
 import Article from "../../components/Article";
+import NotLogIn from "../../components/NotLogIn";
 
 const ArticlePage = () => {
     const image = "https://images.unsplash.com/photo-1502877338535-766e1452684a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2072&q=80"
@@ -138,7 +139,7 @@ const ArticlePage = () => {
     const saveArticle = () => {
         setSave(!save)
     }
-
+    const [user,setUser] = useState(false)
 
     return ( 
         <UserLayout>
@@ -157,10 +158,12 @@ const ArticlePage = () => {
                             <Link to={"/"}>Vozila &gt; Automobili</Link>
                             <div className="flex gap-2">
                                 <img src={share} alt="" className=" cursor-pointer"/>
+                                {user &&  
                                 <div className=" cursor-pointer" onClick={saveArticle}>
                                     {!save && <img src={saveAricle} alt="" />}
                                     {save && <img src={savedAricle} alt="" />}
                                 </div>
+                                }
                             </div>
                         </div>
                         <div className=" max-w-[800px]">
@@ -224,10 +227,14 @@ const ArticlePage = () => {
                         </div>
                     </div>
                     <div className="bg-white p-4">
-                        <h2 className="text-2xl pb-1">Postavi pitanje</h2>
-                        {/* PITANJA OD SVIH KORISNIKA*/}  
-                        <textarea type="text" rows={7} rese className="bg-gray-100 p-4 w-full outline-none my-3 resize-none font-light" placeholder="Postavi pitanje korisniku"></textarea>
-                        <button className="txt-color border-2 border-[#002f34] py-3 px-4 rounded-md text-sm">Postavi pitanje</button>
+                        <h2 className="text-2xl pb-1">Postavi pitanje <span className=" text-base">[{0}]</span></h2>
+                        {/* PITANJA OD SVIH KORISNIKA*/} 
+                        {!user && <NotLogIn/>}
+                        {user && 
+                        <div>
+                            <textarea type="text" rows={7} rese className="bg-gray-100 p-4 w-full outline-none my-3 resize-none font-light" placeholder="Postavi pitanje korisniku"></textarea>
+                            <button className="txt-color border-2 border-[#002f34] py-3 px-4 rounded-md text-sm">Postavi pitanje</button>
+                        </div>}
                     </div>
                     <div className="bg-white p-4">
                         <h2 className="text-2xl pb-1">Ostali oglasi korisnika</h2>
@@ -240,7 +247,7 @@ const ArticlePage = () => {
                         </div>
                     </div>
                 </div>
-                <div className="flex flex-col gap-4">
+                <div className="flex flex-col gap-4 sticky top-3">
                     <div className="p-5 bg-white">
                         <p className="text-sm font-bold">OLX SHOP</p>
                         <div className="flex gap-3 py-4">
@@ -252,8 +259,11 @@ const ArticlePage = () => {
                         </div>
                         <p className=" text-sm text-center bg-[#002f341c] font-semibold py-2 px-4 rounded-md">Korisnik odgovara veoma brzo</p>
                     </div>
-                    <div className="flex bg-white p-3 gap-2">
-                        <Link to={"/"} className="bg-white border-2 border-[#002f34] flex gap-2 items-center justify-center py-3 px-6 rounded-md w-[50%]">
+                    <div className=" max-w-xs">
+                        {!user && <NotLogIn/>}
+                       {user && 
+                       <div className="flex bg-white p-3 gap-2">
+                       <Link to={"/"} className="bg-white border-2 border-[#002f34] flex gap-2 items-center justify-center py-3 px-6 rounded-md w-[50%]">
                             <img src={phoneIcon} alt="" width={17}/>
                             Broj
                         </Link>
@@ -261,6 +271,8 @@ const ArticlePage = () => {
                             <img src={messageIcon} alt="" width={17}/>
                             Poruka
                         </Link>
+                        </div>
+                        }
                     </div>
                 </div>
             </div>

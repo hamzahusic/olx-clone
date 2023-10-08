@@ -3,9 +3,20 @@ import oglasiIcon from '../../assets/listOglasi.svg'
 import searchIcon from '../../assets/search.svg'
 import objaviIcon from '../../assets/objavi.svg'
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 const Navbar = () => {
+    const navigate = useNavigate();
+    const [inputValue,setInputValue] = useState(null); 
+    const [user,setUser] = useState(false);
 
-    const [user,setUser] = useState(false)
+
+    const searchArticle = (e) => {
+        e.preventDefault();
+
+        navigate(`/search/${inputValue}`,{replace:true})
+        console.log("POKRENUTO")
+    }
+
     return ( 
         <nav className="p-5 bg-white ">
             <div className="flex justify-between items-center">
@@ -34,10 +45,10 @@ const Navbar = () => {
                 </div>
             </div>
             <div>
-                <form className="flex gap-4 mt-4 justify-between ">
+                <form className="flex gap-4 mt-4 justify-between" onSubmit={searchArticle}>
                     <div className="flex items-center shadow-md bg-white p-3 rounded border-[0.5px] border-[#002f34] w-full">
                         <img src={searchIcon} className="pr-5"/>
-                        <input type="text" placeholder="Pretraga" className=" outline-none w-full"/>
+                        <input type="text" placeholder="Pretraga" className=" outline-none w-full" onChange={(e) => setInputValue(e.target.value)}/>
                     </div>
                     <button className="bg-[#002f34] text-white flex items-center justify-center px-14 py-3 rounded gap-1">
                         <img src={objaviIcon} width={17}/>
