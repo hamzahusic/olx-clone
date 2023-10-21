@@ -19,6 +19,8 @@ import 'swiper/css/navigation';
 import { useState } from "react";
 import Article from "../../components/Article";
 import NotLogIn from "../../components/NotLogIn";
+import { shallowEqual, useDispatch, useSelector } from "react-redux";
+import { handleLoggin } from "../../redux/actions/RegistrationActions/Actions";
 
 const ArticlePage = () => {
     const image = "https://images.unsplash.com/photo-1502877338535-766e1452684a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2072&q=80"
@@ -136,10 +138,11 @@ const ArticlePage = () => {
     ])
     const [textDetail,setTextDetail] = useState("Golf 2.0TDI Highline Uvoz njemacka! Placeno sve do registacije!");
 
-    const saveArticle = () => {
-        setSave(!save)
-    }
-    const [user,setUser] = useState(false)
+    const saveArticle = () => setSave(!save);
+    
+    const user = useSelector(state => state.isLogged);  
+
+    const dispach = useDispatch();
 
     return ( 
         <UserLayout>

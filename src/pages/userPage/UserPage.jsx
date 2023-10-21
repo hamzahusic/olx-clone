@@ -4,6 +4,7 @@ import categoriesImg from '../../assets/categories.svg'
 import Article from "../../components/Article";
 import olxShopIcon from '../../assets/olxshopnew.svg'
 import olxCatIcon from '../../assets/more-listing.svg'
+import { Link } from "react-router-dom";
 
 const UserPage = () => {
     const image = "https://images.unsplash.com/photo-1502877338535-766e1452684a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2072&q=80"
@@ -44,7 +45,7 @@ const UserPage = () => {
                     <h3 className="pb-4 text-2xl font-semibold">Otvorite OLX shop.</h3>
                     <p className="text-2xl font-light max-w-5xl">Promovišite vaš biznis i maksimizirajte prihode uz minimalan utrošak energije.</p>
                 </div>
-                <a href="/" className="bg-white txt-color px-8 py-3 rounded-md">Pogledaj pakete</a>
+                <Link to="/" className="bg-white txt-color px-8 py-3 rounded-md">Pogledaj pakete</Link>
             </div>
             <div className="flex justify-center items-start gap-6 bg-[#cbf7ee] py-4">
                 <img src={olxCatIcon} alt="" width={134} />

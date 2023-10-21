@@ -9,6 +9,10 @@ body{
 .txt-color{
     color:#002f34;
 }
+/*Background primary color*/
+.bgp{
+  background-color: #002f34;
+}
 .swiper {
   width: 100%;
   height: 100%;

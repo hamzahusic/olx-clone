@@ -1,6 +1,7 @@
 import { useState } from "react";
 import backSchool from '../../assets/categoriesImg/back2school.png'
 import menu from '../../assets/categoriesImg/categories.svg'
+import { Link } from "react-router-dom";
 const Categories = () => {
 
     const categ = [
@@ -74,20 +75,20 @@ const Categories = () => {
 
     return ( 
         <div className="px-4 pb-4 bg-white flex justify-evenly items-center gap-5 flex-wrap shadow-sm">
-            <a href="/" className="flex flex-col justify-between items-center">
+            <Link to="/" className="flex flex-col justify-between items-center">
                 <div className={`bg-[#f1f4f5] rounded-full mb-3`}>
                     <img src={menu} className="px-4 py-5" alt="" width={60} />
                 </div>
                 <p className="text-sm font-[600]">Kategorije</p>
-            </a>
+            </Link>
             {
                 categories.map((categorie,index) => (
-                    <a href="/" key={index} className="flex flex-col justify-center items-center max-w-[100px] max-h-[100px]">
+                    <Link to="/" key={index} className="flex flex-col justify-center items-center max-w-[100px] max-h-[100px]">
                         <div className={`bg-[#3276c0] rounded-full mb-3`}>
                             <img src={categorie.img} className="p-2 hover:scale-110" width={65}/>
                         </div>
                         <p className="text-sm font-[600]">{categorie.name}</p>
-                    </a>
+                    </Link>
                 ))
             }
         </div>
