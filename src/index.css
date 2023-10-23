@@ -37,3 +37,16 @@ body{
 .swiper-button-prev{
   color: #fafafa;
 }
+
+@keyframes widthAnimation {
+  0% {
+    width: 0;
+  }
+  100% {
+    width: 100%; /* Change to your desired final width */
+  }
+}
+
+.animate-width {
+  animation: widthAnimation 0.7s ease-in-out; /* Customize duration and timing function */
+}

@@ -16,7 +16,7 @@ const SearchArticles = () => {
             <Filters/>
             {!result && 
                 <div className="bg-yellow-100 text-center py-32 text-[#002f34] text-3xl">
-                    UPSSS! NO RESULT {user ? "SOMETHING" : "NOTHING"}   
+                    UPSSS! NO RESULTS
                 </div>
             }
             {result && <div className=" p-5 bg-[#f1f4f5] grid grid-cols-[repeat(auto-fill,minmax(233px,1fr))] gap-4">

@@ -2,12 +2,21 @@ import logo from "../../assets/logoOLX.svg"
 import oglasiIcon from '../../assets/listOglasi.svg'
 import searchIcon from '../../assets/search.svg'
 import objaviIcon from '../../assets/objavi.svg'
+import messagesIcon from '../../assets/big-speech-balloon.svg'
+import creditsIcon from '../../assets/olxcredit.svg'
+import whiteProfile from "../../assets/white-olx.svg"
+import menuIcon from '../../assets/menu.svg'
+import closeBtn from '../../assets/close.svg'
+
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+
 const Navbar = () => {
     const navigate = useNavigate();
-    const [inputValue,setInputValue] = useState(null); 
-    const [user,setUser] = useState(false);
+    const [menu,setMenu] = useState(false);
+    const [inputValue,setInputValue] = useState(null);
+     
+    const [user,setUser] = useState(true);
 
 
     const searchArticle = (e) => {
@@ -18,7 +27,7 @@ const Navbar = () => {
     }
 
     return ( 
-        <nav className="p-5 bg-white ">
+        <nav className="p-5 bg-white">
             <div className="flex justify-between items-center">
                 <div className="flex gap-5 text-sm items-center font-semibold">
                     <Link to="/"><img src={logo} alt="" width={71}/></Link>
@@ -37,9 +46,12 @@ const Navbar = () => {
                         </div>
                     }
                     {user && 
-                        <div>
-                            <Link to="/"><img src={oglasiIcon}/> Moji oglasi</Link>
-                            <Link to="/">Registracija</Link>
+                        <div className="flex gap-5 items-center text-sm font-semibold">
+                            <Link to="/" className="flex gap-2 items-center border-r-[1px] pr-3 border-[#002f34]"><img src={oglasiIcon} width={15}/> Moji oglasi</Link>
+                            <Link to="/" className="border-r-[1px] pr-3 border-[#002f34]"><img src={messagesIcon} width={20}/></Link>
+                            <Link to="/" className="flex gap-2 items-center border-r-[1px] pr-3 border-[#002f34]"><img src={creditsIcon} width={20}/><span className="bg-yellow-100 px-2 rounded">13</span></Link>
+                            <Link to="/" className="flex gap-3 items-center text-base"><div className=" w-10 h-10 rounded-full overflow-hidden"><img src={whiteProfile} className="bg-gray-800 w-full h-full object-fit p-1"/></div>Haze347</Link>
+                            <button onClick={() => setMenu(true)}><img src={menuIcon}/></button>
                         </div>
                     }
                 </div>
@@ -54,6 +66,14 @@ const Navbar = () => {
                     <span className="min-w-[100%]">Objavi oglas</span>
                 </button>
             </div>
+            {user && menu && <div className="fixed shadow-xl bg-white top-0 right-0 bottom-0 z-[9999] p-5 w-full md:max-w-[350px] transition-width duration-500 animate-width">
+                     <div className="flex items-center justify-between mb-5">
+                        <p className=" text-xl font-bold">Moj OLX</p>
+                        <button onClick={() => setMenu(false)}><img src={closeBtn} width={15}/></button>
+                    </div>
+                    <p>LINK</p>
+                    
+            </div>}
         </nav>
      );
 }
