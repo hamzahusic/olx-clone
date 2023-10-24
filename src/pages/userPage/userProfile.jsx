@@ -1,0 +1,84 @@
+import UserLayout from "../../components/Layouts/UserLayout";
+import whiteProfile from "../../assets/white-olx.svg"
+import locationIcon from '../../assets/location.svg'
+import editIcon from '../../assets/edit.svg'
+import publishIcon from '../../assets/objavi.svg'
+import noArticlesIcon from '../../assets/no-articles-olx.svg'
+import { Link } from "react-router-dom";
+import { useState } from "react";
+
+const UserProfile = () => {
+
+    const [tab,setTab] = useState('aktivni');
+    return ( 
+        <UserLayout>
+            <div className="p-5 flex">
+                <div className="flex flex-col gap-5 w-full max-w-[350px] border-r-[1px] pr-4 min-h-[70vh]">
+                    <div className="flex gap-4 items-center">
+                        <div className="w-12 h-12 rounded-full overflow-hidden">
+                            <img src={whiteProfile} className="bg-gray-800 w-full h-full object-fit p-1"/>
+                        </div>
+                        <div className="flex flex-col items-stretch">
+                            <p>Haze347</p>
+                            <div className="flex gap-2">
+                                <img src={locationIcon} alt="" width={10}/>
+                                <p>Tuzla</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="p-5 bg-blue-100 text-sm">
+                        <p className="mb-3">Da li ste probali nove OLX avatare? Budi prepoznatljiv, generiši svoj</p>
+                        <Link to={'/'} className="border-b-[1px] border-[#002f34] font-semibold py-2">Promijeni avatar</Link>
+                    </div>
+                    
+                    <div className="flex bg-white gap-2">
+                            <Link to={"/"} className="bg-white border-2 border-[#002f34] flex gap-2 items-center justify-center py-3 px-6 rounded w-[50%]">
+                                <img src={editIcon} alt="" className="max-w-[20px]"/>
+                                Postavke
+                            </Link>
+                            <Link to={"/"} className="bg-[#002f34] text-white border-2 border-[#002f34] flex gap-2 items-center justify-center py-3 px-6 rounded w-[50%]">
+                                <img src={publishIcon} alt="" className="max-w-[17px]"/>
+                                Objavi
+                            </Link>
+                    </div>
+                    <div>
+                        <p className="pb-5">Informacije</p>
+
+                        <div className="flex justify-between text-sm">
+                            <p>Registrovan</p>
+                            <p>04.02.2020</p>
+                        </div>
+                        <div className="flex justify-between text-sm py-2">
+                            <p>OLX ID</p>
+                            <p>2571018</p>
+                        </div>
+                        <div className="flex justify-between text-sm">
+                            <p>Online</p>
+                            <p>prije 8 minuta</p>
+                        </div>
+                    </div>
+                </div>
+                <div className="px-8 w-full">
+                    <div className="flex gap-5 pb-4">
+                        <Link className={` ${tab==='aktivni' ? 'active-tab' : 'nonactive-tab'} pb-2`} onClick={() => setTab('aktivni')}>Aktivni</Link>
+                        <Link className={` ${tab==='zavrseni' ? 'active-tab' : 'nonactive-tab'} pb-2`} onClick={() => setTab('zavrseni')}>Završeni oglasi</Link>
+                        <Link className={` ${tab==='dojmovi' ? 'active-tab' : 'nonactive-tab'} pb-2`} onClick={() => setTab('dojmovi')}>Dojmovi</Link>
+                    </div>
+
+                    <div>
+                        <div className="w-full grid place-items-center min-h-[70vh]">
+                            <div className="grid place-items-center gap-2">
+                                <img src={noArticlesIcon} className="max-w-[100px]"/>
+                                <p className="text-lg">Nemate aktivnih oglasa</p>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </UserLayout>
+     );
+}
+ 
+export default UserProfile;

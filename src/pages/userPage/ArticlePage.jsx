@@ -265,14 +265,14 @@ const ArticlePage = () => {
                         {!user && <NotLogIn/>}
                        {user && 
                        <div className="flex bg-white p-3 gap-2">
-                       <Link to={"/"} className="bg-white border-2 border-[#002f34] flex gap-2 items-center justify-center py-3 px-6 rounded-md w-[50%]">
-                            <img src={phoneIcon} alt="" width={17}/>
-                            Broj
-                        </Link>
                         <Link to={"/"} className="bg-white border-2 border-[#002f34] flex gap-2 items-center justify-center py-3 px-6 rounded-md w-[50%]">
-                            <img src={messageIcon} alt="" width={17}/>
-                            Poruka
-                        </Link>
+                                <img src={phoneIcon} alt="" width={17}/>
+                                Broj
+                            </Link>
+                            <Link to={"/"} className="bg-white border-2 border-[#002f34] flex gap-2 items-center justify-center py-3 px-6 rounded-md w-[50%]">
+                                <img src={messageIcon} alt="" width={17}/>
+                                Poruka
+                            </Link>
                         </div>
                         }
                     </div>

@@ -50,3 +50,36 @@ body{
 .animate-width {
   animation: widthAnimation 0.7s ease-in-out; /* Customize duration and timing function */
 }
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.no-scrollbar {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+.menu-link{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 5px 16px;
+  font-weight: 600;
+}
+.menu-link:hover img{
+  --tw-brightness: brightness(100);
+    filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
+}
+.menu-link:hover{
+  background-color: #002f34;
+  color: white;
+}
+
+.active-tab{
+  font-weight: 600;
+  border-bottom: 2px solid #002f34;
+}
+.nonactive-tab{
+  color: gray;
+}

@@ -6,6 +6,7 @@ import ArticlePage from './pages/userPage/ArticlePage';
 import SearchArticles from './pages/userPage/SearchArticles';
 import LoginPage from './pages/userPage/LoginPage';
 import RegisterPage from './pages/userPage/RegisterPage';
+import UserProfile from './pages/userPage/userProfile';
 
 function App() {
   
@@ -18,6 +19,7 @@ function App() {
           <Route path='/admin' element={<AdminPage/>}/>
           <Route path='/login' element={<LoginPage/>}/>
           <Route path='/register' element={<RegisterPage/>}/>
+          <Route path='/profile/my/' element={<UserProfile/>}/>
           <Route path="*" element={<NotFound/>}/>
       </Routes>
     </Router>
