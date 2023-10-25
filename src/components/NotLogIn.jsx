@@ -8,7 +8,7 @@ const NotLogIn = () => {
             </div>
             <div className='flex flex-col gap-2'>
                 <p className='text-[13px]'>Logujte se ili kreirajte račun na OLX-u da kontaktirate ovog korisnika.</p>
-                <Link to="/" className='underline'>Logujte se ili kreirajte račun</Link>
+                <Link to="/login" className='underline'>Logujte se ili kreirajte račun</Link>
             </div>
         </div>
      );

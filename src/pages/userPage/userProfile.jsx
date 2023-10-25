@@ -3,9 +3,9 @@ import whiteProfile from "../../assets/white-olx.svg"
 import locationIcon from '../../assets/location.svg'
 import editIcon from '../../assets/edit.svg'
 import publishIcon from '../../assets/objavi.svg'
-import noArticlesIcon from '../../assets/no-articles-olx.svg'
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import NoResult from "../../components/NoResult";
 
 const UserProfile = () => {
 
@@ -65,14 +65,8 @@ const UserProfile = () => {
                         <Link className={` ${tab==='dojmovi' ? 'active-tab' : 'nonactive-tab'} pb-2`} onClick={() => setTab('dojmovi')}>Dojmovi</Link>
                     </div>
 
-                    <div>
-                        <div className="w-full grid place-items-center min-h-[70vh]">
-                            <div className="grid place-items-center gap-2">
-                                <img src={noArticlesIcon} className="max-w-[100px]"/>
-                                <p className="text-lg">Nemate aktivnih oglasa</p>
-                            </div>
-                        </div>
-
+                    <div className="min-h-[70vh] grid place-items-center">
+                        <NoResult text={"Nemate aktivnih oglasa"}/>
                     </div>
 
                 </div>

@@ -63,7 +63,7 @@ const Navbar = () => {
                     }
                     {user && 
                         <div className="flex gap-5 items-center text-sm font-semibold">
-                            <Link to="/" className="flex gap-2 items-center border-r-[1px] pr-3 border-[#002f34]"><img src={oglasiIcon} width={15}/> Moji oglasi</Link>
+                            <Link to="/profile/my/" className="flex gap-2 items-center border-r-[1px] pr-3 border-[#002f34]"><img src={oglasiIcon} width={15}/> Moji oglasi</Link>
                             <Link to="/" className="border-r-[1px] pr-3 border-[#002f34]"><img src={messagesIcon} width={20}/></Link>
                             <Link to="/" className="flex gap-2 items-center border-r-[1px] pr-3 border-[#002f34]"><img src={creditsIcon} width={20}/><span className="bg-yellow-100 px-2 rounded">13</span></Link>
                             <Link to="/profile/my/" className="flex gap-3 items-center text-base"><div className=" w-10 h-10 rounded-full overflow-hidden"><img src={whiteProfile} className="bg-gray-800 w-full h-full object-fit p-1"/></div>Haze347</Link>
@@ -73,7 +73,7 @@ const Navbar = () => {
                 </div>
             </div>
             <div className="flex gap-4 mt-4 justify-between" >
-                <form className="flex items-center shadow-md bg-white p-3 rounded border-[0.5px] border-[#002f34] w-full" onSubmit={searchArticle}>
+                <form className="flex items-center shadow-sm bg-white px-4 py-3 rounded border-[1px] border-gray-300 w-full" onSubmit={searchArticle}>
                     <img src={searchIcon} className="pr-5"/>
                     <input type="text" placeholder="Pretraga" className=" outline-none w-full" onChange={(e) => setInputValue(e.target.value)}/>
                 </form>
@@ -94,7 +94,7 @@ const Navbar = () => {
                         </div>
                         <span className="bg-yellow-200 px-2 rounded">13</span>
                     </Link>
-                    <Link to={'/'} className="flex gap-2 p-4 font-semibold hover:bg-[#002f34] hover:text-white"> <img src={olxShopIcon} width={20}/> Postani OLX Shop</Link>
+                    <Link to={'/'} className="menu-link"> <img src={olxShopIcon} width={20}/> Postani OLX Shop</Link>
                     {/*LINKS*/}
                     <p className=" text-xs px-4 py-2 bg-gray-100 font-semibold">MOJI OGLASI</p>
                     <Link to={'/'} className="menu-link"> <img src={megaphoneIcon} width={20}/> Aktivni oglasi</Link>
