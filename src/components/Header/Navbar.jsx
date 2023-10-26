@@ -23,15 +23,17 @@ import chartIcon from '../../assets/menuimg/profit-chart.svg'
 import blockedIcon from '../../assets/menuimg/blocked.svg'
 import settingsIcon from '../../assets/menuimg/settings2.svg'
 import logoutIcon from '../../assets/menuimg/logout.svg'
+import ostaloIcon from '../../assets/ostalo_icon.svg'
 
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import PopUp from "../PopUp"
 
 const Navbar = () => {
     const navigate = useNavigate();
     const [menu,setMenu] = useState(false);
     const [inputValue,setInputValue] = useState(null);
-     
+    const [objavaPopUp,setObjavaPopUp] = useState(false);
     const [user,setUser] = useState(true);
 
 
@@ -77,10 +79,48 @@ const Navbar = () => {
                     <img src={searchIcon} className="pr-5"/>
                     <input type="text" placeholder="Pretraga" className=" outline-none w-full" onChange={(e) => setInputValue(e.target.value)}/>
                 </form>
-                <button className="bg-[#002f34] text-white flex items-center justify-center px-14 py-3 rounded gap-1">
+                <button className="bg-[#002f34] text-white flex items-center justify-center px-14 py-3 rounded gap-1" onClick={() => setObjavaPopUp(true)}>
                     <img src={objaviIcon} width={17}/>
                     <span className="min-w-[100%]">Objavi oglas</span>
                 </button>
+                <PopUp title={"Objavite oglas"} isOpen={objavaPopUp} onClose={() => setObjavaPopUp(false)}>
+                    <div>
+                        <div className="grid grid-cols-2 gap-3 p-5 font-semibold">
+                            <Link to={'/'} className="border-[1px] border-[#002f34] rounded-md p-3 text-center">Automobili</Link>
+                            <Link to={'/'} className="border-[1px] border-[#002f34] rounded-md p-3 text-center">Nekretnina</Link>
+                            <Link to={'/'} className="border-[1px] border-[#002f34] rounded-md p-3 text-center">Usluga</Link>
+                            <Link to={'/'} className="border-[1px] border-[#002f34] rounded-md p-3 text-center" >Posao</Link>
+                        </div>
+                        <div className="p-5 w-full flex flex-col gap-4 border-t-[1px] border-gray-100">
+                            <Link to={"/"}  className=" font-semibold flex gap-5 items-center">
+                                <div className=" rounded-full p-3 shadow-md">
+                                    <img src={ostaloIcon} className="max-w-[30px]"/>
+                                </div>
+                                Objavite nešto drugo
+                            </Link>
+                            
+                            <div className="bg-gray-100 rounded-md p-4">
+                                <p className="mb-4 text-lg txt-color font-semibold">Preostali broj oglasa</p>
+                                <div className="flex flex-col gap-3">
+                                    <div className="flex items-center justify-between">
+                                        <p>Automobili</p>
+                                        <p className="font-semibold">0 od 3</p>
+                                    </div>
+                                    <div className="flex items-center justify-between">
+                                        <p>Nekretnine</p>
+                                        <p className="font-semibold">0 od 2</p>
+                                    </div>
+                                    <div className="flex items-center justify-between">
+                                        <p>Ostalo</p>
+                                        <p className="font-semibold">0 od 35</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <Link to={"/"} className="block w-full text-center bgp text-white py-3 text-base rounded">Postani OLX pro</Link>
+                        </div>
+                    </div>
+                </PopUp>
             </div>
             {user && menu && <div className="fixed shadow-xl bg-white top-0 right-0 bottom-0 z-[9999] w-full md:max-w-[350px] transition-width duration-500 animate-width overflow-y-scroll no-scrollbar ">
                      <div className="flex items-center justify-between mb-5 p-3">
