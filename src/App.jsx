@@ -7,6 +7,7 @@ import SearchArticles from './pages/userPage/SearchArticles';
 import LoginPage from './pages/userPage/LoginPage';
 import RegisterPage from './pages/userPage/RegisterPage';
 import UserProfile from './pages/userPage/userProfile';
+import CarArticle from './pages/AddArticle/ArticleCars/CarArticle';
 
 function App() {
   
@@ -20,6 +21,8 @@ function App() {
           <Route path='/login' element={<LoginPage/>}/>
           <Route path='/register' element={<RegisterPage/>}/>
           <Route path='/profile/my/' element={<UserProfile/>}/>
+          <Route path='/publish/article/cars' element={<CarArticle/>}/>
+          
           <Route path="*" element={<NotFound/>}/>
       </Routes>
     </Router>

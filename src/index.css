@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+:root{
+  --pcolor : #002f34;
+}
+
 body{
     color: #002f34;
 }
