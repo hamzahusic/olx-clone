@@ -1,8 +1,52 @@
+import { useState } from "react";
+import CreateArticleLayout from "../../../components/Layouts/CreateLayout";
+import FirstStepCars from "./CarSteps/firstStepCar";
+import SecondStepCar from "./CarSteps/secondStepCar";
+
 const CarArticle = () => {
+
+    const [step,setStep] = useState(1);
+    const [progress,setProgress] = useState(25);
+    //ALL DATA FOR PUBLISHING CAR
+    const [manufacturer,setManufacturer] = useState('');
+    const [model,setModel] = useState('');
+
+    const [location,setLocation] = useState(null);
+    const [available,setAvailable] = useState(false);
+    const [condition,setCondition] = useState(null);
+    const [price,setPrice] = useState(null);
+
+    const prevStep = () => {
+        if(step <=1) { setStep(1); setProgress(25)} 
+        else{ setStep(step-1);setProgress(progress-25)} 
+    }
+    const nextStep = () => {
+        if(step >=4) { setStep(4);setProgress(100)}
+        else{ setStep(step+1);setProgress(progress+25)}
+    }
+
+    const CarsSteps = () => {
+        switch(step){
+            case 1 : 
+                return <FirstStepCars setManufacturer={setManufacturer} setModel={setModel} model={model} manufacture={manufacturer}/>
+            break;   
+            case 2 : 
+                return <SecondStepCar setAvailable={setAvailable} setCondition={setCondition} setLocation={setLocation} setPrice={setPrice} location={location} available={available} price={price} condition={condition}/>
+            break;
+            case 3 : 
+                return <div>THIRD STEP</div>
+            break;
+            case 4 :
+                return <div>FOURTH STEP</div>
+            break;
+            default:
+        }
+    }
+
     return ( 
-        <div>
-            THIS IS FOR CARS PUBLISHING
-        </div>
+        <CreateArticleLayout previousStep={prevStep} nextStep={nextStep} progress={progress}>
+            <CarsSteps/>
+        </CreateArticleLayout>
      );
 }
  

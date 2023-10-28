@@ -86,7 +86,7 @@ const Navbar = () => {
                 <PopUp title={"Objavite oglas"} isOpen={objavaPopUp} onClose={() => setObjavaPopUp(false)}>
                     <div>
                         <div className="grid grid-cols-2 gap-3 p-5 font-semibold">
-                            <Link to={'/'} className="border-[1px] border-[#002f34] rounded-md p-3 text-center">Automobili</Link>
+                            <Link to={'/publish/article/cars'} className="border-[1px] border-[#002f34] rounded-md p-3 text-center">Automobili</Link>
                             <Link to={'/'} className="border-[1px] border-[#002f34] rounded-md p-3 text-center">Nekretnina</Link>
                             <Link to={'/'} className="border-[1px] border-[#002f34] rounded-md p-3 text-center">Usluga</Link>
                             <Link to={'/'} className="border-[1px] border-[#002f34] rounded-md p-3 text-center" >Posao</Link>
