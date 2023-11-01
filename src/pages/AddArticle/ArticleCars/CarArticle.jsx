@@ -3,6 +3,7 @@ import CreateArticleLayout from "../../../components/Layouts/CreateLayout";
 import FirstStepCars from "./CarSteps/firstStepCar";
 import SecondStepCar from "./CarSteps/secondStepCar";
 import ThirdStepCar from "./CarSteps/thridStepCar";
+import FourtStepCar from "./CarSteps/fourthStepCar";
 
 const CarArticle = () => {
 
@@ -40,13 +41,21 @@ const CarArticle = () => {
                             />
             break;   
             case 2 : 
-                return <SecondStepCar setAvailable={setAvailable} setCondition={setCondition} setLocation={setLocation} setPrice={setPrice} location={location} available={available} price={price} condition={condition}/>
+                return <SecondStepCar 
+                            setAvailable={setAvailable}
+                            setCondition={setCondition}
+                            setLocation={setLocation}
+                            setPrice={setPrice}
+                            location={location}
+                            available={available}
+                            price={price}
+                            condition={condition}/>
             break;
             case 3 : 
                 return <ThirdStepCar/>
             break;
             case 4 :
-                return <div>FOURTH STEP</div>
+                return <FourtStepCar/>
             break;
             default:
         }

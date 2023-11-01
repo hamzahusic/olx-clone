@@ -119,7 +119,7 @@ const FirstStepCars = ({setManufacturer,manufacture,model,setModel}) => {
                 </div>
                 <div className="flex flex-col gap-1">
                         <p className=' text-[12px] font-semibold tracking-wide mt-5 mb-2'>MODEL</p>
-                        <input type="text" onChange={setModel} value={model} className='bg-gray-100 outline-none p-3 rounded-md placeholder:text-gray-600 text-base' placeholder="Unesite model"/>
+                        <input type="text" onChange={(e) => setModel(e.target.value)} value={model} className='bg-gray-100 outline-none p-3 rounded-md placeholder:text-gray-600 text-base' placeholder="Unesite model"/>
                 </div>
             </div>
         </div>
