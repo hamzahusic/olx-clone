@@ -6,8 +6,10 @@ import ArticlePage from './pages/userPage/ArticlePage';
 import SearchArticles from './pages/userPage/SearchArticles';
 import LoginPage from './pages/userPage/LoginPage';
 import RegisterPage from './pages/userPage/RegisterPage';
-import UserProfile from './pages/userPage/userProfile';
 import CarArticle from './pages/AddArticle/ArticleCars/CarArticle';
+import UserActivePosts from './pages/userPage/UserProfilePosts/ActivePosts';
+import UserClosedPosts from './pages/userPage/UserProfilePosts/ClosedPosts';
+import UserImpressionsPost from './pages/userPage/UserProfilePosts/ImpressionsPosts';
 
 function App() {
   
@@ -20,7 +22,9 @@ function App() {
           <Route path='/admin' element={<AdminPage/>}/>
           <Route path='/login' element={<LoginPage/>}/>
           <Route path='/register' element={<RegisterPage/>}/>
-          <Route path='/profile/my/' element={<UserProfile/>}/>
+          <Route path='/profile/my/active' element={<UserActivePosts/>}/>
+          <Route path='/profile/my/closed' element={<UserClosedPosts/>}/>
+          <Route path='/profile/my/impressions' element={<UserImpressionsPost/>}/>
           <Route path='/publish/article/cars' element={<CarArticle/>}/>
           
           <Route path="*" element={<NotFound/>}/>

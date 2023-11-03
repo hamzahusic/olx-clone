@@ -35,7 +35,7 @@ const SecondStepCar = ({setLocation,location,setAvailable,available,condition,se
                             className={` border-[1px] border-gray-200 outline-none p-3 rounded-md text-base
                             ${showPrice ? ' bg-gray-50' : 'bg-gray-50/20 cursor-not-allowed line-through text-gray-300'}`} 
                             placeholder="Unesite cijenu u KM"
-                            disabled={showPrice ? '' : 'disabled'}
+                            disabled={!showPrice && 'disabled'}
                             value={price}
                             onChange={(e) => setPrice(e.target.value)}
                             />        

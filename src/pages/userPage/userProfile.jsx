@@ -7,9 +7,8 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import NoResult from "../../components/NoResult";
 
-const UserProfile = () => {
+const UserProfile = ({children}) => {
 
-    const [tab,setTab] = useState('aktivni');
     return ( 
         <UserLayout>
             <div className="p-5 flex">
@@ -59,16 +58,7 @@ const UserProfile = () => {
                     </div>
                 </div>
                 <div className="px-8 w-full">
-                    <div className="flex gap-5 pb-4">
-                        <Link className={` ${tab==='aktivni' ? 'active-tab' : 'nonactive-tab'} pb-2`} onClick={() => setTab('aktivni')}>Aktivni</Link>
-                        <Link className={` ${tab==='zavrseni' ? 'active-tab' : 'nonactive-tab'} pb-2`} onClick={() => setTab('zavrseni')}>Završeni oglasi</Link>
-                        <Link className={` ${tab==='dojmovi' ? 'active-tab' : 'nonactive-tab'} pb-2`} onClick={() => setTab('dojmovi')}>Dojmovi</Link>
-                    </div>
-
-                    <div className="min-h-[70vh] grid place-items-center">
-                        <NoResult text={"Nemate aktivnih oglasa"}/>
-                    </div>
-
+                    {children}
                 </div>
             </div>
         </UserLayout>
