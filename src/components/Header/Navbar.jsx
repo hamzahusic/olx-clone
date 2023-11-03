@@ -65,10 +65,10 @@ const Navbar = () => {
                     }
                     {user && 
                         <div className="flex gap-5 items-center text-sm font-semibold">
-                            <Link to="/profile/my/" className="flex gap-2 items-center border-r-[1px] pr-3 border-[#002f34]"><img src={oglasiIcon} width={15}/> Moji oglasi</Link>
+                            <Link to="/profile/my/active" className="flex gap-2 items-center border-r-[1px] pr-3 border-[#002f34]"><img src={oglasiIcon} width={15}/> Moji oglasi</Link>
                             <Link to="/" className="border-r-[1px] pr-3 border-[#002f34]"><img src={messagesIcon} width={20}/></Link>
                             <Link to="/" className="flex gap-2 items-center border-r-[1px] pr-3 border-[#002f34]"><img src={creditsIcon} width={20}/><span className="bg-yellow-100 px-2 rounded">13</span></Link>
-                            <Link to="/profile/my/" className="flex gap-3 items-center text-base"><div className=" w-10 h-10 rounded-full overflow-hidden"><img src={whiteProfile} className="bg-gray-800 w-full h-full object-fit p-1"/></div>Haze347</Link>
+                            <Link to="/profile/my/active" className="flex gap-3 items-center text-base"><div className=" w-10 h-10 rounded-full overflow-hidden"><img src={whiteProfile} className="bg-gray-800 w-full h-full object-fit p-1"/></div>Haze347</Link>
                             <button onClick={() => setMenu(true)}><img src={menuIcon}/></button>
                         </div>
                     }
@@ -87,7 +87,7 @@ const Navbar = () => {
                     <div>
                         <div className="grid grid-cols-2 gap-3 p-5 font-semibold">
                             <Link to={'/publish/article/cars'} className="border-[1px] border-[#002f34] rounded-md p-3 text-center">Automobili</Link>
-                            <Link to={'/'} className="border-[1px] border-[#002f34] rounded-md p-3 text-center">Nekretnina</Link>
+                            <Link to={'/publish/article/realestate'} className="border-[1px] border-[#002f34] rounded-md p-3 text-center">Nekretnina</Link>
                             <Link to={'/'} className="border-[1px] border-[#002f34] rounded-md p-3 text-center">Usluga</Link>
                             <Link to={'/'} className="border-[1px] border-[#002f34] rounded-md p-3 text-center" >Posao</Link>
                         </div>

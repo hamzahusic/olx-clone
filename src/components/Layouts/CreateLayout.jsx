@@ -1,6 +1,7 @@
 import OLXLogo from '../../assets/logoOLX.svg'
 import arrowLeft from '../../assets/chevron-left.svg'
 import { Link } from 'react-router-dom';
+
 const CreateArticleLayout = ({children,previousStep,nextStep,progress=25}) => {
     return ( 
         <div>
