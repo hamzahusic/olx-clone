@@ -55,19 +55,12 @@ const UserPage = () => {
 
                 </div>
                 
-                <div className="grid grid-cols-[repeat(auto-fill,minmax(233px,1fr))] justify-center gap-4 ">
+                <div className="grid grid-cols-[repeat(auto-fill,minmax(233px,1fr))] justify-center gap-4">
                     <Article id={1} image={image} separate={true} title={"GARMIN WATCH"} time={"prije 2 minute"} price={"150KM"} tags={['Dizel','Novo']} available={true}/>
                     <Article id={2} image={image} title={"GARMIN WATCH"} time={"prije 2 minute"} price={"150KM"} tags={['Dizel','Novo']} available={true}/>
                     <Article id={3} image={image} title={"GARMIN WATCH"} time={"prije 2 minute"} price={"150KM"} tags={['Dizel','Novo']} available={true}/>
-                    <Article id={4} image={image} separate={true} title={"GARMIN WATCH"} time={"prije 2 minute"} price={"150KM"} tags={['Dizel','Novo']} available={true}/>
+                    <Article id={4} image={image} title={"GARMIN WATCH"} time={"prije 2 minute"} price={"150KM"} tags={['Dizel','Novo']} available={true}/>
                     <Article id={5} image={image} title={"GARMIN WATCH"} time={"prije 2 minute"} price={"150KM"} tags={['Dizel','Novo']} available={true}/>
-                    <Article id={6} image={image} separate={true} title={"GARMIN WATCH"} time={"prije 2 minute"} price={"150KM"} tags={['Dizel','Novo']} available={true}/>
-                    <Article id={7} image={image} title={"GARMIN WATCH"} time={"prije 2 minute"} price={"150KM"} tags={['Dizel','Novo']} available={true}/>
-                    <Article id={8} image={image} separate={true} title={"GARMIN WATCH"} time={"prije 2 minute"} price={"150KM"} tags={['Dizel','Novo']} available={true}/>
-                    <Article id={9} image={image} title={"GARMIN WATCH"} time={"prije 2 minute"} price={"150KM"} tags={['Dizel','Novo']} available={true}/>
-                    <Article id={10} image={image} separate={true} title={"GARMIN WATCH"} time={"prije 2 minute"} price={"150KM"} tags={['Dizel','Novo']} available={true}/>
-                    <Article id={11} image={image} title={"GARMIN WATCH"} time={"prije 2 minute"} price={"150KM"} tags={['Dizel','Novo']} available={true}/>
-                    <Article id={12} image={image} title={"GARMIN WATCH"} time={"prije 2 minute"} price={"150KM"} tags={['Dizel','Novo']} available={true}/>
                 </div>
                 <div className="flex items-center justify-center">
                   <button className="txt-color border-2 border-[#002f34] py-3 px-3 rounded-md text-md my-20">Prikaži više oglasa</button>
