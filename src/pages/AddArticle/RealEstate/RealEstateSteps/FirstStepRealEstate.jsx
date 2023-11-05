@@ -3,11 +3,7 @@ import kuceIcon from '../../../../assets/RealEstate/kuce.png'
 import prostoriIcon from '../../../../assets/RealEstate/poslovni.png'
 import vikendiceIcon from '../../../../assets/RealEstate/vikendice.png'
 import apartmaniIcon from '../../../../assets/RealEstate/apartmani.png'
-import sobeIcon from '../../../../assets/RealEstate/sobe.png'
-import zemljistaIcon from '../../../../assets/RealEstate/zemljista.png'
-import garazeIcon from '../../../../assets/RealEstate/garaze.png'
 import ostaloIcon from '../../../../assets/RealEstate/ostalo.png'
-import montazaIcon from '../../../../assets/RealEstate/motaze.png'
 
 const FirstStepRealEstate = () => {
 

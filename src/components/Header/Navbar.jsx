@@ -45,7 +45,7 @@ const Navbar = () => {
     }
 
     return ( 
-        <nav className="p-5 bg-white">
+        <nav className="p-5 bg-white/95 sticky top-0 z-[999]">
             <div className="flex justify-between items-center">
                 <div className="flex gap-5 text-sm items-center font-semibold">
                     <Link to="/"><img src={logo} alt="" width={71}/></Link>
@@ -77,7 +77,7 @@ const Navbar = () => {
             <div className="flex gap-4 mt-4 justify-between" >
                 <form className="flex items-center shadow-sm bg-white px-4 py-3 rounded border-[1px] border-gray-300 w-full" onSubmit={searchArticle}>
                     <img src={searchIcon} className="pr-5"/>
-                    <input type="text" placeholder="Pretraga" className=" outline-none w-full" onChange={(e) => setInputValue(e.target.value)}/>
+                    <input type="search" placeholder="Pretraga" className="placeholder:text-gray-600 outline-none w-full" onChange={(e) => setInputValue(e.target.value)}/>
                 </form>
                 <button className="bg-[#002f34] text-white flex items-center justify-center px-14 py-3 rounded gap-1" onClick={() => setObjavaPopUp(true)}>
                     <img src={objaviIcon} width={17}/>
