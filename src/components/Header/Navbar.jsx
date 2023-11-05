@@ -30,6 +30,7 @@ import { Link, useNavigate } from "react-router-dom";
 import PopUp from "../PopUp"
 
 const Navbar = () => {
+
     const navigate = useNavigate();
     const [menu,setMenu] = useState(false);
     const [inputValue,setInputValue] = useState(null);
@@ -88,8 +89,8 @@ const Navbar = () => {
                         <div className="grid grid-cols-2 gap-3 p-5 font-semibold">
                             <Link to={'/publish/article/cars'} className="border-[1px] border-[#002f34] rounded-md p-3 text-center">Automobili</Link>
                             <Link to={'/publish/article/realestate'} className="border-[1px] border-[#002f34] rounded-md p-3 text-center">Nekretnina</Link>
-                            <Link to={'/'} className="border-[1px] border-[#002f34] rounded-md p-3 text-center">Usluga</Link>
-                            <Link to={'/'} className="border-[1px] border-[#002f34] rounded-md p-3 text-center" >Posao</Link>
+                            <Link to={'/publish/article/jobs'} className="border-[1px] border-[#002f34] rounded-md p-3 text-center">Posao</Link>
+                            <Link to={'/publish/article/electronics'} className="border-[1px] border-[#002f34] rounded-md p-3 text-center" >Tehnika</Link>
                         </div>
                         <div className="p-5 w-full flex flex-col gap-4 border-t-[1px] border-gray-100">
                             <Link to={"/"}  className=" font-semibold flex gap-5 items-center">

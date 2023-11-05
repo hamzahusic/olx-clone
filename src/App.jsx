@@ -11,6 +11,8 @@ import UserActivePosts from './pages/userPage/UserProfilePosts/ActivePosts';
 import UserClosedPosts from './pages/userPage/UserProfilePosts/ClosedPosts';
 import UserImpressionsPost from './pages/userPage/UserProfilePosts/ImpressionsPosts';
 import RealState from './pages/AddArticle/RealEstate/RealEstate';
+import ArticleJobs from './pages/AddArticle/ArticleJobs/Jobs';
+import ArticleElectronics from './pages/AddArticle/ArticleElectronics/Electronics';
 
 function App() {
   
@@ -28,6 +30,8 @@ function App() {
           <Route path='/profile/my/impressions' element={<UserImpressionsPost/>}/>
           <Route path='/publish/article/cars' element={<CarArticle/>}/>
           <Route path='/publish/article/realestate' element={<RealState/>}/>
+          <Route path='/publish/article/jobs' element={<ArticleJobs/>}/>
+          <Route path='/publish/article/electronics' element={<ArticleElectronics/>}/>
           
           <Route path="*" element={<NotFound/>}/>
       </Routes>
