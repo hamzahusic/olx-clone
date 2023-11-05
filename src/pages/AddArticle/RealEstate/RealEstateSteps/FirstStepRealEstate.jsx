@@ -33,25 +33,10 @@ const FirstStepRealEstate = () => {
             icon:apartmaniIcon
         },
         {
-            name :"Sobe",
-            icon:sobeIcon
-        },
-        {
-            name :"Zemljista",
-            icon:zemljistaIcon
-        },
-        {
-            name :"Garaze",
-            icon:garazeIcon
-        },
-        {
             name :"Ostalo",
             icon:ostaloIcon
         },
-        {
-            name :"Montažni objekat",
-            icon:montazaIcon
-        },
+        
     ]
 
 
