@@ -21,27 +21,36 @@ const CarArticle = () => {
     //THIRD PAGE
    
     const prevStep = () => {
-        if(step <=1) { setStep(1); setProgress(25)} 
-        else{ setStep(step-1);setProgress(progress-25)} 
+        if(step <=1) { 
+            setStep(1); 
+            setProgress(25)
+        } 
+        else{ 
+            setStep(step-1)
+            setProgress(progress-25)
+        } 
     }
     const nextStep = () => {
-        if(step >=4) { setStep(4);setProgress(100)}
-        else{ setStep(step+1);setProgress(progress+25)}
+        if(step >=4) {
+             setStep(4);
+             setProgress(100)
+        }
+        else{ 
+            setStep(step+1);
+            setProgress(progress+25)
+        }
     }
 
 
-    const CarsSteps = () => {
-        switch(step){
-            case 1 : 
-                return <FirstStepCars 
+    return ( 
+        <CreateArticleLayout previousStep={prevStep} nextStep={nextStep} progress={progress}>
+            {step == 1 && <FirstStepCars 
                             setManufacturer={setManufacturer}
                             manufacture={manufacturer}
                             setModel={setModel}
                             model={model}
-                            />
-            break;   
-            case 2 : 
-                return <SecondStepCar 
+                            />}
+            {step == 2 && <SecondStepCar 
                             setAvailable={setAvailable}
                             setCondition={setCondition}
                             setLocation={setLocation}
@@ -49,21 +58,9 @@ const CarArticle = () => {
                             location={location}
                             available={available}
                             price={price}
-                            condition={condition}/>
-            break;
-            case 3 : 
-                return <ThirdStepCar/>
-            break;
-            case 4 :
-                return <FourtStepCar/>
-            break;
-            default:
-        }
-    }
-
-    return ( 
-        <CreateArticleLayout previousStep={prevStep} nextStep={nextStep} progress={progress}>
-            <CarsSteps/>
+                            condition={condition}/>}
+            {step == 3 && <ThirdStepCar/>}
+            {step == 4 && <FourtStepCar/>}
         </CreateArticleLayout>
      );
 }

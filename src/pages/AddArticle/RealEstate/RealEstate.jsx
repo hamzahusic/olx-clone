@@ -12,38 +12,33 @@ const RealState = () => {
     const [progress,setProgress] = useState(20);
 
     const prevStep = () => {
-        if(step <=1) { setStep(1); setProgress(20)} 
-        else{ setStep(step-1);setProgress(progress-20)} 
+        if(step <=1) {
+            setStep(1);
+            setProgress(20)
+        } 
+        else{ 
+            setStep(step-1);
+            setProgress(progress-20)
+        } 
     }
     const nextStep = () => {
-        if(step >=5) { setStep(5);setProgress(100)}
-        else{ setStep(step+1);setProgress(progress+20)}
-    }
-
-    const RealEstateSteps = () => {
-        switch(step){
-            case 1 : 
-                return <FirstStepRealEstate/>
-            break;   
-            case 2 : 
-                return <SecondStepRealEstate/>
-            break;
-            case 3 : 
-                return <ThirdStepRealEstate/>
-            break;
-            case 4 :
-                return <FourtStepRealEstate/>
-            break;
-            case 5 :
-                return <FifthStepRealEstate/>
-            break;
-            default:
+        if(step >=5) { 
+            setStep(5);
+            setProgress(100)
+        }
+        else{ 
+            setStep(step+1);
+            setProgress(progress+20)
         }
     }
 
     return ( 
         <CreateArticleLayout previousStep={prevStep} nextStep={nextStep} progress={progress}>
-            <RealEstateSteps/>
+            {step == 1 && <FirstStepRealEstate/>}
+            {step == 2 && <SecondStepRealEstate/>}
+            {step == 3 && <ThirdStepRealEstate/>}
+            {step == 4 && <FourtStepRealEstate/>}
+            {step == 5 && <FifthStepRealEstate/>}
         </CreateArticleLayout>
      );
 }

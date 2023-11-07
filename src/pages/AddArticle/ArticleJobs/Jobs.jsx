@@ -10,32 +10,32 @@ const ArticleJobs = () => {
     const [progress,setProgress] = useState(33);
 
     const prevStep = () => {
-        if(step <=1) { setStep(1); setProgress(33)} 
-        else{ setStep(step-1);setProgress(progress-33)} 
+        if(step <=1) { 
+            setStep(1);
+            setProgress(33)
+        } 
+        else{ 
+            setStep(step-1);
+            setProgress(progress-33)
+        } 
     }
     const nextStep = () => {
-        if(step >=3) { setStep(3);setProgress(100)}
-        else{ setStep(step+1);setProgress(progress+33)}
-    }
-
-    const JobsSteps = () => {
-        switch(step){
-            case 1 : 
-                return <FirstStepJobs/>
-            break;   
-            case 2 : 
-                return <SecondStepJobs/>
-            break;
-            case 3 : 
-                return <ThridStepJobs/>
-            break;
-            default:
+        if(step >=3) { 
+            setStep(3);
+            setProgress(100)
+        }
+        else{ 
+            setStep(step+1);
+            setProgress(progress+33)
         }
     }
 
+
     return ( 
         <CreateArticleLayout previousStep={prevStep} nextStep={nextStep} progress={progress}>
-            <JobsSteps/>
+            {step == 1 && <FirstStepJobs/>}
+            {step == 2 && <SecondStepJobs/>}
+            {step == 3 && <ThridStepJobs/>}
         </CreateArticleLayout>
      );
 }
