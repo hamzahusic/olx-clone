@@ -1,5 +1,8 @@
 import { useState } from "react";
 import CreateArticleLayout from "../../../components/Layouts/CreateLayout";
+import FirstStepElectronics from "./ElectronicsSteps/firstStepElectronic";
+import SecondStepElectronics from "./ElectronicsSteps/secondStepElectronics";
+import ThirdStepElectronics from "./ElectronicsSteps/thirdStepElectronics";
 
 const ArticleElectronics = () => {
 
@@ -30,9 +33,9 @@ const ArticleElectronics = () => {
 
     return ( 
         <CreateArticleLayout previousStep={prevStep} nextStep={nextStep} progress={progress}>
-            {step === 1 && <div>FIRST</div>}
-            {step === 2 && <div>SECOND</div>}
-            {step === 3 && <div>THIRD</div>}
+            {step === 1 && <FirstStepElectronics/>}
+            {step === 2 && <SecondStepElectronics/>}
+            {step === 3 && <ThirdStepElectronics/>}
         </CreateArticleLayout>
      );
 }

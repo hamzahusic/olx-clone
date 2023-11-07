@@ -160,7 +160,6 @@ const ThirdStepCar = () => {
                                 </label>
                             </div>
                         ))
-
                         }
                     </div>
 

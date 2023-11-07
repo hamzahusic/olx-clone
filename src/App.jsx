@@ -13,6 +13,7 @@ import UserImpressionsPost from './pages/userPage/UserProfilePosts/ImpressionsPo
 import RealState from './pages/AddArticle/RealEstate/RealEstate';
 import ArticleJobs from './pages/AddArticle/ArticleJobs/Jobs';
 import ArticleElectronics from './pages/AddArticle/ArticleElectronics/Electronics';
+import RestArticle from './pages/AddArticle/RestArticle/RestArticle';
 
 function App() {
   
@@ -32,6 +33,7 @@ function App() {
           <Route path='/publish/article/realestate' element={<RealState/>}/>
           <Route path='/publish/article/jobs' element={<ArticleJobs/>}/>
           <Route path='/publish/article/electronics' element={<ArticleElectronics/>}/>
+          <Route path='/publish/article/rest' element={<RestArticle/>}/>
           
           <Route path="*" element={<NotFound/>}/>
       </Routes>

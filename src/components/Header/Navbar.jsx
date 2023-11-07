@@ -93,7 +93,7 @@ const Navbar = () => {
                             <Link to={'/publish/article/electronics'} className="border-[1px] border-[#002f34] rounded-md p-3 text-center" >Tehnika</Link>
                         </div>
                         <div className="p-5 w-full flex flex-col gap-4 border-t-[1px] border-gray-100">
-                            <Link to={"/"}  className=" font-semibold flex gap-5 items-center">
+                            <Link to={"/publish/article/rest"}  className=" font-semibold flex gap-5 items-center">
                                 <div className=" rounded-full p-3 shadow-md">
                                     <img src={ostaloIcon} className="max-w-[30px]"/>
                                 </div>
