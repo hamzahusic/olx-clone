@@ -14,6 +14,7 @@ import RealState from './pages/AddArticle/RealEstate/RealEstate';
 import ArticleJobs from './pages/AddArticle/ArticleJobs/Jobs';
 import ArticleElectronics from './pages/AddArticle/ArticleElectronics/Electronics';
 import RestArticle from './pages/AddArticle/RestArticle/RestArticle';
+import SavedPosts from './pages/userPage/UserProfilePosts/SavedPost';
 
 function App() {
   
@@ -29,6 +30,7 @@ function App() {
           <Route path='/profile/my/active' element={<UserActivePosts/>}/>
           <Route path='/profile/my/closed' element={<UserClosedPosts/>}/>
           <Route path='/profile/my/impressions' element={<UserImpressionsPost/>}/>
+          <Route path='/profile/my/saved' element={<SavedPosts/>}/>
           <Route path='/publish/article/cars' element={<CarArticle/>}/>
           <Route path='/publish/article/realestate' element={<RealState/>}/>
           <Route path='/publish/article/jobs' element={<ArticleJobs/>}/>
