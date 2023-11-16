@@ -172,6 +172,8 @@ const ThirdStepCar = (props) => {
                     placeholder="Unesite opis...."
                     cols="30"
                     rows="10"
+                    value={props.opis}
+                    onChange={(e) => props.setOpis(e.target.value)}
                 ></textarea>
             </div>
         </div>
