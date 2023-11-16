@@ -19,7 +19,26 @@ const CarArticle = () => {
     const [condition,setCondition] = useState('');
     const [price,setPrice] = useState('');
     //THIRD PAGE
-   
+    const [naslov,setNaslov] = useState('');
+    const [kilometraza,setKilometraza] = useState('');
+    const [brojVrata,setBrojVrata] = useState('');
+    const [kubikaza,setKubikaza] = useState(0);
+    const [godiste,setGodiste] = useState(0);
+    const [kilovata,setKilovata] = useState(0);
+    const [gorivo,setGorivo] = useState('');
+    const [konja,setKonja] = useState(0);
+    const [transmisija,setTransmisija] = useState('');
+    const [tip,setTip] = useState('');
+    const [registrovanDo,setRegistrovanDo] = useState(0);
+    const [velicinaFelgi,setVelicinaFelgi] = useState(0);
+    const [euro,setEuro] = useState(0);
+    const [pogon,setPogon] = useState('');
+    const [mjesta,setMjesta] = useState(0);
+    const [opis,setOpis] = useState('');
+    const [checkBoxValue,setCheckBoxValue] = useState([]);
+    
+
+    
     const prevStep = () => {
         if(step <=1) { 
             setStep(1); 
@@ -59,7 +78,42 @@ const CarArticle = () => {
                             available={available}
                             price={price}
                             condition={condition}/>}
-            {step == 3 && <ThirdStepCar/>}
+            {step == 3 && <ThirdStepCar
+                            setNaslov={setNaslov}
+                            naslov={naslov}
+                            setKilometraza={setKilometraza}
+                            kilometraza={kilometraza}
+                            setBrojVrata={setBrojVrata}
+                            brojVrata={brojVrata}
+                            setKubikaza={setKubikaza}
+                            kubikaza={kubikaza}
+                            setGodiste={setGodiste}
+                            godiste={godiste}
+                            setKilovata={setKilovata}
+                            kilovata={kilovata}
+                            setGorivo={setGorivo}
+                            gorivo={gorivo}
+                            setKonja={setKonja}
+                            konja={konja}
+                            setTransmisija={setTransmisija}
+                            transmisija={transmisija}
+                            setTip={setTip}
+                            tip={tip}
+                            setRegistrovanDo={setRegistrovanDo}
+                            registrovanDo={registrovanDo}
+                            setVelicinaFelgi={setVelicinaFelgi}
+                            velicinaFelgi={velicinaFelgi}
+                            setEuro={setEuro}
+                            euro={euro}
+                            setPogon={setPogon}
+                            pogon={pogon}
+                            setMjesta={setMjesta}
+                            mjesta={mjesta}
+                            setOpis={setOpis}
+                            opis={opis}
+                            setCheckBoxValue={setCheckBoxValue}
+                            checkBoxValue={checkBoxValue}
+                            />}
             {step == 4 && <FourtStepCar/>}
         </CreateArticleLayout>
      );
