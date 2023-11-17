@@ -5,11 +5,11 @@ import Article from "../../components/Article";
 import olxShopIcon from '../../assets/olxshopnew.svg'
 import olxCatIcon from '../../assets/more-listing.svg'
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import PopUp from "../../components/PopUp";
 
 const UserPage = () => {
-    const image = "https://images.unsplash.com/photo-1502877338535-766e1452684a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2072&q=80"
+    const image = "https://images.unsplash.com/photo-1593198805047-b97ea2348680?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
     const [isPopUpOpen,setPopUp] = useState(false);
     const [allCategories,setAllCategories] = useState([
         "Vozila",
