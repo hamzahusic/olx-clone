@@ -20,7 +20,7 @@ app.get("/article/",async (req,res) => {
         console.log(req.query);
         res.send("Data is sent!");
     } catch (error) {
-        res.status(404).send("No parameters added!!!!");
+        res.status(404).send("No parameters!!!");
     }
 
 
