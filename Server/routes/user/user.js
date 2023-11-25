@@ -8,11 +8,6 @@ const validateJWToken = require('../../middleware/cookieJwtAuth');
 router.post('/register', async (req, res) => {
    
     try {
-    const api_key = req.body.api_key;
-
-    if (!api_key || api_key !== process.env.API_KEY) {
-      return res.status(405).send('Invalid API key');
-    }
     
     const {ime,prezime,email,sifra,adresa,broj_telefona,slika_link} = req.body;
 
@@ -52,7 +47,7 @@ router.post('/register', async (req, res) => {
       }
     },process.env.JWT_KEY,{expiresIn:'1h'})
 
-    //Set cookie with accestoken and it's httpsOnly
+    //Set cookie with accesstoken and it's httpsOnly
     res.cookie("JWT_TOKEN",accessToken,{
       httpOnly:true
     })
