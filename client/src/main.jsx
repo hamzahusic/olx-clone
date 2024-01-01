@@ -9,8 +9,7 @@ import { configureStore } from '@reduxjs/toolkit'
 
 const store = configureStore({ 
   reducer:allReducers,
-}
-);
+});
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>

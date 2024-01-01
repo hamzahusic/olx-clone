@@ -1,6 +1,11 @@
-export const handleLoggin = (data) => {
+export const handleLogIn = (data) => {
     return{
-        type: "SIGN_IN",
+        type: 'LOG_IN',
         payload:data
+    }
+}
+export const handleLogOut = () => {
+    return{
+        type:'LOG_OUT'
     }
 }

@@ -64,6 +64,7 @@ router.post('/register', async (req, res) => {
 });
 
 router.get('/all',validateJWToken,(req,res) => {
+  
   res.status(200).send({message : "You can accesss all data",data : res.user});
 })
 
@@ -83,28 +84,31 @@ router.post('/login',async (req,res) => {
 
   const userResult = await userDetails;
 
-  if(userResult){
+  if(!userResult)
+    return res.status(401).json({message : "User doesn't exists"})
+   
+  const passwordMatch = await bcrypt.compare(sifra,userResult.sifra);
 
-    const accessToken = jwt.sign({
+  if(!passwordMatch) 
+    return res.status(401).json({message : "Wrong user details (password)"})
+  
+  const accessToken = jwt.sign({
       user:{
-        ime:userResult.ime,
-        prezime:userResult.prezime,
-        email : userResult.email
-      }
-    },process.env.JWT_KEY,{expiresIn:'1h'})
+      ime:userResult.ime,
+      prezime:userResult.prezime,
+      email : userResult.email
+    }
+  },process.env.JWT_KEY,{expiresIn:'1h'})
 
-    //Set cookie with accestoken and it's httpsOnly
-    res.cookie("JWT_TOKEN",accessToken,{
-      httpOnly:true
-    })
+  //Set cookie with accestoken and it's httpsOnly
+  res.cookie("JWT_TOKEN",accessToken,{
+    httpOnly:true
+  })
 
-    return res.status(200).json({
-      message : "User logged in",
-      user : userResult
-    })
-  }
-
-  return res.status(401).json({message : "User doesn't exists"})
+  return res.status(200).json({
+    message : "User logged in",
+    user : userResult
+  })
 })
 
 module.exports = router;

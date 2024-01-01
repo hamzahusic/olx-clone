@@ -6,8 +6,13 @@ import publishIcon from '../../assets/objavi.svg'
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import NoResult from "../../components/NoResult";
+import { useSelector } from "react-redux";
 
 const UserProfile = ({children}) => {
+
+    const user = useSelector(state => state.isLogged)
+
+    const zadnja_prijava = new Date(user.zadnja_prijava);
 
     return ( 
         <UserLayout>
@@ -15,13 +20,13 @@ const UserProfile = ({children}) => {
                 <div className="flex flex-col gap-5 w-full max-w-[350px] border-r-[1px] pr-4 min-h-[70vh]">
                     <div className="flex gap-4 items-center">
                         <div className="w-12 h-12 rounded-full overflow-hidden">
-                            <img src={whiteProfile} className="bg-gray-800 w-full h-full object-fit p-1"/>
+                            <img src={user.slika_link ? user.slika_link : whiteProfile} className="bg-gray-800 w-full h-full object-cover scale-[1.3] p-1"/>
                         </div>
                         <div className="flex flex-col items-stretch">
-                            <p>Haze347</p>
+                            <p>{user.ime}</p>
                             <div className="flex gap-2">
                                 <img src={locationIcon} alt="" width={10}/>
-                                <p>Tuzla</p>
+                                <p>{user.adresa}</p>
                             </div>
                         </div>
                     </div>
@@ -42,18 +47,13 @@ const UserProfile = ({children}) => {
                     </div>
                     <div>
                         <p className="pb-5">Informacije</p>
-
-                        <div className="flex justify-between text-sm">
-                            <p>Registrovan</p>
-                            <p>04.02.2020</p>
-                        </div>
                         <div className="flex justify-between text-sm py-2">
                             <p>OLX ID</p>
-                            <p>2571018</p>
+                            <p>{user.idK}</p>
                         </div>
                         <div className="flex justify-between text-sm">
                             <p>Online</p>
-                            <p>prije 8 minuta</p>
+                            <p>{zadnja_prijava.getDay() + '-' + Number(zadnja_prijava.getMonth()+1) + '-' + zadnja_prijava.getFullYear() + ' / ' + zadnja_prijava.getHours() + ':' + zadnja_prijava.getMinutes()}</p>
                         </div>
                     </div>
                 </div>

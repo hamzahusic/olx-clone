@@ -28,6 +28,8 @@ import ostaloIcon from '../../assets/ostalo_icon.svg'
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import PopUp from "../PopUp"
+import { useDispatch, useSelector } from "react-redux"
+import { handleLogOut } from "../../redux/actions/RegistrationActions/Actions"
 
 const Navbar = () => {
 
@@ -35,8 +37,9 @@ const Navbar = () => {
     const [menu,setMenu] = useState(false);
     const [inputValue,setInputValue] = useState(null);
     const [objavaPopUp,setObjavaPopUp] = useState(false);
-    const [user,setUser] = useState(true);
 
+    const user = useSelector(state => state.isLogged);
+    const dispatch = useDispatch();
 
     const searchArticle = (e) => {
         e.preventDefault();
@@ -69,7 +72,7 @@ const Navbar = () => {
                             <Link to="/profile/my/active" className="flex gap-2 items-center border-r-[1px] pr-3 border-[#002f34]"><img src={oglasiIcon} width={15}/> Moji oglasi</Link>
                             <Link to="/" className="border-r-[1px] pr-3 border-[#002f34]"><img src={messagesIcon} width={20}/></Link>
                             <Link to="/" className="flex gap-2 items-center border-r-[1px] pr-3 border-[#002f34]"><img src={creditsIcon} width={20}/><span className="bg-yellow-100 px-2 rounded">13</span></Link>
-                            <Link to="/profile/my/active" className="flex gap-3 items-center text-base"><div className=" w-10 h-10 rounded-full overflow-hidden"><img src={whiteProfile} className="bg-gray-800 w-full h-full object-fit p-1"/></div>Haze347</Link>
+                            <Link to="/profile/my/active" className="flex gap-3 items-center text-base"><div className=" w-10 h-10 rounded-full overflow-hidden"><img src={user.slika_link ? user.slika_link : whiteProfile} className="bg-gray-800 w-full h-full scale-[1.3] object-cover p-1"/></div>{user.ime}</Link>
                             <button onClick={() => setMenu(true)}><img src={menuIcon}/></button>
                         </div>
                     }
@@ -159,7 +162,7 @@ const Navbar = () => {
                     <Link to={'/'} className="menu-link"> <img src={chartIcon} width={20}/> Marketing</Link>
                     <Link to={'/'} className="menu-link"> <img src={blockedIcon} width={20}/> Blokirani korisnici</Link>
                     <Link to={'/'} className="menu-link"> <img src={settingsIcon} width={20}/> Postavke</Link>
-                    <Link to={'/'} className="menu-link"> <img src={logoutIcon} width={20}/> Odjava</Link>
+                    <button className="menu-link w-full" onClick={() => dispatch(handleLogOut())}> <img src={logoutIcon} width={20} /> Odjava</button>
 
             </div>}
         </nav>
