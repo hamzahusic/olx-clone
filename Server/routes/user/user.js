@@ -100,6 +100,14 @@ router.post('/login',async (req,res) => {
     }
   },process.env.JWT_KEY,{expiresIn:'1h'})
 
+  await User.update({
+    zadnja_prijava:new Date(),
+  },
+  {
+    where:{email:email}
+  })
+
+
   //Set cookie with accestoken and it's httpsOnly
   res.cookie("JWT_TOKEN",accessToken,{
     httpOnly:true

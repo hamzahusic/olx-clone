@@ -3,16 +3,21 @@ import whiteProfile from "../../assets/white-olx.svg"
 import locationIcon from '../../assets/location.svg'
 import editIcon from '../../assets/edit.svg'
 import publishIcon from '../../assets/objavi.svg'
-import { Link } from "react-router-dom";
-import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
 import NoResult from "../../components/NoResult";
 import { useSelector } from "react-redux";
 
 const UserProfile = ({children}) => {
 
     const user = useSelector(state => state.isLogged)
-
+    const navigate = useNavigate()
     const zadnja_prijava = new Date(user.zadnja_prijava);
+
+    useEffect(() => {
+        if(!user)
+            navigate('/')
+    },[user])
 
     return ( 
         <UserLayout>
@@ -23,7 +28,7 @@ const UserProfile = ({children}) => {
                             <img src={user.slika_link ? user.slika_link : whiteProfile} className="bg-gray-800 w-full h-full object-cover scale-[1.3] p-1"/>
                         </div>
                         <div className="flex flex-col items-stretch">
-                            <p>{user.ime}</p>
+                            <p className=" text-lg">{user.ime + " " + user.prezime}</p>
                             <div className="flex gap-2">
                                 <img src={locationIcon} alt="" width={10}/>
                                 <p>{user.adresa}</p>
@@ -53,7 +58,7 @@ const UserProfile = ({children}) => {
                         </div>
                         <div className="flex justify-between text-sm">
                             <p>Online</p>
-                            <p>{zadnja_prijava.getDay() + '-' + Number(zadnja_prijava.getMonth()+1) + '-' + zadnja_prijava.getFullYear() + ' / ' + zadnja_prijava.getHours() + ':' + zadnja_prijava.getMinutes()}</p>
+                            <p>{zadnja_prijava.getDay() + '/' + Number(zadnja_prijava.getMonth()+1) + '/' + zadnja_prijava.getFullYear() + " " + zadnja_prijava.getHours() + ':' + zadnja_prijava.getMinutes()}</p>
                         </div>
                     </div>
                 </div>

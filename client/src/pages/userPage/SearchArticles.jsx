@@ -2,7 +2,7 @@ import { useState } from "react";
 import Article from "../../components/Article";
 import Filters from "../../components/Header/Filters";
 import UserLayout from "../../components/Layouts/UserLayout";
-import { shallowEqual, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 const SearchArticles = () => {
@@ -11,7 +11,7 @@ const SearchArticles = () => {
     const [openFilter,setFilter] = useState(false);
     const [openSort,setSort] = useState(false);
 
-    const user = useSelector(state => state.isLogged,shallowEqual);
+    const user = useSelector(state => state.isLogged);
     
 
     return ( 
