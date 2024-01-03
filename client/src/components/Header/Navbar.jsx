@@ -83,7 +83,7 @@ const Navbar = () => {
                     <img src={searchIcon} className="pr-5"/>
                     <input type="search" placeholder="Pretraga" className="placeholder:text-gray-600 outline-none w-full" onChange={(e) => setInputValue(e.target.value)}/>
                 </form>
-                <button className="bg-[#002f34] text-white flex items-center justify-center px-14 py-3 rounded gap-1" onClick={() => setObjavaPopUp(true)}>
+                <button className="bg-[#002f34] text-white flex items-center justify-center px-14 py-3 rounded gap-1" onClick={() => user ? setObjavaPopUp(true) : navigate('/login')}>
                     <img src={objaviIcon} width={17}/>
                     <span className="min-w-[100%]">Objavi oglas</span>
                 </button>

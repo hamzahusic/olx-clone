@@ -57,7 +57,6 @@ router.post('/register', async (req, res) => {
       user: user.toJSON(),
     });
   } catch (error) {
-    console.error('Error during registration:', error);
     res.status(500).send({response : "Error during registration"});
   }
   

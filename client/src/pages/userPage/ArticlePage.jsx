@@ -19,7 +19,7 @@ import 'swiper/css/navigation';
 import { useState } from "react";
 import Article from "../../components/Article";
 import NotLogIn from "../../components/NotLogIn";
-import { shallowEqual, useDispatch, useSelector } from "react-redux";
+import {useDispatch, useSelector } from "react-redux";
 
 
 const ArticlePage = () => {

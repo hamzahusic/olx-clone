@@ -23,8 +23,8 @@ const SecondStepCar = ({setLocation,location,setAvailable,available,condition,se
                         <div className="w-full">
                             <p className=' text-[12px] font-semibold tracking-wide mt-5 mb-3'>STANJE OGLASA</p>
                             <div className="flex justify-between items-center gap-4 text-sm">
-                                <button className="py-2 px-7 bg-gray-100 rounded text-gray-600 font-thin w-full" onClick={() => setCondition(true)} style={{backgroundColor:condition && '#23e5db'}}>Novo</button>
-                                <button className="py-2 px-7  bg-gray-100 rounded text-gray-600 font-thin  w-full" onClick={() => setCondition(false)} style={{backgroundColor:!condition && '#23e5db'}}>Korišteno</button>
+                                <button className="py-2 px-7 bg-gray-100 rounded text-gray-600 font-thin w-full" onClick={() => setCondition("Novo")} style={{backgroundColor:condition == "Novo" && '#23e5db'}}>Novo</button>
+                                <button className="py-2 px-7  bg-gray-100 rounded text-gray-600 font-thin  w-full" onClick={() => setCondition("Korišteno")} style={{backgroundColor:condition == "Korišteno" && '#23e5db'}}>Korišteno</button>
                             </div>
                         </div>
                 </div>
@@ -43,7 +43,7 @@ const SecondStepCar = ({setLocation,location,setAvailable,available,condition,se
                     <p className="py-3 px-5 rounded-full bg-gray-100">ili</p>
                     <button 
                         className={`py-3 bg-gray-100 rounded  text-sm w-full border-2 ${showPrice ? 'font-thin text-gray-600' : 'border-[var(--pcolor)] font-semibold text-color'}`}
-                        onClick={() => {setShowPrice(!showPrice);setPrice(0)}}>Cijena na upit</button>
+                        onClick={() => {setShowPrice(!showPrice);setPrice(-1)}}>Cijena na upit</button>
                 </div>
             </div>
         </div>

@@ -4,6 +4,10 @@ import FirstStepCars from "./CarSteps/firstStepCar";
 import SecondStepCar from "./CarSteps/secondStepCar";
 import ThirdStepCar from "./CarSteps/thridStepCar";
 import FourtStepCar from "./CarSteps/fourthStepCar";
+import PopUp from "../../../components/PopUp";
+import checkIcon from "../../../assets/check-mark.png"
+import wrongIcon from '../../../assets/cross.png'
+import { useNavigate } from "react-router-dom";
 
 const CarArticle = () => {
 
@@ -17,27 +21,32 @@ const CarArticle = () => {
     const [location,setLocation] = useState('');
     const [available,setAvailable] = useState(false);
     const [condition,setCondition] = useState('');
-    const [price,setPrice] = useState('');
+    const [price,setPrice] = useState(0);
     //THIRD PAGE
     const [naslov,setNaslov] = useState('');
     const [kilometraza,setKilometraza] = useState('');
     const [brojVrata,setBrojVrata] = useState('');
     const [kubikaza,setKubikaza] = useState(0);
-    const [godiste,setGodiste] = useState(0);
+    const [godiste,setGodiste] = useState('');
     const [kilovata,setKilovata] = useState(0);
     const [gorivo,setGorivo] = useState('');
     const [konja,setKonja] = useState(0);
     const [transmisija,setTransmisija] = useState('');
     const [tip,setTip] = useState('');
-    const [registrovanDo,setRegistrovanDo] = useState(0);
+    const [registrovanDo,setRegistrovanDo] = useState();
     const [velicinaFelgi,setVelicinaFelgi] = useState(0);
     const [euro,setEuro] = useState(0);
     const [pogon,setPogon] = useState('');
     const [mjesta,setMjesta] = useState(0);
     const [opis,setOpis] = useState('');
     const [checkBoxValue,setCheckBoxValue] = useState([]);
-    
-
+    //FOURTH PAGE
+    const [slike,setSlike] = useState([])
+    //POPUP
+    const [objavaPopUp,setObjavaPopUp] = useState(false);
+    const [errorPopUp,setErrorPopUp] = useState(false);
+    const navigate = useNavigate()
+    const [createdArticleId,setCreatedArticleId] = useState('');
     
     const prevStep = () => {
         if(step <=1) { 
@@ -49,10 +58,72 @@ const CarArticle = () => {
             setProgress(progress-25)
         } 
     }
+
+    const handleObjava = async () => {
+
+        try {
+            
+            const response = await fetch('http://localhost:8080/api/create/automobili',{
+                method: "POST",
+                    headers: {
+                        "Content-Type": "application/json", 
+                    },
+                    body: JSON.stringify({
+                        proizvodjac:manufacturer,
+                        model:model,
+                        kilometraza:kilometraza,
+                        broj_vrata:brojVrata,
+                        godiste:godiste,
+                        kubikaza:kubikaza,
+                        kilovata:kilovata,
+                        gorivo:gorivo,
+                        konjskih_snaga:konja,
+                        tip:tip,
+                        transmisija:transmisija,
+                        registrovan_do:registrovanDo,
+                        velicina_felgi:velicinaFelgi,
+                        euro:euro,
+                        pogon:pogon,
+                        mjesta:mjesta,
+                        naslov:naslov,
+                        datum_promjene: new Date(),
+                        lokacija:location,
+                        dostupno:available,
+                        stanje:condition,
+                        cijena:price,
+                        opis:opis,
+                        slika:slike,
+                        detalji_checkbox:checkBoxValue
+                    })
+            })
+            if(!response.ok)
+                throw Error("Error publishing article!")
+
+            const data = await response.json()
+
+            setCreatedArticleId(data.id)
+            setObjavaPopUp(true)
+        } catch (error) {
+            console.log(error)
+            setErrorPopUp(true);
+        }
+
+        
+    }
+
     const nextStep = () => {
-        if(step >=4) {
-             setStep(4);
-             setProgress(100)
+        if(step >= 4) {
+            setProgress(100)
+
+            console.log(manufacturer,model,location,available,condition,price,naslov,kilometraza,brojVrata,kubikaza,godiste,kilovata,gorivo,slike,konja,transmisija,tip,registrovanDo,velicinaFelgi,euro,pogon,mjesta,opis)
+            
+            if(!manufacturer || !model || !location || !price || !naslov || !kilometraza || !brojVrata || !kubikaza || !godiste || !kilovata || !gorivo || !slike){
+                setErrorPopUp(true)
+            }
+            else{    
+                handleObjava();
+            }
+            
         }
         else{ 
             setStep(step+1);
@@ -114,7 +185,32 @@ const CarArticle = () => {
                             setCheckBoxValue={setCheckBoxValue}
                             checkBoxValue={checkBoxValue}
                             />}
-            {step == 4 && <FourtStepCar/>}
+            {step == 4 && <FourtStepCar
+                            slike={slike}
+                            setSlike={setSlike}
+            />}
+            {objavaPopUp && 
+                <PopUp title={"Uspješno objavljen oglas!"} isOpen={objavaPopUp} >
+                    <div className="p-5">
+                        <img src={checkIcon} alt="" className="max-w-[150px] mx-auto my-5"/>
+                        <p className="text-center text-xl">Vaš oglas je objavljen!</p>
+                        <div className="flex gap-2 mt-10">
+                            <button className="flex-1 border-[1px] border-[var(--pcolor)] py-2 rounded font-semibold" onClick={() => navigate(`/article/${createdArticleId}`)}>Pogledaj oglas</button>
+                            <button className="flex-1 border-[1px] border-[var(--pcolor)] py-2 rounded font-semibold text-white bg-[var(--pcolor)]" onClick={() => navigate('/')}>Vrati se na početnu</button>
+                        </div>
+                    </div>
+                </PopUp>
+            }
+            {errorPopUp && 
+                <PopUp title={"Oglas nije objavljen!"} isOpen={errorPopUp} onClose={() => setErrorPopUp(!errorPopUp)}>
+                    <div className="p-5">
+                        <img src={wrongIcon} alt="" className="max-w-[150px] mx-auto my-5"/>
+                        <p className="text-center text-xl">Unesite sve informacije!</p>
+                        <p className="text-center">Obavezna polja su označena sa *</p>
+                    </div>
+                </PopUp>
+            }
+            
         </CreateArticleLayout>
      );
 }

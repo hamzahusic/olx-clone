@@ -36,7 +36,6 @@ function App() {
           <Route path='/publish/article/jobs' element={<ArticleJobs/>}/>
           <Route path='/publish/article/electronics' element={<ArticleElectronics/>}/>
           <Route path='/publish/article/rest' element={<RestArticle/>}/>
-          
           <Route path="*" element={<NotFound/>}/>
       </Routes>
     </Router>

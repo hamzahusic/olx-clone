@@ -6,8 +6,14 @@ const ThirdStepCar = (props) => {
         "Grijanje sjedišta","Klima","Komande na volanu","Navigacija","Ocarinjen","Panorama krov","Park assist",
         "Servo volan","Turbo","Tempomat","Registrovan","Udaren","Start-Stop sistem","Šiber"
     ]
-
-    const savedCh = [];
+    
+    const handleCheckBoxValue = (value) => {
+        if(props.checkBoxValue.includes(value))
+            props.setCheckBoxValue(props.checkBoxValue.filter(ch => ch != value))
+        else
+            props.setCheckBoxValue([...props.checkBoxValue,value])
+        console.log(props.checkBoxValue)
+    }
     
     return ( 
         <div>
@@ -37,27 +43,17 @@ const ThirdStepCar = (props) => {
                         </div>
                         <div className="w-full flex flex-col">
                             <p className=' text-[12px] font-semibold tracking-wide mt-5 mb-3'>KUBIKAŽA*</p>
-                            <select  className='bg-gray-100 outline-none p-3 rounded-md' value={props.kubikaza} onChange={(e) => props.setKubikaza(e.target.value)}>
-                                <option value="">Izaberi kubikažu</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                            </select>
+                            <input type="number" value={props.kubikaza} onChange={(e) => props.setKubikaza(e.target.value)} className='bg-gray-100 outline-none p-3 rounded-md placeholder:text-gray-600 text-base w-full' placeholder="Unesite kubikažu"/>
                         </div>
                 </div>
                 <div className="flex items-start justify-between gap-6" >
                         <div className="w-full flex flex-col">
                             <p className=' text-[12px] font-semibold tracking-wide mt-5 mb-3'>GODIŠTE*</p>
-                            <select  className='bg-gray-100 outline-none p-3 rounded-md' value={props.godiste} onChange={(e) => props.setGodiste(e.target.value)}>
-                                <option value="">Izaberi godište</option>
-                                <option value="1">2001</option>
-                                <option value="2">2002</option>
-                                <option value="3">2003</option>
-                            </select>
+                            <input type="text" value={props.godiste} onChange={(e) => props.setGodiste(e.target.value)} className='bg-gray-100 outline-none p-3 rounded-md placeholder:text-gray-600 text-base w-full' placeholder="Unesite godište"/>
                         </div>
                         <div className="w-full flex flex-col">
                             <p className=' text-[12px] font-semibold tracking-wide mt-5 mb-3'>KILOVATA (KW)*</p>
-                            <input type="text" id="" value={props.kilovata} onChange={(e) => props.setKilovata(e.target.value)} placeholder="Unesite KW" className='bg-gray-100 outline-none p-3 rounded-md placeholder:text-gray-600 text-base w-full'/>
+                            <input type="number" id="" value={props.kilovata} onChange={(e) => props.setKilovata(e.target.value)} placeholder="Unesite KW" className='bg-gray-100 outline-none p-3 rounded-md placeholder:text-gray-600 text-base w-full'/>
                         </div>
                         
                 </div>
@@ -93,40 +89,30 @@ const ThirdStepCar = (props) => {
                         <div className="w-full flex flex-col">
                             <p className=' text-[12px] font-semibold tracking-wide mt-5 mb-3'>TIP</p>
                             <select  className='bg-gray-100 outline-none p-3 rounded-md' value={props.tip} onChange={(e) => props.setTip(e.target.value)}>
-                                <option value="">Izaberi tip</option>
-                                <option value="1">kabriolet</option>
-                                <option value="2">karavan</option>
-                                <option value="3">limuzina</option>
+                                <option value={null}>Izaberi tip</option>
+                                <option value="kabriolet">kabriolet</option>
+                                <option value="karavan">karavan</option>
+                                <option value="limuzina">limuzina</option>
                             </select>
                         </div>
                         <div className="w-full flex flex-col">
                             <p className=' text-[12px] font-semibold tracking-wide mt-5 mb-3'>REGISTROVAN DO</p>
-                            <select  className='bg-gray-100 outline-none p-3 rounded-md' value={props.registrovanDo} onChange={(e) => props.setRegistrovanDo(e.target.value)}>
-                                <option value="">Izaberi registorovan do</option>
-                                <option value="1">11</option>
-                                <option value="2">12</option>
-                                <option value="3">1</option>
-                            </select>
+                            <input type="date" value={props.registrovanDo} onChange={(e) => props.setRegistrovanDo(e.target.value)} className='bg-gray-100 outline-none p-3 rounded-md placeholder:text-gray-600 text-base w-full' placeholder="Unesite dan i mjesec isteka"/>
                         </div>
                         <div className="w-full flex flex-col">
                             <p className=' text-[12px] font-semibold tracking-wide mt-5 mb-3'>VELICINA FELGI</p>
-                            <select  className='bg-gray-100 outline-none p-3 rounded-md' value={props.velicinaFelgi} onChange={(e) => props.setVelicinaFelgi(e.target.value)}>
-                                <option value="">Izaberi velicinu felgi</option>
-                                <option value="1">14</option>
-                                <option value="2">15</option>
-                                <option value="3">16</option>
-                            </select>
+                            <input type="number" value={props.velicinaFelgi} onChange={(e) => props.setVelicinaFelgi(e.target.value)} className='bg-gray-100 outline-none p-3 rounded-md placeholder:text-gray-600 text-base w-full' placeholder="Unesite veličinu felgi"/>
                         </div>
                         <div className="w-full flex flex-col">
                             <p className=' text-[12px] font-semibold tracking-wide mt-5 mb-3'>Euro [0-6]</p>
                             <select  className='bg-gray-100 outline-none p-3 rounded-md' value={props.euro} onChange={(e) => props.setEuro(e.target.value)}>
-                                <option value="0">0</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                                <option value="6">6</option>
+                                <option value={0}>0</option>
+                                <option value={1}>1</option>
+                                <option value={2}>2</option>
+                                <option value={3}>3</option>
+                                <option value={4}>4</option>
+                                <option value={5}>5</option>
+                                <option value={6}>6</option>
                             </select>
                         </div>
                         <div className="w-full">
@@ -148,7 +134,7 @@ const ThirdStepCar = (props) => {
                                     <button className="py-2 px-6  bg-gray-300 rounded text-gray-600 font-thin w-full" style={{border:props.mjesta==6 && "2px solid var(--pcolor)"}} onClick={() => props.setMjesta(6)}>6</button>
                                     <button className="py-2 px-6  bg-gray-300 rounded text-gray-600 font-thin w-full" style={{border:props.mjesta==7 && "2px solid var(--pcolor)"}} onClick={() => props.setMjesta(7)}>7</button>
                                     <button className="py-2 px-6  bg-gray-300 rounded text-gray-600 font-thin w-full" style={{border:props.mjesta==8 && "2px solid var(--pcolor)"}} onClick={() => props.setMjesta(8)}>8</button>
-                                    <button className="py-2 px-6  bg-gray-300 rounded text-gray-600 font-thin w-full" style={{border:props.mjesta==0 && "2px solid var(--pcolor)"}} onClick={() => props.setMjesta(0)}>Ostalo</button>
+                                    <button className="py-2 px-6  bg-gray-300 rounded text-gray-600 font-thin w-full" style={{border:props.mjesta==0 && "2px solid var(--pcolor)"}} onClick={() => props.setMjesta(null)}>Ostalo</button>
                                 </div>
                         </div>
                     </div>
@@ -158,7 +144,7 @@ const ThirdStepCar = (props) => {
                             <div className="text-base" key={value}>
                                 <label htmlFor={value} className="flex items-center w-full justify-between cursor-pointer">
                                     {value}
-                                    <input id={value} type="checkbox" onClick={() => {props.setCheckBoxValue(...props.checkBoxValue,value)}}/>
+                                    <input id={value} type="checkbox" onClick={() => {handleCheckBoxValue(value)}}/>
                                 </label>
                             </div>
                         ))

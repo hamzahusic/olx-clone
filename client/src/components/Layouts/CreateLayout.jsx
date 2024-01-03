@@ -23,7 +23,7 @@ const CreateArticleLayout = ({children,previousStep,nextStep,progress=25}) => {
                     <button onClick={previousStep}>
                         <img src={arrowLeft}/>
                     </button>
-                    <button className='p-3 border-2 border-[var(--pcolor)] rounded' onClick={nextStep}>Nastavi</button>
+                    <button className='p-3 border-2 border-[var(--pcolor)] rounded' onClick={nextStep}>{progress == 100 ? "Završi" :"Nastavi"}</button>
                 </div>
             </div>
         </div>
