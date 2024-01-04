@@ -1,4 +1,4 @@
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import UserLayout from "../../components/Layouts/UserLayout";
 import instantDelivery from '../../assets/articleImg/delivery-truck-new.svg'
 import saveAricle from '../../assets/articleImg/save.svg'
@@ -10,155 +10,72 @@ import slikaTest from '../../assets/articleImg/testImg.jpg'
 import logo from "../../assets/logoOLX.svg"
 import phoneIcon from '../../assets/articleImg/phone.svg'
 import messageIcon from '../../assets/articleImg/message.svg'
+import locationIcon from '../../assets/location.png'
+import priceTagIcon from '../../assets/price-tag.png'
+import clockIcon from '../../assets/clock.png'
+import infoIcon from '../../assets/info.png'
+import checkIcon from '../../assets/check.png'
 
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Article from "../../components/Article";
 import NotLogIn from "../../components/NotLogIn";
 import {useDispatch, useSelector } from "react-redux";
-
+import ClipLoader from "react-spinners/ClipLoader"
 
 const ArticlePage = () => {
     const image = "https://images.unsplash.com/photo-1502877338535-766e1452684a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2072&q=80"
     const {id} = useParams();
     const [save,setSave] = useState(false);
-    const [articleImages,setArticleImages] = useState([slikaTest,slikaTest,slikaTest,slikaTest])
-    const [artcileInfo,setArticleInfo] = useState([
-        {
-            name:"Tuzla",
-            icon: "Icon",    
-        },
-        {
-            name:"Koristeno",
-            icon: "Icon",
-        },
-        {
-            name:"Obnovljen",
-            icon: "Icon",
-            value:'14.09.2023'
-        },
-        {
-            name:"ID",
-            icon: "Icon",
-            value:55102817
-        },
-        {
-            name:"Pregledi",
-            icon: "Icon",
-            value:2507,
-        }
-    ])
-    const [articleDetails,setArticleDetails] = useState([
-        {
-            "name" : "Proizvodjač",
-            "value" : "Volkswagen"
-        },
-        {
-            "name" : "Proizvodjač",
-            "value" : "Volkswagen"
-        },
-        {
-            "name" : "Proizvodjač",
-            "value" : "Volkswagen"
-        },
-        {
-            "name" : "Proizvodjač",
-            "value" : "Volkswagen"
-        },
-        {
-            "name" : "Proizvodjač",
-            "value" : "Volkswagen"
-        },
-        {
-            "name" : "Proizvodjač",
-            "value" : "Volkswagen"
-        },
-        {
-            "name" : "Proizvodjač",
-            "value" : "Volkswagen"
-        },
-    ])
-    const [arcitleTraits,setTraits] = useState([
-        {
-            name:"Veličina felgi",
-            value:17
-        },
-        {
-            name:"Veličina felgi",
-            value:17
-        },
-        {
-            name:"Veličina felgi",
-            value:17
-        },
-        {
-            name:"Veličina felgi",
-            value:17
-        },
-        {
-            name:"Veličina felgi",
-            value:17
-        },
-        {
-            name:"Veličina felgi",
-            value:17
-        },
-        {
-            name:"Veličina felgi",
-            value:17
-        },
-        {
-            name:"Veličina felgi",
-            value:17
-        },
-        {
-            name:"Veličina felgi",
-            value:17
-        },
-        {
-            name:"Veličina felgi",
-            value:17
-        },
-        {
-            name:"Veličina felgi",
-            value:17
-        },
-        {
-            name:"Veličina felgi",
-            value:17
-        },
-        {
-            name:"Veličina felgi",
-            value:17
-        }
-    ])
-    const [textDetail,setTextDetail] = useState("Golf 2.0TDI Highline Uvoz njemacka! Placeno sve do registacije!");
-
+    const [articleInfo,setArticleInfo] = useState([])
+    const [loading,setLoading] = useState(true);
     const saveArticle = () => setSave(!save);
-    
     const user = useSelector(state => state.isLogged);  
-
     const dispach = useDispatch();
+    const navigate = useNavigate()
+
+    const getCarInformation = async () => {
+
+        try {
+            const response = await fetch(`http://localhost:8080/api/get/automobili/${id}`)
+            
+            if(!response.ok)
+                    throw Error("Error getting car info")
+
+            const data = response.json();
+
+            const result = await data;
+            setArticleInfo(result)
+            setLoading(false)
+            console.log(result)
+        } catch (error) {
+            console.error(error)
+        }
+
+    }
+
+    useEffect(() => {
+        getCarInformation()
+    },[])
 
     return ( 
         <UserLayout>
-            <div className="flex max-w-[1180] p-4 items-start justify-center gap-4 bg-[#f1f4f5]">
+            {!loading && articleInfo && <div className="flex max-w-[1180] p-4 items-start justify-center gap-4 bg-[#f1f4f5]">
                 <div className=" flex flex-col gap-4">
                     <div className="bg-white p-4">
-                        <h1 className="text-[26px] font-light">Renault Megane 1.5 DCI 2019 NEW-MODEL</h1>
-                        <div className="flex gap-2 items-center">
-                            <p className=" text-[34px] font-bold">21.900 KM</p>
-                            <p className="flex gap-2 bg-[#002f34] py-1 px-2 text-white text-[12px] rounded-sm">
-                                <img src={instantDelivery} className=" brightness-[100]" width={24}/>
-                                Dostupno odmah
-                            </p>
-                        </div>
-                        <div className="flex justify-between items-center pb-5">
-                            <Link to={"/"}>Vozila &gt; Automobili</Link>
+                        <h1 className="text-[26px] font-light">{articleInfo[0].naslov}</h1>
+                        <div className="flex gap-2 items-center justify-between pb-3">
+                            <div className="flex items-center gap-2">
+                                <p className=" text-[34px] font-bold">{articleInfo[0].cijena.toLocaleString("de-DE")}KM</p>
+                                {articleInfo[0].dostupno && <p className="flex gap-2 bg-[#002f34] py-1 px-2 text-white text-[12px] rounded-sm">
+                                    <img src={instantDelivery} className=" brightness-[100]" width={24}/>
+                                    Dostupno odmah
+                                </p>}
+                            </div>
                             <div className="flex gap-2">
                                 <img src={share} alt="" className=" cursor-pointer"/>
                                 {user &&  
@@ -179,9 +96,10 @@ const ArticlePage = () => {
                                 className="mySwiper lg:min-h-[600px]"
                             >
                                 {
-                                    articleImages.map((image) => (
+
+                                    articleInfo[0].Slikas.map((image) => (
                                         <SwiperSlide>
-                                            <img src={image} alt=""/>
+                                            <img src={image.slika_link} alt="" key={image} className=" min-h-[600px] w-full object-fill"/>
                                         </SwiperSlide>
                                     ))
                                 }
@@ -190,22 +108,31 @@ const ArticlePage = () => {
                     </div>
                     <div className="bg-white p-4">
                         <div className="flex gap-2">
-                                {
-                                    artcileInfo.map((article) => (
-                                        <p className="py-1 px-3 text-[12px] font-semibold border-[1px] border-gray-300 rounded-md">
-                                            {article.name} {article?.value ? ': ' + article.value : ''}
-                                        </p>
-                                    ))
-                                }
+                        <p className="py-1 px-3 text-[12px] font-semibold border-[1px] border-gray-300 rounded-md uppercase flex items-center gap-1">
+                            <img src={locationIcon} alt="" width={14} />
+                            {articleInfo[0].lokacija}
+                        </p>
+                        <p className="py-1 px-3 text-[12px] font-semibold border-[1px] border-gray-300 rounded-md uppercase flex items-center gap-1">
+                            <img src={priceTagIcon} alt="" width={14} />
+                            {articleInfo[0].stanje}
+                        </p>
+                        <p className="py-1 px-3 text-[12px] font-semibold border-[1px] border-gray-300 rounded-md flex items-center gap-1">
+                            <img src={clockIcon} alt="" width={14} />
+                            OBNOVLJEN : {articleInfo[0].datum_promjene.substring(0,10)}
+                        </p>
+                        <p className="py-1 px-3 text-[12px] font-semibold border-[1px] border-gray-300 rounded-md flex items-center gap-1">
+                            <img src={infoIcon} alt="" width={13} />
+                            ID : {articleInfo[0].idA}
+                        </p>
                         </div>
                         <div className=" grid grid-cols-2 gap-4 py-6 border-b-[1px] border-gray-300">
                             {
-                                articleDetails.map((detail) => (
+                                Object.keys(articleInfo[0].KategorijaVozilo).filter(el => el != "idKV").map((detail) => (
                                     <div className="p-2 border-[1px] border-gray-300 rounded-md text-sm flex gap-3 items-center">
                                         <img src={logo} alt="" width={40} className=" bg-black px-2 py-[14px] rounded-full"/>
                                         <div>
-                                            <p className="p-0 m-0">{detail.name}</p>
-                                            <p className=" font-semibold p-0 m-0">{detail.value}</p>
+                                            <p className="p-0 m-0 first-letter:uppercase">{detail.replace('_',' ')}</p>
+                                            <p className=" font-semibold p-0 m-0">{detail == "registrovan_do" ? articleInfo[0].KategorijaVozilo[detail].substring(0,10) : articleInfo[0].KategorijaVozilo[detail]}</p>
                                         </div>
                                     </div>
                                 ))
@@ -215,10 +142,10 @@ const ArticlePage = () => {
                             <h2 className="text-2xl pb-1">Osobine</h2>
                             <div className="grid grid-cols-2 py-4">
                                 {
-                                    arcitleTraits.map((trait) => (
+                                    articleInfo[0].KategorijaCheckBoxDetaljs.map((trait) => (
                                         <div className=" grid grid-cols-2 text-sm py-1">
-                                            <p>{trait.name}</p>
-                                            <p className=" font-semibold">{trait.value}</p>
+                                            <p>{trait.vrijednost_checkboxa}</p>
+                                            <img src={checkIcon} alt="" width={14} />
                                         </div>
                                     ))
                                 }
@@ -226,7 +153,7 @@ const ArticlePage = () => {
                         </div>
                         <div>
                                 <h2 className="text-2xl pb-1">Detaljni opis</h2>
-                                <p className="py-3 px-4">{textDetail}</p>
+                                <p className="py-3 px-4">{articleInfo[0].opis}</p>
                         </div>
                     </div>
                     <div className="bg-white p-4">
@@ -251,7 +178,7 @@ const ArticlePage = () => {
                 </div>
                 <div className="flex flex-col gap-4 sticky top-3">
                     <div className="p-5 bg-white">
-                        <p className="text-sm font-bold">OLX SHOP</p>
+                        <p className="text-sm font-bold">OLX KORISNIK</p>
                         <div className="flex gap-3 py-4">
                             <img src={logo} alt="" width={60} className=" bg-black px-2 py-[17px] rounded-full"/>
                             <div>
@@ -277,8 +204,12 @@ const ArticlePage = () => {
                         }
                     </div>
                 </div>
-            </div>
-
+            </div>}
+            {loading && !articleInfo.length>0 && 
+                <div className="w-full grid place-items-center py-56">
+                    <ClipLoader color={"#002f34"} size={45}/>
+                </div>
+            }
         </UserLayout>
      );
 }

@@ -3,7 +3,8 @@ const cors = require("cors")
 const dotenv = require("dotenv")
 const userAuth = require("./routes/user/user")
 const cookieParser = require("cookie-parser")
-const Article = require("./routes/article/article")
+const createArticle = require("./routes/article/createArticle")
+const getArticle = require("./routes/article/getArticle")
 const app = express()
 
 app.use(cors())
@@ -14,6 +15,7 @@ dotenv.config()
 const port = process.env.PORT || 4000
 
 app.use("/api/auth",userAuth)
-app.use("/api/create",Article)
+app.use("/api/create",createArticle)
+app.use("/api/get/",getArticle)
 
 app.listen(port,() => {console.log(port);})

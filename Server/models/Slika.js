@@ -21,6 +21,4 @@ const Slika = sequelize.define('Slika', {
     timestamps: false,
   });
 
-Slika.belongsTo(Artikal, { foreignKey: 'idA'});
-
 module.exports = Slika

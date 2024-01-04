@@ -22,6 +22,4 @@ const KategorijaCheckBoxDetalj = sequelize.define('KategorijaCheckBoxDetalj',{
     timestamps: false,
 })
 
-KategorijaCheckBoxDetalj.belongsTo(Artikal, { foreignKey: 'idA'});
-
 module.exports = KategorijaCheckBoxDetalj

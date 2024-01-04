@@ -5,7 +5,9 @@ const KategorijaVozilo = require('./KategorijaVozilo');
 const KategorijaNekretnina = require('./KategorijaNekretnina');
 const KategorijaOglasi = require('./KategorijaOglasi');
 const KategorijaTehnika = require('./KategorijaTehnika');
-
+const Slika = require('./Slika');
+const KategorijaCheckBoxDetalj = require('./KategorijaCheckBoxDetalj');
+const Korisnik = require('./korisnik')
 const Artikal = sequelize.define("Artikal", {
     idA: {
       type: DataTypes.INTEGER,
@@ -57,6 +59,8 @@ Artikal.belongsTo(KategorijaVozilo, { foreignKey: 'idKV'});
 Artikal.belongsTo(KategorijaNekretnina, { foreignKey: 'idKN'});
 Artikal.belongsTo(KategorijaOglasi, { foreignKey: 'idKO'});
 Artikal.belongsTo(KategorijaTehnika, { foreignKey: 'idKT'});
+Artikal.hasMany(Slika,{foreignKey: 'idA'})
+Artikal.hasMany(KategorijaCheckBoxDetalj,{foreignKey: 'idA'})
 
 /*sequelize.sync({ force: true }).then(() => {
     console.log('Tables synced');
