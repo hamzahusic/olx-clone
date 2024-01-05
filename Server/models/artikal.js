@@ -22,6 +22,13 @@ const Artikal = sequelize.define("Artikal", {
     stanje: DataTypes.STRING,
     cijena: DataTypes.INTEGER,
     opis: DataTypes.TEXT,
+    idK: {
+      type: DataTypes.INTEGER,
+      references: {
+        model: Korisnik,
+        key: 'idK',
+      },
+    },
     idKV: {
       type: DataTypes.INTEGER,
       references: {
@@ -61,7 +68,7 @@ Artikal.belongsTo(KategorijaOglasi, { foreignKey: 'idKO'});
 Artikal.belongsTo(KategorijaTehnika, { foreignKey: 'idKT'});
 Artikal.hasMany(Slika,{foreignKey: 'idA'})
 Artikal.hasMany(KategorijaCheckBoxDetalj,{foreignKey: 'idA'})
-
+Artikal.belongsTo(Korisnik,{foreignKey:'idK'})
 /*sequelize.sync({ force: true }).then(() => {
     console.log('Tables synced');
 }).catch(err => console.error('Error syncing tables:', err));
