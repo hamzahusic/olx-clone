@@ -118,7 +118,7 @@ const ArticlePage = () => {
                         </p>
                         <p className="py-1 px-3 text-[12px] font-semibold border-[1px] border-gray-300 rounded-md flex items-center gap-1">
                             <img src={clockIcon} alt="" width={14} />
-                            OBNOVLJEN : {articleInfo[0].datum_promjene.substring(0,10)}
+                            OBNOVLJEN : {new Date(articleInfo[0].datum_promjene).toLocaleDateString()}
                         </p>
                         <p className="py-1 px-3 text-[12px] font-semibold border-[1px] border-gray-300 rounded-md flex items-center gap-1">
                             <img src={infoIcon} alt="" width={13} />
@@ -132,7 +132,7 @@ const ArticlePage = () => {
                                         <img src={logo} alt="" width={40} className=" bg-black px-2 py-[14px] rounded-full"/>
                                         <div>
                                             <p className="p-0 m-0 first-letter:uppercase">{detail.replace('_',' ')}</p>
-                                            <p className=" font-semibold p-0 m-0">{detail == "registrovan_do" ? articleInfo[0].KategorijaVozilo[detail].substring(0,10) : articleInfo[0].KategorijaVozilo[detail]}</p>
+                                            <p className=" font-semibold p-0 m-0">{detail == "registrovan_do" ? new Date(articleInfo[0].KategorijaVozilo[detail]).toLocaleDateString() : articleInfo[0].KategorijaVozilo[detail]}</p>
                                         </div>
                                     </div>
                                 ))
@@ -180,10 +180,12 @@ const ArticlePage = () => {
                     <div className="p-5 bg-white">
                         <p className="text-sm font-bold">OLX KORISNIK</p>
                         <div className="flex gap-3 py-4">
-                            <img src={logo} alt="" width={60} className=" bg-black px-2 py-[17px] rounded-full"/>
+                            <div className="w-12 h-12 rounded-full overflow-hidden">
+                                <img src={articleInfo[0].Korisnik.slika_link} className="bg-gray-800 w-full h-full object-cover scale-[1.3] p-1"/>
+                            </div>
                             <div>
-                                <p className=" font-semibold tracking-wide pb-1 text-base">ASHAAUTO</p>
-                                <p className=" text-[12px]">Online prije jednog sata</p>
+                                <p className=" font-semibold tracking-wide pb-1 text-base">{articleInfo[0].Korisnik.ime} {articleInfo[0].Korisnik.prezime}</p>
+                                <p className=" text-[12px]"><span className=" font-semibold">Online</span> : {new Date(articleInfo[0].Korisnik.zadnja_prijava).toLocaleDateString()} u {new Date(articleInfo[0].Korisnik.zadnja_prijava).toLocaleTimeString()}</p>
                             </div>
                         </div>
                         <p className=" text-sm text-center bg-[#002f341c] font-semibold py-2 px-4 rounded-md">Korisnik odgovara veoma brzo</p>

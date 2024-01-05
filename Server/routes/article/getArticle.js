@@ -27,6 +27,9 @@ router.get('/automobili/:id', async (req,res) => {
             },
             {
                 model:Slika
+            },
+            {
+                model:Korisnik
             }
         ]
     })
