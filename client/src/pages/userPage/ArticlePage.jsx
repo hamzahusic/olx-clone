@@ -36,11 +36,14 @@ import {useDispatch, useSelector } from "react-redux";
 import ClipLoader from "react-spinners/ClipLoader"
 
 const ArticlePage = () => {
-    const image = "https://images.unsplash.com/photo-1502877338535-766e1452684a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2072&q=80"
+
     const {id} = useParams();
     const [save,setSave] = useState(false);
     const [articleInfo,setArticleInfo] = useState([])
+    const [otherArticles,setOtherArticles] = useState([])
     const [loading,setLoading] = useState(true);
+    const [otherArticleloading,setOtherArticleLoading] = useState(true);
+
     const saveArticle = () => setSave(!save);
     const user = useSelector(state => state.isLogged);  
     const dispach = useDispatch();
@@ -81,6 +84,25 @@ const ArticlePage = () => {
         }
     }
 
+    const getOtherUserArticles = async (userId) => {
+        try {
+            const response = await fetch(`http://localhost:8080/api/get/${userId}/items/4`)
+            
+            if(!response.ok)
+                throw Error("Error getting car info")
+
+            const data = response.json();
+            const result = await data;
+            
+            setOtherArticles(result)
+            setOtherArticleLoading(false)
+            console.log(result)
+        } catch (error) {
+            setOtherArticles(null)
+            console.error(error)
+        }
+    } 
+
     const getCarInformation = async () => {
 
         try {
@@ -92,8 +114,13 @@ const ArticlePage = () => {
             const data = response.json();
 
             const result = await data;
-            setArticleInfo(result)
-            setLoading(false)
+            
+            if(result){
+                setArticleInfo(result)
+                setLoading(false)
+                getOtherUserArticles(result[0].idK)
+            }
+
             console.log(result)
         } catch (error) {
             console.error(error)
@@ -103,7 +130,7 @@ const ArticlePage = () => {
 
     useEffect(() => {
         getCarInformation()
-    },[])
+    },[id])
 
     return ( 
         <UserLayout>
@@ -172,31 +199,31 @@ const ArticlePage = () => {
                             ID : {articleInfo[0].idA}
                         </p>
                         </div>
-                        {articleInfo[0].KategorijaVozilo && articleInfo[0].KategorijaVozilo &&
+                        {articleInfo[0].KategorijaVozilo &&
                             <div className=" grid grid-cols-2 gap-4 py-6 border-b-[1px] border-gray-300">
                                     {Object.keys(articleInfo[0].KategorijaVozilo).slice(1,9).map((detail) => (
                                         <div className="p-2 border-[1px] border-gray-300 rounded-md text-sm flex gap-3 items-center">
                                             <img src={carMainInfo[detail].icon} alt="" width={35} className=""/>
                                             <div>
                                                 <p className="p-0 m-0 first-letter:uppercase">{carMainInfo[detail].name}</p>
-                                                <p className=" font-semibold p-0 m-0">{detail=="kilometraza" ? Number(articleInfo[0].KategorijaVozilo[detail]).toLocaleString("de-DE")+"km" : articleInfo[0].KategorijaVozilo[detail]}</p>
+                                                <p className=" font-semibold p-0 m-0 first-letter:uppercase">{detail=="kilometraza" ? Number(articleInfo[0].KategorijaVozilo[detail]).toLocaleString("de-DE")+"km" : articleInfo[0].KategorijaVozilo[detail]}</p>
                                             </div>
                                         </div>
                                     ))}
                             </div>
                         }
                         <div className="py-6">
-                            <h2 className="text-2xl pb-1">Specifikacije</h2>
+                            {articleInfo[0].KategorijaVozilo && <h2 className="text-2xl pb-1">Specifikacije</h2>}
+                            {articleInfo[0].KategorijaVozilo &&
                                 <div className="grid grid-cols-2 py-4">
-                                {articleInfo[0].KategorijaVozilo && articleInfo[0].KategorijaVozilo &&
-                                    Object.keys(articleInfo[0].KategorijaVozilo).slice(9).map((detail) => (
+                                    {Object.keys(articleInfo[0].KategorijaVozilo).slice(9).map((detail) => (
                                         <div className=" grid grid-cols-2 text-sm py-1">
                                             <p className=" first-letter:uppercase">{detail.replace('_',' ')}</p>
-                                            <p className=" font-medium text-gray-700">{detail == "registrovan_do" ? new Date(articleInfo[0].KategorijaVozilo[detail]).toLocaleDateString() : articleInfo[0].KategorijaVozilo[detail]}</p>
+                                            <p className=" font-medium text-gray-700 first-letter:uppercase">{detail == "registrovan_do" ? new Date(articleInfo[0].KategorijaVozilo[detail]).toLocaleDateString() : articleInfo[0].KategorijaVozilo[detail]}</p>
                                         </div>
-                                    ))
-                                }
-                            </div>
+                                    ))}
+                                </div>
+                            }
                             <h2 className="text-2xl pb-1">Osobine</h2>
                             <div className="grid grid-cols-2 py-4">
                                 {articleInfo[0].KategorijaCheckBoxDetaljs && articleInfo[0].KategorijaCheckBoxDetaljs &&
@@ -224,15 +251,22 @@ const ArticlePage = () => {
                             <button className="txt-color border-2 border-[#002f34] py-3 px-4 rounded-md text-sm">Postavi pitanje</button>
                         </div>}
                     </div>
-                    <div className="bg-white p-4">
+                    {!otherArticleloading && otherArticles && <div className="bg-white p-4">
                         <h2 className="text-2xl pb-1">Ostali oglasi korisnika</h2>
-                        <div className="flex justify-evenly max-w-3xl gap-4 py-4">
-                            <Article id={1} image={image} title={"GARMIN WATCH"} time={"prije 2 minute"} price={"150KM"} tags={['Dizel','Novo']} available={true}/>
-                            <Article id={2} image={image} title={"GARMIN WATCH"} time={"prije 2 minute"} price={"150KM"} tags={['Dizel','Novo']} available={true}/>
-                            <Article id={3} image={image} title={"GARMIN WATCH"} time={"prije 2 minute"} price={"150KM"} tags={['Dizel','Novo']} available={true}/>
-                            <Article id={4} image={image} title={"GARMIN WATCH"} time={"prije 2 minute"} price={"150KM"} tags={['Dizel','Novo']} available={true}/>
+                        <div className="flex max-w-3xl gap-4 py-4 [&>*]:max-w-[192px]">
+                            {otherArticles.map((article) => (
+                                <Article 
+                                    key={article.idA}
+                                    id={article.idA}
+                                    image={article.Slikas[0].slika_link} 
+                                    title={article.naslov} 
+                                    time={new Date(article.datum_promjene).toLocaleDateString()} 
+                                    price={article.cijena.toLocaleString("de-DE")} 
+                                    tags={[article.lokacija,article.stanje]} 
+                                    available={article.dostupno}/>
+                            ))}
                         </div>
-                    </div>
+                    </div>}
                 </div>
                 <div className="flex flex-col gap-4 sticky top-3">
                     <div className="p-5 bg-white">
@@ -243,7 +277,7 @@ const ArticlePage = () => {
                             </div>
                             <div>
                                 <p className=" font-semibold tracking-wide pb-1 text-base">{articleInfo[0].Korisnik.ime} {articleInfo[0].Korisnik.prezime}</p>
-                                <p className=" text-[12px]"><span className=" font-semibold">Online</span> : {new Date(articleInfo[0].Korisnik.zadnja_prijava).toLocaleDateString()} u {new Date(articleInfo[0].Korisnik.zadnja_prijava).toLocaleTimeString()}</p>
+                                <p className=" text-[12px]"><span className=" font-semibold">Online</span> : {new Date(articleInfo[0].Korisnik.zadnja_prijava).toLocaleDateString()} u {new Date(articleInfo[0].Korisnik.zadnja_prijava).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</p>
                             </div>
                         </div>
                         <p className=" text-sm text-center bg-[#002f341c] font-semibold py-2 px-4 rounded-md">Korisnik odgovara veoma brzo</p>
