@@ -1,0 +1,9 @@
+<svg class="SvgIcon__1H1VO" width="40" height="40" viewBox="0 0 40 40" focusable="false" aria-hidden="true"
+     xmlns="http://www.w3.org/2000/svg" fill="none">
+    <g fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M35 31V9C35 7.89543 34.1046 7 33 7H7C5.89543 7 5 7.89543 5 9V31C5 32.1046 5.89543 33 7 33H33C34.1046 33 35 32.1046 35 31Z"></path>
+        <path d="M31 23V19H27V23H31Z"></path>
+        <path d="M35 15H5"></path>
+        <path d="M28 5V9M12 9V5"></path>
+    </g>
+</svg>

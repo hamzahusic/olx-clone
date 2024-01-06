@@ -20,7 +20,7 @@ router.get('/automobili/:id', async (req,res) => {
         },
         include:[
             {
-                model:KategorijaVozilo
+                model:KategorijaVozilo,
             },
             {
                 model:KategorijaCheckBoxDetalj
@@ -34,8 +34,9 @@ router.get('/automobili/:id', async (req,res) => {
         ]
     })
 
-    if(articleData)
+    if(articleData){
         return res.status(200).json(articleData)
+    }
     else
         return res.status(500).json({
             message:"Error finding car details!",

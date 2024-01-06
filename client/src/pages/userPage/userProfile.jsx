@@ -12,7 +12,6 @@ const UserProfile = ({children}) => {
 
     const user = useSelector(state => state.isLogged)
     const navigate = useNavigate()
-    const zadnja_prijava = new Date(user.zadnja_prijava);
 
     useEffect(() => {
         if(!user)
@@ -58,7 +57,7 @@ const UserProfile = ({children}) => {
                         </div>
                         <div className="flex justify-between text-sm">
                             <p>Online</p>
-                            <p>{zadnja_prijava.getDay() + '/' + Number(zadnja_prijava.getMonth()+1) + '/' + zadnja_prijava.getFullYear() + " " + zadnja_prijava.getHours() + ':' + zadnja_prijava.getMinutes()}</p>
+                            <p>{new Date(user.zadnja_prijava).toLocaleDateString()} u {new Date(user.zadnja_prijava).toLocaleTimeString()}</p>
                         </div>
                     </div>
                 </div>

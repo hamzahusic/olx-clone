@@ -6,7 +6,6 @@ import savedAricle from '../../assets/articleImg/saved.svg'
 import share from '../../assets/articleImg/share-new.svg'
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination, Navigation } from 'swiper/modules';
-import slikaTest from '../../assets/articleImg/testImg.jpg'
 import logo from "../../assets/logoOLX.svg"
 import phoneIcon from '../../assets/articleImg/phone.svg'
 import messageIcon from '../../assets/articleImg/message.svg'
@@ -15,6 +14,15 @@ import priceTagIcon from '../../assets/price-tag.png'
 import clockIcon from '../../assets/clock.png'
 import infoIcon from '../../assets/info.png'
 import checkIcon from '../../assets/check.png'
+
+import proizvodjacIcon from '../../assets/carIcon/proizvodjac.png'
+import modelIcon from '../../assets/carIcon/model.png'
+import gorivoIcon from '../../assets/carIcon/gorivo.svg'
+import godisteIcon from '../../assets/carIcon/godiste.svg'
+import kilometrazaIcon from '../../assets/carIcon/kilometraza.svg'
+import kubikazaIcon from '../../assets/carIcon/kubikaza.svg'
+import kilovataIcon from '../../assets/carIcon/snaga.svg'
+import brojVrataIcon from '../../assets/carIcon/broj vrata.svg'
 
 import 'swiper/css';
 import 'swiper/css/pagination';
@@ -37,6 +45,41 @@ const ArticlePage = () => {
     const user = useSelector(state => state.isLogged);  
     const dispach = useDispatch();
     const navigate = useNavigate()
+
+    const carMainInfo = {
+        "proizvodjac":{
+            name:"Proizvođač",
+            icon : proizvodjacIcon
+        },
+        "model":{
+            name:"Model",
+            icon : modelIcon
+        },
+        "gorivo":{
+            name:"Gorivo",
+            icon : gorivoIcon
+        },
+        "godiste":{
+            name:"Godište",
+            icon : godisteIcon
+        },
+        "kilometraza":{
+            name:"Kilometraža",
+            icon : kilometrazaIcon
+        },
+        "kubikaza":{
+            name:"Kubikaža",
+            icon : kubikazaIcon
+        },
+        "kilovata":{
+            name:"Snaga motora (KW)",
+            icon : kilovataIcon
+        },
+        "broj_vrata":{
+            name:"Broj vrata",
+            icon : brojVrataIcon
+        }
+    }
 
     const getCarInformation = async () => {
 
@@ -77,11 +120,15 @@ const ArticlePage = () => {
                                 </p>}
                             </div>
                             <div className="flex gap-2">
-                                <img src={share} alt="" className=" cursor-pointer"/>
+                                <div className="select-none text-sm flex gap-1 items-center bg-gray-200/50 p-3 rounded">
+                                    <img src={share} alt="" className=" cursor-pointer"/>
+                                    Podijeli
+                                </div>
                                 {user &&  
-                                <div className=" cursor-pointer" onClick={saveArticle}>
+                                <div className=" cursor-pointer text-sm flex gap-1 items-center bg-gray-200/50 p-3 rounded select-none" onClick={saveArticle}>
                                     {!save && <img src={saveAricle} alt="" />}
                                     {save && <img src={savedAricle} alt="" />}
+                                    Spasi oglas
                                 </div>
                                 }
                             </div>
@@ -99,7 +146,7 @@ const ArticlePage = () => {
 
                                     articleInfo[0].Slikas.map((image) => (
                                         <SwiperSlide>
-                                            <img src={image.slika_link} alt="" key={image} className=" min-h-[600px] w-full object-fill"/>
+                                            <img src={image.slika_link} alt="" key={image} className=" min-h-[600px] w-full object-fill select-none"/>
                                         </SwiperSlide>
                                     ))
                                 }
@@ -125,23 +172,34 @@ const ArticlePage = () => {
                             ID : {articleInfo[0].idA}
                         </p>
                         </div>
-                        <div className=" grid grid-cols-2 gap-4 py-6 border-b-[1px] border-gray-300">
-                            {
-                                Object.keys(articleInfo[0].KategorijaVozilo).filter(el => el != "idKV").map((detail) => (
-                                    <div className="p-2 border-[1px] border-gray-300 rounded-md text-sm flex gap-3 items-center">
-                                        <img src={logo} alt="" width={40} className=" bg-black px-2 py-[14px] rounded-full"/>
-                                        <div>
-                                            <p className="p-0 m-0 first-letter:uppercase">{detail.replace('_',' ')}</p>
-                                            <p className=" font-semibold p-0 m-0">{detail == "registrovan_do" ? new Date(articleInfo[0].KategorijaVozilo[detail]).toLocaleDateString() : articleInfo[0].KategorijaVozilo[detail]}</p>
+                        {articleInfo[0].KategorijaVozilo && articleInfo[0].KategorijaVozilo &&
+                            <div className=" grid grid-cols-2 gap-4 py-6 border-b-[1px] border-gray-300">
+                                    {Object.keys(articleInfo[0].KategorijaVozilo).slice(1,9).map((detail) => (
+                                        <div className="p-2 border-[1px] border-gray-300 rounded-md text-sm flex gap-3 items-center">
+                                            <img src={carMainInfo[detail].icon} alt="" width={35} className=""/>
+                                            <div>
+                                                <p className="p-0 m-0 first-letter:uppercase">{carMainInfo[detail].name}</p>
+                                                <p className=" font-semibold p-0 m-0">{detail=="kilometraza" ? Number(articleInfo[0].KategorijaVozilo[detail]).toLocaleString("de-DE")+"km" : articleInfo[0].KategorijaVozilo[detail]}</p>
+                                            </div>
                                         </div>
-                                    </div>
-                                ))
-                            }
-                        </div>
+                                    ))}
+                            </div>
+                        }
                         <div className="py-6">
+                            <h2 className="text-2xl pb-1">Specifikacije</h2>
+                                <div className="grid grid-cols-2 py-4">
+                                {articleInfo[0].KategorijaVozilo && articleInfo[0].KategorijaVozilo &&
+                                    Object.keys(articleInfo[0].KategorijaVozilo).slice(9).map((detail) => (
+                                        <div className=" grid grid-cols-2 text-sm py-1">
+                                            <p className=" first-letter:uppercase">{detail.replace('_',' ')}</p>
+                                            <p className=" font-medium text-gray-700">{detail == "registrovan_do" ? new Date(articleInfo[0].KategorijaVozilo[detail]).toLocaleDateString() : articleInfo[0].KategorijaVozilo[detail]}</p>
+                                        </div>
+                                    ))
+                                }
+                            </div>
                             <h2 className="text-2xl pb-1">Osobine</h2>
                             <div className="grid grid-cols-2 py-4">
-                                {
+                                {articleInfo[0].KategorijaCheckBoxDetaljs && articleInfo[0].KategorijaCheckBoxDetaljs &&
                                     articleInfo[0].KategorijaCheckBoxDetaljs.map((trait) => (
                                         <div className=" grid grid-cols-2 text-sm py-1">
                                             <p>{trait.vrijednost_checkboxa}</p>
@@ -181,7 +239,7 @@ const ArticlePage = () => {
                         <p className="text-sm font-bold">OLX KORISNIK</p>
                         <div className="flex gap-3 py-4">
                             <div className="w-12 h-12 rounded-full overflow-hidden">
-                                <img src={articleInfo[0].Korisnik.slika_link} className="bg-gray-800 w-full h-full object-cover scale-[1.3] p-1"/>
+                                <img src={articleInfo[0].Korisnik.slika_link ? articleInfo[0].Korisnik.slika_link : logo} className="bg-gray-800 w-full h-full object-cover scale-[1.3] p-1"/>
                             </div>
                             <div>
                                 <p className=" font-semibold tracking-wide pb-1 text-base">{articleInfo[0].Korisnik.ime} {articleInfo[0].Korisnik.prezime}</p>
