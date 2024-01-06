@@ -7,6 +7,7 @@ import olxCatIcon from '../../assets/more-listing.svg'
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import PopUp from "../../components/PopUp";
+import ClipLoader from "react-spinners/ClipLoader";
 
 const UserPage = () => {
     const image = "https://images.unsplash.com/photo-1593198805047-b97ea2348680?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
@@ -33,6 +34,32 @@ const UserPage = () => {
 "Hrana i piće",
 "Muzička oprema"
     ])
+    const [loading,setLoading] = useState(true)
+    const [allArticleData,setAllArticleData] = useState([])
+    const [numberOfItemsPerPage,setNumberOfItemsPerPage] = useState(100)
+
+    const handleAllArticles = async (articleNumber) => {
+        setLoading(true)
+        try {
+            const response = await fetch(`http://localhost:8080/api/get/all/article/${articleNumber}`)
+    
+            if(!response.ok)
+                throw Error("Error getting all articles")
+            
+            const data = await response.json()
+            const allItems = await data;
+
+            setAllArticleData(allItems)
+            setLoading(false)
+            console.log(allItems)
+        } catch (error) {
+            console.error(error)
+        }
+    }
+
+    useEffect(() => {
+        handleAllArticles(numberOfItemsPerPage)
+    },[numberOfItemsPerPage])
 
     return ( 
         <UserLayout>
@@ -55,18 +82,26 @@ const UserPage = () => {
 
                 </div>
                 
-                <div className="grid grid-cols-[repeat(auto-fill,minmax(233px,1fr))] justify-center gap-4">
-                    <Article id={1} image={image} separate={true} title={"GARMIN WATCH"} time={"prije 2 minute"} price={"150KM"} tags={['Dizel','Novo']} available={true}/>
-                    <Article id={2} image={image} title={"GARMIN WATCH"} time={"prije 2 minute"} price={"150KM"} tags={['Dizel','Novo']} available={true}/>
-                    <Article id={3} image={image} title={"GARMIN WATCH"} time={"prije 2 minute"} price={"150KM"} tags={['Dizel','Novo']} available={true}/>
-                    <Article id={4} image={image} title={"GARMIN WATCH"} time={"prije 2 minute"} price={"150KM"} tags={['Dizel','Novo']} available={true}/>
-                    <Article id={5} image={image} title={"GARMIN WATCH"} time={"prije 2 minute"} price={"150KM"} tags={['Dizel','Novo']} available={true}/>
-                    <Article id={1} image={image} separate={true} title={"GARMIN WATCH"} time={"prije 2 minute"} price={"150KM"} tags={['Dizel','Novo']} available={true}/>
-                    <Article id={2} image={image} title={"GARMIN WATCH"} time={"prije 2 minute"} price={"150KM"} tags={['Dizel','Novo']} available={true}/>
-                    <Article id={3} image={image} title={"GARMIN WATCH"} time={"prije 2 minute"} price={"150KM"} tags={['Dizel','Novo']} available={true}/>
-                    <Article id={4} image={image} title={"GARMIN WATCH"} time={"prije 2 minute"} price={"150KM"} tags={['Dizel','Novo']} available={true}/>
-                    <Article id={5} image={image} title={"GARMIN WATCH"} time={"prije 2 minute"} price={"150KM"} tags={['Dizel','Novo']} available={true}/>
-                </div>
+                {!loading && allArticleData && <div className="grid auto-rows-max grid-cols-[repeat(auto-fill,minmax(233px,1fr))] justify-center gap-4">
+                        {allArticleData.map((article) => (
+                            <Article 
+                                key={article.idA}
+                                id={article.idA}
+                                image={article.Slikas[0].slika_link} 
+                                title={article.naslov} 
+                                time={new Date(article.datum_promjene).toLocaleDateString()} 
+                                price={article.cijena.toLocaleString("de-DE")} 
+                                tags={[article.lokacija,article.stanje]} 
+                                available={article.dostupno}
+                                separate={true}
+                                />
+                        ))}
+                </div>}
+                {loading && !allArticleData.length>0 && 
+                    <div className="w-full grid place-items-center py-40">
+                        <ClipLoader color={"#002f34"} size={45} />               
+                    </div>
+                }
                 <div className="flex items-center justify-center">
                   <button className="txt-color border-2 border-[#002f34] py-3 px-3 rounded-md text-md my-20">Prikaži više oglasa</button>
                 </div>

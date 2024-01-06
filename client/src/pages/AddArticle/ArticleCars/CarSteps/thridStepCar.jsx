@@ -93,6 +93,8 @@ const ThirdStepCar = (props) => {
                                 <option value="kabriolet">kabriolet</option>
                                 <option value="karavan">karavan</option>
                                 <option value="limuzina">limuzina</option>
+                                <option value="SUV">SUV</option>
+                                <option value="coupe">coupe</option>
                             </select>
                         </div>
                         <div className="w-full flex flex-col">

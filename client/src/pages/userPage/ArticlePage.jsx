@@ -140,7 +140,7 @@ const ArticlePage = () => {
                         <h1 className="text-[26px] font-light">{articleInfo[0].naslov}</h1>
                         <div className="flex gap-2 items-center justify-between pb-3">
                             <div className="flex items-center gap-2">
-                                <p className=" text-[34px] font-bold">{articleInfo[0].cijena.toLocaleString("de-DE")}KM</p>
+                                <p className=" text-[34px] font-bold">{articleInfo[0].cijena == 0 ? "Na upit" : articleInfo[0].cijena.toLocaleString("de-DE")+"KM"}</p>
                                 {articleInfo[0].dostupno && <p className="flex gap-2 bg-[#002f34] py-1 px-2 text-white text-[12px] rounded-sm">
                                     <img src={instantDelivery} className=" brightness-[100]" width={24}/>
                                     Dostupno odmah
@@ -172,8 +172,8 @@ const ArticlePage = () => {
                                 {
 
                                     articleInfo[0].Slikas.map((image) => (
-                                        <SwiperSlide>
-                                            <img src={image.slika_link} alt="" key={image} className=" min-h-[600px] w-full object-fill select-none"/>
+                                        <SwiperSlide key={image.slika_link}>
+                                            <img src={image.slika_link} alt="" className=" min-h-[600px] w-full object-fill select-none"/>
                                         </SwiperSlide>
                                     ))
                                 }
@@ -202,7 +202,7 @@ const ArticlePage = () => {
                         {articleInfo[0].KategorijaVozilo &&
                             <div className=" grid grid-cols-2 gap-4 py-6 border-b-[1px] border-gray-300">
                                     {Object.keys(articleInfo[0].KategorijaVozilo).slice(1,9).map((detail) => (
-                                        <div className="p-2 border-[1px] border-gray-300 rounded-md text-sm flex gap-3 items-center">
+                                        <div className="p-2 border-[1px] border-gray-300 rounded-md text-sm flex gap-3 items-center" key={detail}>
                                             <img src={carMainInfo[detail].icon} alt="" width={35} className=""/>
                                             <div>
                                                 <p className="p-0 m-0 first-letter:uppercase">{carMainInfo[detail].name}</p>
@@ -217,7 +217,7 @@ const ArticlePage = () => {
                             {articleInfo[0].KategorijaVozilo &&
                                 <div className="grid grid-cols-2 py-4">
                                     {Object.keys(articleInfo[0].KategorijaVozilo).slice(9).map((detail) => (
-                                        <div className=" grid grid-cols-2 text-sm py-1">
+                                        <div className="grid grid-cols-2 text-sm py-1" key={detail}>
                                             <p className=" first-letter:uppercase">{detail.replace('_',' ')}</p>
                                             <p className=" font-medium text-gray-700 first-letter:uppercase">{detail == "registrovan_do" ? new Date(articleInfo[0].KategorijaVozilo[detail]).toLocaleDateString() : articleInfo[0].KategorijaVozilo[detail]}</p>
                                         </div>
@@ -228,7 +228,7 @@ const ArticlePage = () => {
                             <div className="grid grid-cols-2 py-4">
                                 {articleInfo[0].KategorijaCheckBoxDetaljs && articleInfo[0].KategorijaCheckBoxDetaljs &&
                                     articleInfo[0].KategorijaCheckBoxDetaljs.map((trait) => (
-                                        <div className=" grid grid-cols-2 text-sm py-1">
+                                        <div className="grid grid-cols-2 text-sm py-1" key={trait.vrijednost_checkboxa}>
                                             <p>{trait.vrijednost_checkboxa}</p>
                                             <img src={checkIcon} alt="" width={14} />
                                         </div>

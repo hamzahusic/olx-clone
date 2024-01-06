@@ -8,6 +8,7 @@ import PopUp from "../../../components/PopUp";
 import checkIcon from "../../../assets/check-mark.png"
 import wrongIcon from '../../../assets/cross.png'
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const CarArticle = () => {
 
@@ -45,8 +46,10 @@ const CarArticle = () => {
     //POPUP
     const [objavaPopUp,setObjavaPopUp] = useState(false);
     const [errorPopUp,setErrorPopUp] = useState(false);
-    const navigate = useNavigate()
     const [createdArticleId,setCreatedArticleId] = useState('');
+    const navigate = useNavigate()
+
+    const user = useSelector((state) => state.isLogged)
     
     const prevStep = () => {
         if(step <=1) { 
@@ -93,7 +96,8 @@ const CarArticle = () => {
                         cijena:price,
                         opis:opis,
                         slika:slike,
-                        detalji_checkbox:checkBoxValue
+                        detalji_checkbox:checkBoxValue,
+                        idK:user.idK
                     })
             })
             if(!response.ok)
@@ -115,9 +119,7 @@ const CarArticle = () => {
         if(step >= 4) {
             setProgress(100)
 
-            console.log(manufacturer,model,location,available,condition,price,naslov,kilometraza,brojVrata,kubikaza,godiste,kilovata,gorivo,slike,konja,transmisija,tip,registrovanDo,velicinaFelgi,euro,pogon,mjesta,opis)
-            
-            if(!manufacturer || !model || !location || !price || !naslov || !kilometraza || !brojVrata || !kubikaza || !godiste || !kilovata || !gorivo || !slike){
+            if(!manufacturer || !model || !location || price<0 || !naslov || kilometraza<0 || !brojVrata || !kubikaza || !godiste || !kilovata.toString() || !gorivo || !slike || !user){
                 setErrorPopUp(true)
             }
             else{    

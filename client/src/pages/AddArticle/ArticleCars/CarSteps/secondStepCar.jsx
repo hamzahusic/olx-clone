@@ -43,7 +43,7 @@ const SecondStepCar = ({setLocation,location,setAvailable,available,condition,se
                     <p className="py-3 px-5 rounded-full bg-gray-100">ili</p>
                     <button 
                         className={`py-3 bg-gray-100 rounded  text-sm w-full border-2 ${showPrice ? 'font-thin text-gray-600' : 'border-[var(--pcolor)] font-semibold text-color'}`}
-                        onClick={() => {setShowPrice(!showPrice);setPrice(-1)}}>Cijena na upit</button>
+                        onClick={() => {setShowPrice(!showPrice);setPrice(0)}}>Cijena na upit</button>
                 </div>
             </div>
         </div>
