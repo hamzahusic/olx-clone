@@ -81,7 +81,7 @@ const RegisterPage = () => {
                         <label htmlFor="slika" className=' text-[12px] font-semibold tracking-wide mt-5 mb-2'>UNESITE LINK SLIKE</label>
                         <input type="text" name="slika" className='bg-gray-100 outline-none p-3 rounded-md' onChange={(e) => setSlika(e.target.value)}/>
                         <div className='py-5 text-base flex gap-2'>
-                            <input type="checkbox" required className='txt-xl required:'/>
+                            <input type="checkbox" required className='txt-xl'/>
                             Slažem se sa uslovima korištenja
                         </div>
                         <button className='bgp text-white py-3 text-sm font-semibold rounded-md' onClick={handleRegister}>Registruj se</button>

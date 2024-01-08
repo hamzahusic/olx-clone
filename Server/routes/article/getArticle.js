@@ -60,7 +60,7 @@ router.get('/:userId/items/:itemNum', async (req,res) => {
         where:{
             idK:userId
         },
-        limit:numberOfItems,
+        limit:numberOfItems || false,
         include:[  
             {
                 model:Slika

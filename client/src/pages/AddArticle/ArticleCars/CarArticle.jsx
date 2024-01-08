@@ -21,7 +21,7 @@ const CarArticle = () => {
     //SECOND PAGE
     const [location,setLocation] = useState('');
     const [available,setAvailable] = useState(false);
-    const [condition,setCondition] = useState('');
+    const [condition,setCondition] = useState('Novo');
     const [price,setPrice] = useState(0);
     //THIRD PAGE
     const [naslov,setNaslov] = useState('');
@@ -97,7 +97,8 @@ const CarArticle = () => {
                         opis:opis,
                         slika:slike,
                         detalji_checkbox:checkBoxValue,
-                        idK:user.idK
+                        idK:user.idK,
+                        proces:"Aktivan"
                     })
             })
             if(!response.ok)

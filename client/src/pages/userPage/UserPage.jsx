@@ -82,7 +82,8 @@ const UserPage = () => {
 
                 </div>
                 
-                {!loading && allArticleData && <div className="grid auto-rows-max grid-cols-[repeat(auto-fill,minmax(233px,1fr))] justify-center gap-4">
+                {!loading && allArticleData && 
+                <div className="grid grid-cols-[repeat(auto-fill,minmax(233px,1fr))] justify-center gap-4">
                         {allArticleData.map((article) => (
                             <Article 
                                 key={article.idA}

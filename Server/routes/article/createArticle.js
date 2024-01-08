@@ -12,7 +12,7 @@ router.post('/automobili', async (req,res) => {
         proizvodjac,model,kilometraza,broj_vrata,godiste,kubikaza,
         kilovata,gorivo,konjskih_snaga,tip,transmisija,registrovan_do,
         velicina_felgi,euro,pogon,mjesta,naslov,datum_promjene,lokacija,
-        dostupno,stanje,cijena,opis,slika,detalji_checkbox,idK
+        dostupno,stanje,cijena,opis,slika,detalji_checkbox,idK,proces
     } = req.body
 
     try {
@@ -55,9 +55,10 @@ router.post('/automobili', async (req,res) => {
                 cijena:cijena,
                 opis:opis,
                 idKV:createdCarId,
-                idK:idK
+                idK:idK,
+                proces:proces
             },{
-                fields:["naslov", "datum_promjene", "lokacija", "dostupno", "stanje", "cijena", "opis","idKV","idK"],
+                fields:["naslov", "datum_promjene", "lokacija", "dostupno", "stanje", "cijena", "opis","idKV","idK","proces"],
                 transaction:t
             })
     

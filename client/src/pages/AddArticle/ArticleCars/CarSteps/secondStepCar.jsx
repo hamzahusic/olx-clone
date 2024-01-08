@@ -1,8 +1,15 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const SecondStepCar = ({setLocation,location,setAvailable,available,condition,setCondition,price,setPrice}) => {
 
     const [showPrice,setShowPrice] = useState(true);
+
+    useEffect(() => {
+        if(price == 0)
+            setShowPrice(false)
+        else
+            setShowPrice(true)
+    },[])
 
     return ( 
         <div>
@@ -30,14 +37,15 @@ const SecondStepCar = ({setLocation,location,setAvailable,available,condition,se
                 </div>
                 <div className="flex justify-between items-end gap-5">
                     <div className="flex flex-col gap-1 w-full">
-                        <p className=' text-[12px] font-semibold tracking-wide mt-5 mb-3'>CIJENA</p> 
-                        <input type="number"  name="model"  
+                        <p className=' text-[12px] font-semibold tracking-wide mt-5 mb-3'>CIJENA (Kliknite na dugme pored ukoliko želite postaviti cijenu)</p> 
+                        <input type="number" name="model"  
                             className={` border-[1px] border-gray-200 outline-none p-3 rounded-md text-base
                             ${showPrice ? ' bg-gray-50' : 'bg-gray-50/20 cursor-not-allowed line-through text-gray-300'}`} 
                             placeholder="Unesite cijenu u KM"
                             disabled={!showPrice && 'disabled'}
                             value={price}
                             onChange={(e) => setPrice(e.target.value)}
+                            title="Kliknite na dugme pored da unesete cijenu"
                             />        
                     </div>
                     <p className="py-3 px-5 rounded-full bg-gray-100">ili</p>

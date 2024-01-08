@@ -54,7 +54,7 @@ const LoginPage = () => {
                         <label htmlFor="pass" className=' text-[12px] font-semibold tracking-wide mt-5 mb-2'>ŠIFRA</label>
                         <div className='flex items-center justify-between bg-gray-100 rounded-md'>
                             <input type={showpass ? "text" : "password"} name="pass" value={sifra} className='p-3 flex-1 bg-transparent outline-none' placeholder='Enter password' onChange={(e) =>setSifra(e.target.value)}/>
-                            <img src={showpass ? hideIcon : showIcon} alt="" width={showpass ? 19 : 25} className='mx-2 cursor-pointer' onClick={() => setShowPass(!showpass)}/>
+                            <img src={showpass ? showIcon : hideIcon} alt="" width={showpass ? 25 : 19} className='mx-2 cursor-pointer' onClick={() => setShowPass(!showpass)}/>
                         </div>
                         <Link to={"/"} className='py-3  ml-auto'>Zaboravili ste šifru?</Link>
                         <button className='bgp text-white py-3 text-sm font-semibold rounded-md' onClick={(e) => handleLogin(e)}>Prijavi se</button>

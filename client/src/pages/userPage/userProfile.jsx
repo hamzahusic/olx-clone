@@ -4,7 +4,7 @@ import locationIcon from '../../assets/location.svg'
 import editIcon from '../../assets/edit.svg'
 import publishIcon from '../../assets/objavi.svg'
 import { Link, useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import NoResult from "../../components/NoResult";
 import { useSelector } from "react-redux";
 
@@ -12,7 +12,7 @@ const UserProfile = ({children}) => {
 
     const user = useSelector(state => state.isLogged)
     const navigate = useNavigate()
-
+    
     useEffect(() => {
         if(!user)
             navigate('/')

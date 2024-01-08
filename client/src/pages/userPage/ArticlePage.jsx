@@ -46,6 +46,7 @@ const ArticlePage = () => {
 
     const saveArticle = () => setSave(!save);
     const user = useSelector(state => state.isLogged);  
+    const navigate = useNavigate()
 
     const carMainInfo = {
         "proizvodjac":{
@@ -113,10 +114,13 @@ const ArticlePage = () => {
 
             const result = await data;
             
-            if(result){
+            if(result && Object.keys(result).length>0){
                 setArticleInfo(result)
                 setLoading(false)
                 getOtherUserArticles(result[0].idK)
+            }
+            else{
+                navigate('/')
             }
 
             console.log(result)
@@ -146,8 +150,8 @@ const ArticlePage = () => {
                                 </p>}
                             </div>
                             <div className="flex gap-2">
-                                <div className="select-none text-sm flex gap-1 items-center bg-gray-200/50 p-3 rounded">
-                                    <img src={share} alt="" className=" cursor-pointer"/>
+                                <div className="select-none text-sm flex gap-1 items-center bg-gray-200/50 p-3 rounded cursor-pointer">
+                                    <img src={share} alt=""/>
                                     Podijeli
                                 </div>
                                 {user &&  
@@ -191,7 +195,7 @@ const ArticlePage = () => {
                         </p>
                         <p className="py-1 px-3 text-[12px] font-semibold border-[1px] border-gray-300 rounded-md flex items-center gap-1">
                             <img src={clockIcon} alt="" width={14} />
-                            OBNOVLJEN : {new Date(articleInfo[0].datum_promjene).toLocaleDateString("de-DE")}
+                            OBJAVLJEN : {new Date(articleInfo[0].datum_promjene).toLocaleDateString("de-DE")}
                         </p>
                         <p className="py-1 px-3 text-[12px] font-semibold border-[1px] border-gray-300 rounded-md flex items-center gap-1">
                             <img src={infoIcon} alt="" width={13} />

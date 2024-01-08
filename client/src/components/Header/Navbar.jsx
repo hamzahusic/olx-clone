@@ -151,7 +151,7 @@ const Navbar = () => {
                     <Link to={'/'} className="menu-link"> <img src={deliveryTruckIcon} width={20}/> Narudžbe</Link>
                     {/*LINKS*/}
                     <p className=" text-xs px-4 py-2 bg-gray-100 font-semibold">SPAŠENI</p>
-                    <Link to={'/'} className="menu-link"> <img src={allArticleIcon} width={20}/> Spašeni oglasi</Link>
+                    <Link to={'/profile/my/saved'} className="menu-link"> <img src={allArticleIcon} width={20}/> Spašeni oglasi</Link>
                     <Link to={'/profile/my/closed'} className="menu-link"> <img src={userIcon} width={20}/> Završeni oglasi</Link>
                     <Link to={'/'} className="menu-link"> <img src={searchSmallIcon} width={20}/> Neaktivni oglasi</Link>
                     {/*LINKS*/}
