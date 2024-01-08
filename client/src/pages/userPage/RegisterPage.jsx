@@ -20,6 +20,11 @@ const RegisterPage = () => {
     const handleRegister = async (e) => {
         e.preventDefault();
 
+        if(!ime || !prezime || !email || !sifra || !adresa ||!brojTelefona){
+            alert("Unesite sve informacije")
+            return;
+        }
+
         try {
             const response = await fetch('http://localhost:8080/api/auth/register',{
                 method: "POST",
@@ -39,7 +44,7 @@ const RegisterPage = () => {
             })
 
             if(!response.ok)
-                throw Error("Enter correct and allowed information")
+                throw Error("Unesite sve informacije")
 
             const data = await response.json()
 
@@ -50,12 +55,14 @@ const RegisterPage = () => {
 
         } catch (error) {
             console.log(error)
+            alert(error)
         }
     }
 
     return ( 
-        <div className='bgp min-h-screen grid place-items-center'>
-            <div className='bg-white px-5 py-7 rounded-sm md:min-w-[400px]'>
+        <div className='bgp min-h-screen grid place-items-center relative overflow-hidden'>
+            <div className='white-outline-space absolute animate-circle'></div>
+            <div className='bg-white px-5 py-7 mt-10 mb-5 rounded-sm md:min-w-[400px]  z-50'>
                 <img src={olxLogo} width={110} className=' mx-auto'/>
                 <p className=' text-[22px] mt-7'>Registracija</p>
                     <form action="" className='flex flex-col'>
@@ -74,7 +81,7 @@ const RegisterPage = () => {
                         <label htmlFor="slika" className=' text-[12px] font-semibold tracking-wide mt-5 mb-2'>UNESITE LINK SLIKE</label>
                         <input type="text" name="slika" className='bg-gray-100 outline-none p-3 rounded-md' onChange={(e) => setSlika(e.target.value)}/>
                         <div className='py-5 text-base flex gap-2'>
-                            <input type="checkbox" required className='txt-xl'/>
+                            <input type="checkbox" required className='txt-xl required:'/>
                             Slažem se sa uslovima korištenja
                         </div>
                         <button className='bgp text-white py-3 text-sm font-semibold rounded-md' onClick={handleRegister}>Registruj se</button>

@@ -43,8 +43,9 @@ const LoginPage = () => {
     }
 
     return ( 
-        <div className='bgp min-h-screen grid place-items-center'>
-            <div className='bg-white px-5 py-7 rounded-sm md:min-w-[400px]'>
+        <div className='bgp min-h-screen grid place-items-center relative overflow-hidden'>
+            <div className='white-outline-space absolute animate-circle'></div>
+            <div className='bg-white px-5 py-7 rounded-sm md:min-w-[400px] relative z-50'>
                 <img src={olxLogo} width={110} className=' mx-auto'/>
                 <p className=' text-[22px] mt-7'>Prijava</p>
                     <form action="" className='flex flex-col'>
@@ -52,7 +53,7 @@ const LoginPage = () => {
                         <input type="text" name="name" value={email} className='bg-gray-100 outline-none p-3 rounded-md' placeholder='example@site.com' onChange={(e) =>setEmail(e.target.value)}/>
                         <label htmlFor="pass" className=' text-[12px] font-semibold tracking-wide mt-5 mb-2'>ŠIFRA</label>
                         <div className='flex items-center justify-between bg-gray-100 rounded-md'>
-                            <input type={showpass ? "text" : "password"} name="pass" value={sifra} className='p-3 flex-1 bg-transparent outline-none' onChange={(e) =>setSifra(e.target.value)}/>
+                            <input type={showpass ? "text" : "password"} name="pass" value={sifra} className='p-3 flex-1 bg-transparent outline-none' placeholder='Enter password' onChange={(e) =>setSifra(e.target.value)}/>
                             <img src={showpass ? hideIcon : showIcon} alt="" width={showpass ? 19 : 25} className='mx-2 cursor-pointer' onClick={() => setShowPass(!showpass)}/>
                         </div>
                         <Link to={"/"} className='py-3  ml-auto'>Zaboravili ste šifru?</Link>

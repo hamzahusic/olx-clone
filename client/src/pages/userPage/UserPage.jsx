@@ -89,7 +89,7 @@ const UserPage = () => {
                                 id={article.idA}
                                 image={article.Slikas[0].slika_link} 
                                 title={article.naslov} 
-                                time={new Date(article.datum_promjene).toLocaleDateString()} 
+                                time={new Date(article.datum_promjene).toLocaleDateString("de-DE")} 
                                 price={article.cijena.toLocaleString("de-DE")} 
                                 tags={[article.lokacija,article.stanje]} 
                                 available={article.dostupno}

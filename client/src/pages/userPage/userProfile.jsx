@@ -57,7 +57,7 @@ const UserProfile = ({children}) => {
                         </div>
                         <div className="flex justify-between text-sm">
                             <p>Online</p>
-                            <p>{new Date(user.zadnja_prijava).toLocaleDateString()} u {new Date(user.zadnja_prijava).toLocaleTimeString()}</p>
+                            <p>{new Date(user.zadnja_prijava).toLocaleDateString("de-DE")} u {new Date(user.zadnja_prijava).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</p>
                         </div>
                     </div>
                 </div>

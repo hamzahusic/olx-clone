@@ -46,8 +46,6 @@ const ArticlePage = () => {
 
     const saveArticle = () => setSave(!save);
     const user = useSelector(state => state.isLogged);  
-    const dispach = useDispatch();
-    const navigate = useNavigate()
 
     const carMainInfo = {
         "proizvodjac":{
@@ -193,7 +191,7 @@ const ArticlePage = () => {
                         </p>
                         <p className="py-1 px-3 text-[12px] font-semibold border-[1px] border-gray-300 rounded-md flex items-center gap-1">
                             <img src={clockIcon} alt="" width={14} />
-                            OBNOVLJEN : {new Date(articleInfo[0].datum_promjene).toLocaleDateString()}
+                            OBNOVLJEN : {new Date(articleInfo[0].datum_promjene).toLocaleDateString("de-DE")}
                         </p>
                         <p className="py-1 px-3 text-[12px] font-semibold border-[1px] border-gray-300 rounded-md flex items-center gap-1">
                             <img src={infoIcon} alt="" width={13} />
@@ -220,7 +218,7 @@ const ArticlePage = () => {
                                     {Object.keys(articleInfo[0].KategorijaVozilo).slice(9).map((detail) => (
                                         <div className="grid grid-cols-2 text-sm py-1" key={detail}>
                                             <p className=" first-letter:uppercase">{detail.replace('_',' ')}</p>
-                                            <p className=" font-medium text-gray-700 first-letter:uppercase">{detail == "registrovan_do" ? new Date(articleInfo[0].KategorijaVozilo[detail]).toLocaleDateString() : articleInfo[0].KategorijaVozilo[detail] == 0 || articleInfo[0].KategorijaVozilo[detail] == null ? 'Ostalo' : articleInfo[0].KategorijaVozilo[detail] }</p>
+                                            <p className=" font-medium text-gray-700 first-letter:uppercase">{detail == "registrovan_do" ? new Date(articleInfo[0].KategorijaVozilo[detail]).toLocaleDateString("de-DE") : articleInfo[0].KategorijaVozilo[detail] == 0 || articleInfo[0].KategorijaVozilo[detail] == null ? 'Ostalo' : articleInfo[0].KategorijaVozilo[detail] }</p>
                                         </div>
                                     ))}
                                 </div>
@@ -260,7 +258,7 @@ const ArticlePage = () => {
                                     id={article.idA}
                                     image={article.Slikas[0].slika_link} 
                                     title={article.naslov} 
-                                    time={new Date(article.datum_promjene).toLocaleDateString()} 
+                                    time={new Date(article.datum_promjene).toLocaleDateString("de-DE")} 
                                     price={article.cijena.toLocaleString("de-DE")} 
                                     tags={[article.lokacija,article.stanje]} 
                                     available={article.dostupno}/>
@@ -277,7 +275,7 @@ const ArticlePage = () => {
                             </div>
                             <div>
                                 <p className=" font-semibold tracking-wide pb-1 text-base">{articleInfo[0].Korisnik.ime} {articleInfo[0].Korisnik.prezime}</p>
-                                <p className=" text-[12px]"><span className=" font-semibold">Online</span> : {new Date(articleInfo[0].Korisnik.zadnja_prijava).toLocaleDateString()} u {new Date(articleInfo[0].Korisnik.zadnja_prijava).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</p>
+                                <p className=" text-[12px]"><span className=" font-semibold">Online</span> : {new Date(articleInfo[0].Korisnik.zadnja_prijava).toLocaleDateString("de-DE")} u {new Date(articleInfo[0].Korisnik.zadnja_prijava).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</p>
                             </div>
                         </div>
                         <p className=" text-sm text-center bg-[#002f341c] font-semibold py-2 px-4 rounded-md">Korisnik odgovara veoma brzo</p>

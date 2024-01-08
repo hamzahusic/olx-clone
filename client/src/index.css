@@ -70,9 +70,14 @@ body{
   gap: 10px;
   padding: 5px 16px;
   font-weight: 600;
+  z-index: 1;
+}
+.menu-link img{
+  position: relative;
+  z-index: 10;
 }
 .menu-link:hover{
-  background-color: #002f34;
+  background-color: #002f34ad;
   color: white;
 }
 
@@ -90,3 +95,39 @@ body{
   -webkit-line-clamp: 2;
   white-space: pre-wrap;
 }
+
+.white-outline-space{
+  display: block;
+  width: 120em;
+  height: 120em;
+  border-radius: 100%;
+  background-color: transparent;
+  margin: 0px;
+  border: 250px solid white;
+  background-clip: content-box;
+  padding: 1em;
+  z-index: 1;
+}
+
+@keyframes circleAnimation {
+  0% {
+    width: 120em;
+    height: 120em;
+    border: 250px solid white;
+  }
+  50% {
+    width: 40em;
+    height: 40em;
+    border: 80px solid white;
+  }
+  100%{
+    width: 120em;
+    height: 120em;
+    border: 250px solid white;
+  }
+}
+
+.animate-circle {
+  animation: circleAnimation 1s ease-in-out; /* Customize duration and timing function */
+}
+
