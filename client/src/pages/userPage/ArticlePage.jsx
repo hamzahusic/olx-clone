@@ -130,6 +130,7 @@ const ArticlePage = () => {
 
     useEffect(() => {
         getCarInformation()
+        window.scrollTo({top:0,behavior: 'smooth'})
     },[id])
 
     return ( 
@@ -140,7 +141,7 @@ const ArticlePage = () => {
                         <h1 className="text-[26px] font-light">{articleInfo[0].naslov}</h1>
                         <div className="flex gap-2 items-center justify-between pb-3">
                             <div className="flex items-center gap-2">
-                                <p className=" text-[34px] font-bold">{articleInfo[0].cijena == 0 ? "Na upit" : articleInfo[0].cijena.toLocaleString("de-DE")+"KM"}</p>
+                                <p className=" text-[34px] font-bold">{articleInfo[0].cijena == 0 ? "Na upit" : Number(articleInfo[0].cijena).toLocaleString("de-DE")+"KM"}</p>
                                 {articleInfo[0].dostupno && <p className="flex gap-2 bg-[#002f34] py-1 px-2 text-white text-[12px] rounded-sm">
                                     <img src={instantDelivery} className=" brightness-[100]" width={24}/>
                                     Dostupno odmah
@@ -219,27 +220,26 @@ const ArticlePage = () => {
                                     {Object.keys(articleInfo[0].KategorijaVozilo).slice(9).map((detail) => (
                                         <div className="grid grid-cols-2 text-sm py-1" key={detail}>
                                             <p className=" first-letter:uppercase">{detail.replace('_',' ')}</p>
-                                            <p className=" font-medium text-gray-700 first-letter:uppercase">{detail == "registrovan_do" ? new Date(articleInfo[0].KategorijaVozilo[detail]).toLocaleDateString() : articleInfo[0].KategorijaVozilo[detail]}</p>
+                                            <p className=" font-medium text-gray-700 first-letter:uppercase">{detail == "registrovan_do" ? new Date(articleInfo[0].KategorijaVozilo[detail]).toLocaleDateString() : articleInfo[0].KategorijaVozilo[detail] == 0 || articleInfo[0].KategorijaVozilo[detail] == null ? 'Ostalo' : articleInfo[0].KategorijaVozilo[detail] }</p>
                                         </div>
                                     ))}
                                 </div>
                             }
-                            <h2 className="text-2xl pb-1">Osobine</h2>
-                            <div className="grid grid-cols-2 py-4">
-                                {articleInfo[0].KategorijaCheckBoxDetaljs && articleInfo[0].KategorijaCheckBoxDetaljs &&
-                                    articleInfo[0].KategorijaCheckBoxDetaljs.map((trait) => (
+                            {articleInfo[0].KategorijaCheckBoxDetaljs.length >0 && <h2 className="text-2xl pb-1">Osobine</h2>}
+                            {articleInfo[0].KategorijaCheckBoxDetaljs.length >0 && <div className="grid grid-cols-2 py-4">
+                                {articleInfo[0].KategorijaCheckBoxDetaljs.map((trait) => (
                                         <div className="grid grid-cols-2 text-sm py-1" key={trait.vrijednost_checkboxa}>
                                             <p>{trait.vrijednost_checkboxa}</p>
                                             <img src={checkIcon} alt="" width={14} />
                                         </div>
                                     ))
                                 }
-                            </div>
+                            </div>}
                         </div>
-                        <div>
+                        {articleInfo[0].opis && <div>
                                 <h2 className="text-2xl pb-1">Detaljni opis</h2>
                                 <p className="py-3 px-4">{articleInfo[0].opis}</p>
-                        </div>
+                        </div>}
                     </div>
                     <div className="bg-white p-4">
                         <h2 className="text-2xl pb-1">Postavi pitanje <span className=" text-base">[{0}]</span></h2>

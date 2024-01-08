@@ -34,7 +34,7 @@ const CarArticle = () => {
     const [konja,setKonja] = useState(0);
     const [transmisija,setTransmisija] = useState('');
     const [tip,setTip] = useState('');
-    const [registrovanDo,setRegistrovanDo] = useState();
+    const [registrovanDo,setRegistrovanDo] = useState(new Date().toLocaleDateString());
     const [velicinaFelgi,setVelicinaFelgi] = useState(0);
     const [euro,setEuro] = useState(0);
     const [pogon,setPogon] = useState('');
@@ -119,7 +119,7 @@ const CarArticle = () => {
         if(step >= 4) {
             setProgress(100)
 
-            if(!manufacturer || !model || !location || price<0 || !naslov || kilometraza<0 || !brojVrata || !kubikaza || !godiste || !kilovata.toString() || !gorivo || !slike || !user){
+            if(!manufacturer || !model || !location || price<0 || !naslov || kilometraza<0 || !brojVrata || kubikaza<=0 || !godiste || !kilovata || !gorivo || !slike || !user){
                 setErrorPopUp(true)
             }
             else{    

@@ -20,7 +20,7 @@ const Artikal = sequelize.define("Artikal", {
     lokacija: DataTypes.STRING,
     dostupno: DataTypes.BOOLEAN,
     stanje: DataTypes.STRING,
-    cijena: DataTypes.INTEGER,
+    cijena: DataTypes.DECIMAL,
     opis: DataTypes.TEXT,
     idK: {
       type: DataTypes.INTEGER,

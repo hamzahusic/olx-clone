@@ -3,12 +3,14 @@ import olxLogo from '../../assets/logoOLX.svg';
 import { useDispatch } from 'react-redux';
 import { handleLogIn } from '../../redux/actions/RegistrationActions/Actions';
 import { useState } from 'react';
+import showIcon from '../../assets/show-password.png'
+import hideIcon from '../../assets/hide.png'
 
 const LoginPage = () => {
 
     const [email,setEmail] = useState('');
     const [sifra,setSifra] = useState('');
-
+    const [showpass,setShowPass] = useState(false)
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
@@ -46,10 +48,13 @@ const LoginPage = () => {
                 <img src={olxLogo} width={110} className=' mx-auto'/>
                 <p className=' text-[22px] mt-7'>Prijava</p>
                     <form action="" className='flex flex-col'>
-                        <label htmlFor="name" className=' text-[12px] font-semibold tracking-wide mt-5 mb-2'>KORISNIČKO IME ILI EMAIL</label>
-                        <input type="text" name="name" value={email} className='bg-gray-100 outline-none p-3 rounded-md' onChange={(e) =>setEmail(e.target.value)}/>
+                        <label htmlFor="name" className=' text-[12px] font-semibold tracking-wide mt-5 mb-2'>KORISNIČKI EMAIL</label>
+                        <input type="text" name="name" value={email} className='bg-gray-100 outline-none p-3 rounded-md' placeholder='example@site.com' onChange={(e) =>setEmail(e.target.value)}/>
                         <label htmlFor="pass" className=' text-[12px] font-semibold tracking-wide mt-5 mb-2'>ŠIFRA</label>
-                        <input type="password" name="pass" value={sifra} className='bg-gray-100 outline-none p-3 rounded-md' onChange={(e) =>setSifra(e.target.value)}/>
+                        <div className='flex items-center justify-between bg-gray-100 rounded-md'>
+                            <input type={showpass ? "text" : "password"} name="pass" value={sifra} className='p-3 flex-1 bg-transparent outline-none' onChange={(e) =>setSifra(e.target.value)}/>
+                            <img src={showpass ? hideIcon : showIcon} alt="" width={showpass ? 19 : 25} className='mx-2 cursor-pointer' onClick={() => setShowPass(!showpass)}/>
+                        </div>
                         <Link to={"/"} className='py-3  ml-auto'>Zaboravili ste šifru?</Link>
                         <button className='bgp text-white py-3 text-sm font-semibold rounded-md' onClick={(e) => handleLogin(e)}>Prijavi se</button>
                         <div className='mt-7 flex justify-evenly'>
