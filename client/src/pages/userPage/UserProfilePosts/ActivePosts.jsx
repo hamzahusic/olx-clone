@@ -55,6 +55,8 @@ const UserActivePosts = () => {
                             price={article.cijena.toLocaleString("de-DE")} 
                             tags={[article.lokacija,article.stanje]} 
                             available={article.dostupno}
+                            remove={true}
+                            edit={true}
                         />
                    ))}
                 </div>
