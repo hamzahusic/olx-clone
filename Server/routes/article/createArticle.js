@@ -71,7 +71,8 @@ router.post('/automobili', async (req,res) => {
                             vrijednost_checkboxa : detalj,
                             idA:createdArticleId
                         },{
-                            fields:["vrijednost_checkboxa","idA"]
+                            fields:["vrijednost_checkboxa","idA"],
+                            transaction:t
                         }
                     )
                 })

@@ -4,7 +4,7 @@ import NoResult from "../../../components/NoResult";
 import UserProfile from "../userProfile";
 
 const UserImpressionsPost = () => {
-    const [posts,setPosts] = useState(null);
+    const [posts,setPosts] = useState([]);
 
     return ( 
         <UserProfile>
@@ -14,13 +14,13 @@ const UserImpressionsPost = () => {
                         <Link to={'/profile/my/impressions'} className="active-tab">Dojmovi</Link>
                         <Link to={'/profile/my/saved'} className="nonactive-tab">Spašeni oglasi</Link>
             </div>
-            <div className="min-h-[70vh] grid place-items-center">
-                {posts && 
+            <div className="min-h-[70vh]" style={{display:!posts.length>0 && "grid",placeItems:!posts.length>0 && "center"}}>
+                {posts.length>0 && 
                 <div>
                     All active posts
                 </div>
                 }
-                {!posts && <NoResult text={"Nemate dojmova"}/>}
+                {!posts.length>0 && <NoResult text={"Nemate dojmova"}/>}
             </div>
         </UserProfile>
      );

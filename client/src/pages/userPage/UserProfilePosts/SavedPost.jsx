@@ -5,7 +5,7 @@ import UserProfile from "../userProfile";
 
 const SavedPosts = () => {
 
-    const [posts,setPosts] = useState(null);
+    const [posts,setPosts] = useState([]);
 
     return ( 
         <UserProfile>
@@ -15,13 +15,13 @@ const SavedPosts = () => {
                         <Link to={'/profile/my/impressions'} className="nonactive-tab">Dojmovi</Link>
                         <Link to={'/profile/my/saved'} className="active-tab">Spašeni oglasi</Link>
             </div>
-            <div className="min-h-[70vh] grid place-items-center">
-                {posts && 
+            <div className="min-h-[70vh]" style={{display:!posts.length>0 && "grid",placeItems:!posts.length>0 && "center"}}>
+                {posts.length>0 && 
                 <div>
                     All closed posts
                 </div>
                 }
-                {!posts && <NoResult text={"Nemate spašenih oglasa"}/>}
+                {!posts.length>0 && <NoResult text={"Nemate spašenih oglasa"}/>}
             </div>
         </UserProfile>
      );

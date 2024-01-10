@@ -54,6 +54,7 @@ const UserPage = () => {
             console.log(allItems)
         } catch (error) {
             console.error(error)
+            setLoading(false)
         }
     }
 
@@ -101,6 +102,11 @@ const UserPage = () => {
                 {loading && !allArticleData.length>0 && 
                     <div className="w-full grid place-items-center py-40">
                         <ClipLoader color={"#002f34"} size={45} />               
+                    </div>
+                }
+                {!loading && !allArticleData.length>0 &&
+                    <div>
+                        <p>No article available</p>
                     </div>
                 }
                 <div className="flex items-center justify-center">

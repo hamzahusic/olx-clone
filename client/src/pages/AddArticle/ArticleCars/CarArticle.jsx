@@ -34,7 +34,7 @@ const CarArticle = () => {
     const [konja,setKonja] = useState(0);
     const [transmisija,setTransmisija] = useState('');
     const [tip,setTip] = useState('');
-    const [registrovanDo,setRegistrovanDo] = useState(new Date().toLocaleDateString());
+    const [registrovanDo,setRegistrovanDo] = useState(new Date().toISOString().slice(0, 10));
     const [velicinaFelgi,setVelicinaFelgi] = useState(0);
     const [euro,setEuro] = useState(0);
     const [pogon,setPogon] = useState('');
@@ -110,7 +110,7 @@ const CarArticle = () => {
             setObjavaPopUp(true)
         } catch (error) {
             console.log(error)
-            setErrorPopUp(true);
+            alert("Doslo je do greske na serveru!")
         }
 
         

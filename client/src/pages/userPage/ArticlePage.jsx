@@ -24,6 +24,10 @@ import kubikazaIcon from '../../assets/carIcon/kubikaza.svg'
 import kilovataIcon from '../../assets/carIcon/snaga.svg'
 import brojVrataIcon from '../../assets/carIcon/broj vrata.svg'
 
+import deleteIcon from '../../assets/articleImg/delete.png'
+import editIcon from '../../assets/articleImg/edit.png'
+import questionIcon from '../../assets/question.png'
+
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
@@ -34,6 +38,7 @@ import Article from "../../components/Article";
 import NotLogIn from "../../components/NotLogIn";
 import {useDispatch, useSelector } from "react-redux";
 import ClipLoader from "react-spinners/ClipLoader"
+import PopUp from "../../components/PopUp";
 
 const ArticlePage = () => {
 
@@ -42,11 +47,12 @@ const ArticlePage = () => {
     const [articleInfo,setArticleInfo] = useState([])
     const [otherArticles,setOtherArticles] = useState([])
     const [loading,setLoading] = useState(true);
-    const [otherArticleloading,setOtherArticleLoading] = useState(true);
+    const [otherArticleloading,setOtherArticleLoading] = useState(true)
 
-    const saveArticle = () => setSave(!save);
-    const user = useSelector(state => state.isLogged);  
+    const saveArticle = () => setSave(!save)
+    const user = useSelector(state => state.isLogged)
     const navigate = useNavigate()
+    const [popUp,setPopUp] = useState(false)
 
     const carMainInfo = {
         "proizvodjac":{
@@ -130,6 +136,28 @@ const ArticlePage = () => {
 
     }
 
+    const handleDeleteAction = async () => {
+
+        if(articleInfo[0].hasOwnProperty("KategorijaVozilo")){
+            try {
+                const response = await fetch(`http://localhost:8080/api/delete/automobili/${articleInfo[0].idA}`,{
+                    method:"DELETE"
+                })
+    
+                if(!response.ok)
+                    throw Error("Error deleting car")
+                
+                navigate("/profile/my/active")
+                
+            } catch (error) {
+                console.error(error)
+                alert(error)
+                setPopUp(false)
+            }
+        }
+
+    }
+
     useEffect(() => {
         getCarInformation()
         window.scrollTo({top:0,behavior: 'smooth'})
@@ -137,7 +165,17 @@ const ArticlePage = () => {
 
     return ( 
         <UserLayout>
-            {!loading && articleInfo && <div className="flex max-w-[1180] p-4 items-start justify-center gap-4 bg-[#f1f4f5]">
+            {popUp && <PopUp isOpen={popUp} onClose={() => setPopUp(false)} title={"Brisanje oglasa"}>
+                <div className="grid place-items-center py-7">
+                    <img src={questionIcon} alt="" />
+                    <p className="text-xl mt-3 mb-4">Da li ste sigurni da želite izbrisati oglas?</p>
+                    <div className="flex items-center gap-4">
+                        <button className="py-3 px-10 bg-[var(--pcolor)] border-2 border-[var(--pcolor)] text-white rounded-md" onClick={() => {handleDeleteAction()}}>DA</button>
+                        <button className="py-3 px-10 bg-white border-2 border-[var(--pcolor)] rounded-md" onClick={() => {setPopUp(false)}}>NE</button>
+                    </div>
+                </div>
+            </PopUp>}
+            {!loading && Object.keys(articleInfo[0]).length > 0 && <div className="flex max-w-[1180] p-4 items-start justify-center gap-4 bg-[#f1f4f5]">
                 <div className=" flex flex-col gap-4">
                     <div className="bg-white p-4">
                         <h1 className="text-[26px] font-light">{articleInfo[0].naslov}</h1>
@@ -172,10 +210,9 @@ const ArticlePage = () => {
                                 modules={[Pagination, Navigation]}
                                 className="mySwiper lg:min-h-[600px]"
                             >
-                                {
-
-                                    articleInfo[0].Slikas.map((image) => (
-                                        <SwiperSlide key={image.slika_link}>
+                                {articleInfo[0].Slikas.length>0 &&
+                                    articleInfo[0].Slikas.map((image,index) => (
+                                        <SwiperSlide key={index}>
                                             <img src={image.slika_link} alt="" className=" min-h-[600px] w-full object-fill select-none"/>
                                         </SwiperSlide>
                                     ))
@@ -270,7 +307,7 @@ const ArticlePage = () => {
                         </div>
                     </div>}
                 </div>
-                <div className="flex flex-col gap-4 sticky top-3">
+                <div className="flex flex-col gap-4 sticky top-40">
                     <div className="p-5 bg-white">
                         <p className="text-sm font-bold">OLX KORISNIK</p>
                         <div className="flex gap-3 py-4">
@@ -286,17 +323,31 @@ const ArticlePage = () => {
                     </div>
                     <div className=" max-w-xs">
                         {!user && <NotLogIn/>}
-                       {user && 
+                       {user && articleInfo[0].Korisnik.idK != user.idK && 
                        <div className="flex bg-white p-3 gap-2">
-                        <Link to={"/"} className="bg-white border-2 border-[#002f34] flex gap-2 items-center justify-center py-3 px-6 rounded-md w-[50%]">
+                        <Link to={"/"} className="bg-white border-2 border-[#002f34] flex gap-2 items-center justify-center py-3 px-6 rounded-md flex-1">
                                 <img src={phoneIcon} alt="" width={17}/>
                                 Broj
                             </Link>
-                            <Link to={"/"} className="bg-white border-2 border-[#002f34] flex gap-2 items-center justify-center py-3 px-6 rounded-md w-[50%]">
+                            <Link to={"/"} className="bg-white border-2 border-[#002f34] flex gap-2 items-center justify-center py-3 px-6 rounded-md flex-1">
                                 <img src={messageIcon} alt="" width={17}/>
                                 Poruka
                             </Link>
                         </div>
+                        }
+                        {articleInfo[0].Korisnik.idK === user.idK &&
+                            <div className="flex bg-white p-3 gap-2">
+                                <button className="bg-red-500 border-2 border-red-500 flex gap-2 items-center justify-center py-3 px-6 rounded-md flex-1 text-white"
+                                    onClick={() => {setPopUp(true)}}
+                                >
+                                    <img src={deleteIcon} alt="" width={17}/>
+                                    Obriši
+                                </button>
+                                <button className="bg-yellow-500 border-2 border-yellow-500 flex gap-2 items-center justify-center py-3 px-6 rounded-md flex-1 text-white">
+                                    <img src={editIcon} alt="" width={17}/>
+                                    Uredi
+                                </button>
+                            </div>
                         }
                     </div>
                 </div>

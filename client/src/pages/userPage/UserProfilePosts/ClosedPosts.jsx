@@ -42,7 +42,7 @@ const UserClosedPosts = () => {
                         <Link to={'/profile/my/impressions'} className="nonactive-tab">Dojmovi</Link>
                         <Link to={'/profile/my/saved'} className="nonactive-tab">Spašeni oglasi</Link>
             </div>
-            <div className="min-h-[70vh] grid place-items-center">
+            <div className="min-h-[70vh]" style={{display:!posts.length>0 && "grid",placeItems:!posts.length>0 && "center"}}>
                 {posts.length >0 && 
                 <div className="grid grid-cols-[repeat(auto-fill,minmax(233px,1fr))] gap-4">
                     { posts.map(article => (

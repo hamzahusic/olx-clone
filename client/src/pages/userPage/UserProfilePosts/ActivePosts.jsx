@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link} from "react-router-dom";
 import NoResult from "../../../components/NoResult";
 import UserProfile from "../userProfile";
 import { useSelector } from "react-redux";
@@ -42,7 +42,7 @@ const UserActivePosts = () => {
                         <Link to={'/profile/my/impressions'} className="nonactive-tab">Dojmovi</Link>
                         <Link to={'/profile/my/saved'} className="nonactive-tab">Spašeni oglasi</Link>
             </div>
-            <div className="min-h-[70vh]">
+            <div className="min-h-[70vh]" style={{display:!posts.length>0 && "grid",placeItems:!posts.length>0 && "center"}}>
                 {posts.length>0 && 
                 <div className="grid grid-cols-[repeat(auto-fill,minmax(233px,1fr))] gap-4">
                    { posts.map(article => (
@@ -55,8 +55,6 @@ const UserActivePosts = () => {
                             price={article.cijena.toLocaleString("de-DE")} 
                             tags={[article.lokacija,article.stanje]} 
                             available={article.dostupno}
-                            remove={true}
-                            edit={true}
                         />
                    ))}
                 </div>
