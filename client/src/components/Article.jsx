@@ -4,7 +4,8 @@ const Article = ({image,title,tags,time,price,available,id,separate}) => {
     return ( 
         <Link to={`/article/${id}`} className="shadow-md inline-block rounded-t-md min-h-fit overflow-hidden max-w-[280px] bg-white">
             <div className="relative max-h-[164px]">
-                <img src={image} className=" w-full max-w-[280px] h-[164px] object-cover"/>
+                {image && <img src={image} className=" w-full max-w-[280px] h-[164px] object-cover"/>}
+                {!image && <div className="w-[280px] h-[164px] object-cover bg-[#002f34]"/>}
                 {available && <div className="absolute right-0 bottom-0 text-white text-[12px] bg-[#002f34] p-1 rounded-ss-md ">DOSTUPNO ODMAH</div>}
                 {separate && <div className="absolute left-0 bottom-0 text-white text-[12px] bg-[#edac44] p-1 rounded-se-md  z-50">IZDVOJENO</div>}
             </div>

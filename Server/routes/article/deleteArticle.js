@@ -34,14 +34,19 @@ router.delete('/automobili/:id',async (req,res) => {
             },
             transaction: t,
           });
+
+          // Step 4: Find Foreign key of Artikal
+          const ArticleidKv = await Artikal.findOne({ where: { idA: articleId} });
         
-          // Step 4: Delete the record in KategorijaVozilo
-          await KategorijaVozilo.destroy({
-            where: {
-              idKV: articleId,
-            },
-            transaction: t,
-          });
+          // Step 5: Delete the record in KategorijaVozilo
+          if(ArticleidKv){
+            await KategorijaVozilo.destroy({
+              where: {
+                idKV: ArticleidKv.idKV,
+              },
+              transaction: t,
+            });
+          }
 
           await Artikal.destroy({
             where: {
