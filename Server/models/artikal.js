@@ -8,6 +8,7 @@ const KategorijaTehnika = require('./KategorijaTehnika');
 const Slika = require('./Slika');
 const KategorijaCheckBoxDetalj = require('./KategorijaCheckBoxDetalj');
 const Korisnik = require('./korisnik')
+
 const Artikal = sequelize.define("Artikal", {
     idA: {
       type: DataTypes.INTEGER,
@@ -70,10 +71,5 @@ Artikal.belongsTo(KategorijaTehnika, { foreignKey: 'idKT'});
 Artikal.hasMany(Slika,{foreignKey: 'idA'})
 Artikal.hasMany(KategorijaCheckBoxDetalj,{foreignKey: 'idA'})
 Artikal.belongsTo(Korisnik,{foreignKey:'idK'})
-
-/*sequelize.sync({ force: true }).then(() => {
-    console.log('Tables synced');
-}).catch(err => console.error('Error syncing tables:', err));
-*/
 
 module.exports = Artikal;

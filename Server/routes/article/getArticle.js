@@ -4,7 +4,7 @@ const Artikal = require('../../models/artikal');
 const KategorijaVozilo = require('../../models/KategorijaVozilo');
 const KategorijaCheckBoxDetalj = require('../../models/KategorijaCheckBoxDetalj');
 const Slika = require('../../models/Slika');
-const Korisnik = require('../../models/korisnik')
+const Korisnik = require('../../models/korisnik');
 
 router.get('/automobili/:id', async (req,res) => {
     
@@ -35,15 +35,16 @@ router.get('/automobili/:id', async (req,res) => {
         ]
     })
 
+
     if(articleData){
         return res.status(200).json(articleData)
     }
-    else
+    else{
         return res.status(500).json({
             message:"Error finding car details!",
             id:carId
         })
-
+    }
 })
 
 

@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 const Article = ({image,title,tags,time,price,available,id,separate}) => {
     return ( 
-        <Link to={`/article/${id}`} className="shadow-md inline-block rounded-t-md min-h-fit overflow-hidden max-w-[280px] bg-white">
+        <Link to={`/article/${id}`} className="shadow-md inline-block rounded-t-md min-h-fit w-full overflow-hidden max-w-[280px] bg-white">
             <div className="relative max-h-[164px]">
                 {image && <img src={image} className=" w-full max-w-[280px] h-[164px] object-cover"/>}
                 {!image && <div className="w-[280px] h-[164px] object-cover bg-[#002f34]"/>}

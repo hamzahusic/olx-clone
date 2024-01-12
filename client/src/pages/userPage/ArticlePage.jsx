@@ -49,7 +49,7 @@ const ArticlePage = () => {
     const [loading,setLoading] = useState(true);
     const [otherArticleloading,setOtherArticleLoading] = useState(true)
 
-    const saveArticle = () => setSave(!save)
+    const [isSavedBtnDisabled,setSavedBtnDisabled] = useState(false);
     const user = useSelector(state => state.isLogged)
     const navigate = useNavigate()
     const [popUp,setPopUp] = useState(false)
@@ -112,24 +112,28 @@ const ArticlePage = () => {
 
         try {
             const response = await fetch(`http://localhost:8080/api/get/automobili/${id}`)
-            
             if(!response.ok)
-                    throw Error("Error getting car info")
+            throw Error("Error getting car info")
+        
+        const data = await response.json();
+        
+        if(data && Object.keys(data).length>0){
+                const isSavedArticle = await fetch(`http://localhost:8080/api/saved/${user.idK}/${data[0].idA}`)
 
-            const data = response.json();
-
-            const result = await data;
-            
-            if(result && Object.keys(result).length>0){
-                setArticleInfo(result)
+                const savedArticleData = await isSavedArticle.json()
+                console.log(savedArticleData)
+                if(Object.keys(savedArticleData).length > 0){
+                    setSave(true)
+                }
+                setArticleInfo(data)
                 setLoading(false)
-                getOtherUserArticles(result[0].idK)
+                getOtherUserArticles(data[0].idK)
             }
             else{
                 navigate('/')
             }
 
-            console.log(result)
+            console.log(data)
         } catch (error) {
             console.error(error)
         }
@@ -157,11 +161,70 @@ const ArticlePage = () => {
         }
 
     }
+    
+    const addSavedArticle = async (idA,idK) => {
+        setSavedBtnDisabled(true)
+        try {
+            const response = await fetch(`http://localhost:8080/api/save/${idA}`,{
+                method:"POST",
+                headers: {
+                    "Content-Type": "application/json", 
+                },
+                body : JSON.stringify({
+                    datum_spasavanja : new Date().toLocaleDateString(),
+                    idK : idK
+                })
+            })
+
+            if(!response.ok)
+                throw Error(response)
+
+            setSavedBtnDisabled(false)
+        } catch (error) {
+            console.error(error)
+            alert("Error adding car")
+        }
+    }
+
+    const removeSavedArticle = async (idA,idK) => {
+        setSavedBtnDisabled(true)
+
+        try {
+            const response = await fetch(`http://localhost:8080/api/remove/${idA}`,{
+                method:"DELETE",
+                headers: {
+                    "Content-Type": "application/json", 
+                },
+                body : JSON.stringify({
+                    idK : idK
+                })
+            })
+
+            if(!response.ok)
+                throw Error(response)
+
+            setSavedBtnDisabled(false)
+        } catch (error) {
+            console.error(error)
+            alert("Error removing car")
+        }
+    }
+
+    const handleSaveArticle = async () => {
+        if(!save){
+            setSave(true)
+            addSavedArticle(articleInfo[0].idA,user.idK)
+        }
+        else{
+            setSave(false)
+            removeSavedArticle(articleInfo[0].idA,user.idK)
+        }
+    }
 
     useEffect(() => {
         getCarInformation()
         window.scrollTo({top:0,behavior: 'smooth'})
-    },[id])
+    },[id,user])
 
     return ( 
         <UserLayout>
@@ -192,12 +255,12 @@ const ArticlePage = () => {
                                     <img src={share} alt=""/>
                                     Podijeli
                                 </div>
-                                {user &&  
-                                <div className=" cursor-pointer text-sm flex gap-1 items-center bg-gray-200/50 p-3 rounded select-none" onClick={saveArticle}>
+                                {user && user.idK != articleInfo[0].Korisnik.idK &&  
+                                <button disabled={isSavedBtnDisabled} className=" cursor-pointer text-sm flex gap-1 items-center bg-gray-200/50 p-3 rounded select-none" onClick={handleSaveArticle}>
                                     {!save && <img src={saveAricle} alt="" />}
                                     {save && <img src={savedAricle} alt="" />}
                                     Spasi oglas
-                                </div>
+                                </button>
                                 }
                             </div>
                         </div>
