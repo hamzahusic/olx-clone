@@ -1,30 +1,26 @@
 const express = require('express');
-const { Op, fn, col } = require('sequelize');
+const { Op } = require('sequelize');
 const Artikal = require('../../models/artikal');
+const Slika = require('../../models/Slika');
 const router = express.Router();
 
-router.get('/:searchString', async (req, res) => {
+router.post('/', async (req, res) => {
+    
+     const searchString = req.body.input.split(' ');
 
-     const searchString = req.params.searchString.split(' ');
+    const input = searchString.map(value => ({ [Op.iLike] : `%${value}%` }))
 
-
-    const searchTerm1 = 'audi';
-    const searchTerm2 = 'prodajem';
-
-    const input = [
-        { [Op.iLike]: `%${searchTerm1}%` },
-        { [Op.iLike]: `%${searchTerm2}%` }
-    ]
-
-    console.log(searchString.map(value => ({ [Op.iLike] : `%${value}%` })))
-    console.log("----------")
-    console.log(input)
     const result = await Artikal.findAll({
-    where: {
-        naslov: {
-        [Op.or]: input
-        }
-    }
+        where: {
+            naslov: {
+                [Op.or]: input
+            }
+        },
+        include : [
+            {
+                model : Slika
+            }
+        ]
     });
 
 
