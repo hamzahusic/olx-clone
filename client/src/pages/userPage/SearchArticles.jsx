@@ -1,31 +1,69 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Article from "../../components/Article";
 import Filters from "../../components/Header/Filters";
 import UserLayout from "../../components/Layouts/UserLayout";
-import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
+import ClipLoader from "react-spinners/ClipLoader";
 
 const SearchArticles = () => {
     const image = "https://images.unsplash.com/photo-1502877338535-766e1452684a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2072&q=80"
-    const [result,setResult] = useState(true);
+    
+    const [result,setResult] = useState([]);
     const [openFilter,setFilter] = useState(false);
     const [openSort,setSort] = useState(false);
-
-    const user = useSelector(state => state.isLogged);
+    const [loading,setLoading] = useState(true)
     
+    const { inputValue } = useParams()
+    
+    const fetchAricles = async () => {
+        try {
+            console.log(inputValue)
+            const response = await fetch(`http://localhost:8080/api/search/`,{
+                method : "POST",
+                headers: {
+                    "Content-Type": "application/json", 
+                },
+                body : JSON.stringify({
+                    input : inputValue
+                })
+            })
+
+            if(!response.ok)
+                throw Error("Error getting articles")
+
+            const data = await response.json()
+
+            setResult(data)
+            setLoading(false)
+            console.log(data)
+
+        } catch (error) {
+            console.error(error.message)
+            setLoading(false)
+        }
+    }
+
+    useEffect(() => {
+        fetchAricles()
+    },[inputValue])
 
     return ( 
         <UserLayout>
             <Filters/>
-            {!result && 
+            {!result.length > 0 && loading && 
+                <div className="w-full grid place-items-center py-56">
+                    <ClipLoader color={"#002f34"} size={45}/>
+                </div>
+            }
+            {!result.length > 0 && !loading && 
                 <div className="bg-yellow-100 text-center py-32 text-[#002f34] text-3xl">
                     UPSSS! NO RESULTS
                 </div>
             }
-            {result && 
+            {result.length > 0 && !loading && 
             <div>
                 <div className="flex justify-between px-4 pt-5 bg-[#f1f4f5] items-center">
-                    <p className="font-semibold">248.928 REZULTATA</p>
+                    <p className="font-semibold">{result.length} {result.length == 1 ? "REZULTAT" : "REZULTATA"}</p>
                     <div className="flex gap-4">
                         <div className="relative">
                             <button onClick={() => setFilter(!openFilter)} className="inline-flex justify-center w-full px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-[#002f34]">
@@ -92,10 +130,17 @@ const SearchArticles = () => {
                     </div>
                 </div>
                 <div className="p-5 bg-[#f1f4f5] grid grid-cols-[repeat(auto-fill,minmax(233px,1fr))] gap-4">
-                    <Article id={1} image={image} title={"GARMIN WATCH"} time={"prije 2 minute"} price={"150KM"} tags={['Dizel','Novo']} available={true}/>
-                    <Article id={2} image={image} title={"GARMIN WATCH"} time={"prije 2 minute"} price={"150KM"} tags={['Dizel','Novo']} available={true}/>
-                    <Article id={3} image={image} title={"GARMIN WATCH"} time={"prije 2 minute"} price={"150KM"} tags={['Dizel','Novo']} available={true}/>
-                    <Article id={4} image={image} title={"GARMIN WATCH"} time={"prije 2 minute"} price={"150KM"} tags={['Dizel','Novo']} available={true}/>
+                        {result.map((article) => (
+                                <Article 
+                                    key={article.idA}
+                                    id={article.idA}
+                                    image={article.Slikas[0].slika_link} 
+                                    title={article.naslov} 
+                                    time={new Date(article.datum_promjene).toLocaleDateString("de-DE")} 
+                                    price={article.cijena.toLocaleString("de-DE")} 
+                                    tags={[article.lokacija,article.stanje]} 
+                                    available={article.dostupno}/>
+                            ))}
                 </div>
             </div>
             }

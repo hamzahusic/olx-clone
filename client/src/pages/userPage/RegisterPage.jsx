@@ -51,7 +51,7 @@ const RegisterPage = () => {
             console.log(data);
 
             dispatch(handleLogIn(data.user))
-            navigate('/')
+            navigate(-1)
 
         } catch (error) {
             console.log(error)

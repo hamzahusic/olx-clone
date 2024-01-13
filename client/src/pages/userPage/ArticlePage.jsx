@@ -118,12 +118,14 @@ const ArticlePage = () => {
         const data = await response.json();
         
         if(data && Object.keys(data).length>0){
-                const isSavedArticle = await fetch(`http://localhost:8080/api/saved/${user.idK}/${data[0].idA}`)
-
-                const savedArticleData = await isSavedArticle.json()
-                console.log(savedArticleData)
-                if(Object.keys(savedArticleData).length > 0){
-                    setSave(true)
+                
+                if(user.idK){      
+                    const isSavedArticle = await fetch(`http://localhost:8080/api/saved/${user.idK}/${data[0].idA}`)
+                    const savedArticleData = await isSavedArticle.json()
+                    console.log(savedArticleData)
+                    if(Object.keys(savedArticleData).length > 0){
+                        setSave(true)
+                    }
                 }
                 setArticleInfo(data)
                 setLoading(false)

@@ -6,14 +6,19 @@ const router = express.Router();
 
 router.post('/', async (req, res) => {
     
-     const searchString = req.body.input.split(' ');
+    const { input } = req.body
 
-    const input = searchString.map(value => ({ [Op.iLike] : `%${value}%` }))
+    console.log(input)
+
+    if(!input)
+        return res.status(404).json({message : "Need to provide input value"})
+
+    const searchValue = input.split(' ').map(value => ({ [Op.iLike] : `%${value}%` }))
 
     const result = await Artikal.findAll({
         where: {
             naslov: {
-                [Op.or]: input
+                [Op.or]: searchValue
             }
         },
         include : [

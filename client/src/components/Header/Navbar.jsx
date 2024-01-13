@@ -35,7 +35,7 @@ const Navbar = () => {
 
     const navigate = useNavigate();
     const [menu,setMenu] = useState(false);
-    const [inputValue,setInputValue] = useState(null);
+    const [inputValue,setInputValue] = useState('');
     const [objavaPopUp,setObjavaPopUp] = useState(false);
 
     const user = useSelector(state => state.isLogged);
@@ -44,7 +44,10 @@ const Navbar = () => {
     const searchArticle = (e) => {
         e.preventDefault();
 
-        navigate(`/search/${inputValue}`,{replace:true})
+        if(inputValue == '')
+            return
+
+        navigate(`/search/${inputValue}`)
         console.log("POKRENUTO")
     }
 
