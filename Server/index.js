@@ -10,6 +10,7 @@ const deleteArticle = require("./routes/article/deleteArticle")
 const saveArticle = require("./routes/article/saveArticle")
 const removeArticle = require("./routes/article/removeSavedArticle")
 const getSavedArticle = require("./routes/article/getSavedArticle")
+const searchArticle = require("./routes/article/searchArticle")
 
 const app = express()
 
@@ -28,5 +29,6 @@ app.use("/api/data/",getUserData)
 app.use("/api/save/",saveArticle)
 app.use("/api/remove/",removeArticle)
 app.use("/api/saved/",getSavedArticle)
+app.use("/api/search/",searchArticle)
 
 app.listen(port,() => {console.log(port);})
