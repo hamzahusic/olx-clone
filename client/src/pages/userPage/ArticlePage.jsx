@@ -173,7 +173,6 @@ const ArticlePage = () => {
                     "Content-Type": "application/json", 
                 },
                 body : JSON.stringify({
-                    datum_spasavanja : new Date().toLocaleDateString(),
                     idK : idK
                 })
             })

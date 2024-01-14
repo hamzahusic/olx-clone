@@ -6,7 +6,6 @@ import { useParams } from "react-router-dom";
 import ClipLoader from "react-spinners/ClipLoader";
 
 const SearchArticles = () => {
-    const image = "https://images.unsplash.com/photo-1502877338535-766e1452684a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2072&q=80"
     
     const [result,setResult] = useState([]);
     const [openFilter,setFilter] = useState(false);
@@ -40,6 +39,24 @@ const SearchArticles = () => {
         } catch (error) {
             console.error(error.message)
             setLoading(false)
+        }
+    }
+
+    const handleSort = (type) => {
+        setSort(false)
+        switch(type){
+            case "najjeftiniji" :
+                setResult(result.sort((a,b) => {return Number(a.cijena) - Number(b.cijena)}))
+            break;
+            case "najskuplji" :
+                setResult(result.sort((a,b) => {return Number(a.cijena) - Number(b.cijena)}).reverse())
+            break;
+            case "najstariji" :
+                setResult(result.sort((a,b) => {return new Date(a.datum_promjene) - new Date(b.datum_promjene)}))
+            break;
+            default :
+                setResult(result.sort((a,b) => {return new Date(a.datum_promjene) - new Date(b.datum_promjene)}).reverse())
+            break;
         }
     }
 
@@ -121,10 +138,10 @@ const SearchArticles = () => {
                             </svg>
                             </button>
                             <div className={`${openSort ? 'block' : 'hidden'} absolute right-0 mt-2 text-sm rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 p-3  z-10 min-w-[300px] grid grid-cols-2 gap-3`}>
-                                <button className="bg-gray-100 py-3 rounded-md">Najjeftiniji</button>
-                                <button className="bg-gray-100 py-3 rounded-md">Najsljuplii</button>
-                                <button className="bg-gray-100 py-3 rounded-md">Najstariji</button>
-                                <button className="bg-gray-100 py-3 rounded-md">Najnoviji</button>
+                                <button className="bg-gray-100 py-3 rounded-md" onClick={() => handleSort("najjeftiniji")}>Najjeftiniji</button>
+                                <button className="bg-gray-100 py-3 rounded-md" onClick={() => handleSort("najskuplji")}>Najsljuplji</button>
+                                <button className="bg-gray-100 py-3 rounded-md" onClick={() => handleSort("najstariji")}>Najstariji</button>
+                                <button className="bg-gray-100 py-3 rounded-md" onClick={() => handleSort("najnoviji")}>Najnoviji</button>
                             </div>
                         </div>
                     </div>

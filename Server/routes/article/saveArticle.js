@@ -4,9 +4,9 @@ const router = express.Router();
 
 router.post('/:id',async (req,res) => {
     const articleId = req.params.id
-    const {datum_spasavanja,idK} = req.body;
+    const {idK} = req.body;
 
-    if(!articleId || !datum_spasavanja || !idK){
+    if(!articleId || !idK){
         return res.status(403).json({
             message : "You need to provide article id!"
         })
@@ -15,7 +15,7 @@ router.post('/:id',async (req,res) => {
     try {
         
         const savedArticle = await SpaseniArtikal.create({
-            datum_spasavanja : new Date(datum_spasavanja),
+            datum_spasavanja : new Date(),
             idK : idK,
             idA : articleId
         },{
