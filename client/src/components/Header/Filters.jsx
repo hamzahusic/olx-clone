@@ -6,10 +6,9 @@ const Filters = () => {
     const [openCategory,setCategory] = useState(false);
     const [openPrice,setPrice] = useState(false);
     const [openLocation,setLocation] = useState(false);
-    const [openAllFilters,setAllFilters] = useState(false);
 
     return ( 
-        <div className="flex items-center px-5 pb-4 gap-4">
+        <div className="flex items-center px-5 pb-4 pt-2 gap-4">
             <div className="relative">
                 <button id="dropdown-button" onClick={() => setCategory(!openCategory)} className="inline-flex justify-center w-full px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-[#002f34]">
                 <span className="mr-2">Kategorije</span>

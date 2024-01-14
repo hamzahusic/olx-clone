@@ -35,7 +35,7 @@ const LoginPage = () => {
             const data = await response.json();
 
             dispatch(handleLogIn(data.user))
-            navigate(-1)
+            navigate('/')
         } catch (error) {
             alert(error)
         }           

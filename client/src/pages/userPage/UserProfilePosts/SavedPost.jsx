@@ -18,7 +18,7 @@ const SavedPosts = () => {
             return 
         
         try {
-            const response = await fetch(`http://localhost:8080/api/saved/1`)
+            const response = await fetch(`http://localhost:8080/api/saved/${user.idK}`)
     
             if(!response.ok)
                 throw Error("Error getting user articles")
