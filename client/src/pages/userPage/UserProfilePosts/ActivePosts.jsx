@@ -4,11 +4,13 @@ import NoResult from "../../../components/NoResult";
 import UserProfile from "../userProfile";
 import { useSelector } from "react-redux";
 import Article from "../../../components/Article";
+import ClipLoader from "react-spinners/ClipLoader";
 
 const UserActivePosts = () => {
 
     const user = useSelector((state) => state.isLogged)
     const [posts,setPosts] = useState([]);
+    const [loading,setLoading] = useState(true)
 
     useEffect(() => {
 
@@ -26,9 +28,11 @@ const UserActivePosts = () => {
     
                 const data = await response.json()
                 setPosts(data)
+                setLoading(false)
                 
             } catch (error) {
                 console.log(error)
+                setLoading(false)
             }
         }
         fetchActiveArticle()
@@ -43,7 +47,7 @@ const UserActivePosts = () => {
                         <Link to={'/profile/my/saved'} className="nonactive-tab">Spašeni oglasi</Link>
             </div>
             <div className="min-h-[70vh]" style={{display:!posts.length>0 && "grid",placeItems:!posts.length>0 && "center"}}>
-                {posts.length>0 && 
+                {posts.length>0 && !loading && 
                 <div className="grid grid-cols-[repeat(auto-fill,minmax(233px,1fr))] gap-4">
                    { posts.map(article => (
                         <Article 
@@ -59,7 +63,8 @@ const UserActivePosts = () => {
                    ))}
                 </div>
                 }
-                {!posts.length>0 && <NoResult text={"Nemate aktivnih oglasa"}/>}
+                {!posts.length>0 && !loading && <NoResult text={"Nemate aktivnih oglasa"}/>}
+                {!posts.length>0 && loading && <ClipLoader color={"#002f34"} size={45}/>}
             </div>
         </UserProfile>
      );
