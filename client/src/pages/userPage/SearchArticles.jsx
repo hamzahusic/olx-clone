@@ -4,10 +4,12 @@ import Filters from "../../components/Header/Filters";
 import UserLayout from "../../components/Layouts/UserLayout";
 import { useParams } from "react-router-dom";
 import ClipLoader from "react-spinners/ClipLoader";
+import noResultIcon from "../../assets/search-results.svg"
 
 const SearchArticles = () => {
     
     const [result,setResult] = useState([]);
+    const [copyResult,setCopyResult] = useState([]);
     const [openFilter,setFilter] = useState(false);
     const [openSort,setSort] = useState(false);
     const [loading,setLoading] = useState(true)
@@ -33,6 +35,7 @@ const SearchArticles = () => {
             const data = await response.json()
 
             setResult(data)
+            setCopyResult(data)
             setLoading(false)
             console.log(data)
 
@@ -60,6 +63,37 @@ const SearchArticles = () => {
         }
     }
 
+    const handleFilter = (type) => {
+        setFilter(false)
+        switch(type){
+            case "novo" :
+                setResult(result.filter(value => value.stanje == "Novo"))
+                break;
+            case "koristeno" :
+                setResult(result.filter(value => value.stanje == "Korišteno"))
+            break;
+            case "sve" : 
+                setResult(result)
+            break;
+            case "24h" :
+                setResult(result.filter(value => {new Date().getTime()-(24*60*60*1000) <= new Date(value.datum_promjene).getTime()}))
+            break;
+            case "7d" :
+                setResult(result.filter(value => new Date().getTime()-(7*24*60*60*1000) <= new Date(value.datum_promjene).getTime()))
+            break;
+            case "1m" :
+                setResult(result.filter(value => new Date().getTime()-(30*24*60*60*1000) <= new Date(value.datum_promjene).getTime()))
+            break;
+            case "dostupnoOdmah" : 
+                setResult(result.filter(value => value.dostupno === true))
+            break;
+            default :
+                setResult(result.filter(value => value.cijena != 0))
+            break;
+            }
+        console.log(result)
+    }
+
     useEffect(() => {
         fetchAricles()
     },[inputValue])
@@ -71,13 +105,7 @@ const SearchArticles = () => {
                 <div className="w-full grid place-items-center py-56">
                     <ClipLoader color={"#002f34"} size={45}/>
                 </div>
-            }
-            {!result.length > 0 && !loading && 
-                <div className="bg-yellow-100 text-center py-32 text-[#002f34] text-3xl">
-                    UPSSS! NO RESULTS
-                </div>
-            }
-            {result.length > 0 && !loading && 
+            }       
             <div>
                 <div className="flex justify-between px-4 pt-5 bg-[#f1f4f5] items-center">
                     <p className="font-semibold">{result.length} {result.length == 1 ? "REZULTAT" : "REZULTATA"}</p>
@@ -92,42 +120,43 @@ const SearchArticles = () => {
                             <div id="dropdown-menu" className={`${openFilter ? 'block' : 'hidden'} absolute right-0 mt-2 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 p-3  z-10 min-w-[300px]`}>
                                 <p className="text-sm mb-2">Stanje oglasa</p>
                                 <div className="flex gap-2 text-sm">
-                                    <button className="bg-gray-100 py-3 rounded-md w-full">Novo</button>
-                                    <button className="bg-gray-100 py-3 rounded-md w-full">Korišteno</button>
+                                    <button className="bg-gray-100 py-3 rounded-md w-full" onClick={() => handleFilter("novo")}>Novo</button>
+                                    <button className="bg-gray-100 py-3 rounded-md w-full" onClick={() => handleFilter("koristeno")}>Korišteno</button>
                                 </div>
                                 <p className="text-sm mb-2 mt-2">Datum objave</p>
                                 <div className="grid grid-cols-2 gap-2 text-sm">
-                                    <button className="bg-gray-100 py-3 rounded-md w-full">Sve</button>
-                                    <button className="bg-gray-100 py-3 rounded-md w-full">Zadnja 24h</button>
-                                    <button className="bg-gray-100 py-3 rounded-md w-full">Zadnjih 7 dana</button>
-                                    <button className="bg-gray-100 py-3 rounded-md w-full">Zadnji mjesec</button>
+                                    <button className="bg-gray-100 py-3 rounded-md w-full" onClick={() => handleFilter("sve")}>Sve</button>
+                                    <button className="bg-gray-100 py-3 rounded-md w-full" onClick={() => handleFilter("24h")}>Zadnja 24h</button>
+                                    <button className="bg-gray-100 py-3 rounded-md w-full" onClick={() => handleFilter("7d")}>Zadnjih 7 dana</button>
+                                    <button className="bg-gray-100 py-3 rounded-md w-full" onClick={() => handleFilter("1m")}>Zadnji mjesec</button>
                                 </div>
                                 <div className="flex flex-col gap-7 py-5 px-2 text-sm">
-                                    <div className="flex items-center gap-3">
-                                        <input type="checkbox" name="dostupnoOdmah" id="dostupnoOdmah" />
+                                    <div className="flex items-center gap-3 select-none">
+                                        <input type="checkbox" name="dostupnoOdmah" id="dostupnoOdmah" 
+                                            onClick={() => {
+                                                if(document.getElementById("dostupnoOdmah").checked) 
+                                                    handleFilter("dostupnoOdmah")
+                                            }}/>
                                         <label htmlFor="dostupnoOdmah"> Oglas je dostupan odmah</label>
                                     </div>
-                                    <div className="flex items-center gap-3">
-                                        <input type="checkbox" name="cijena" id="cijena" />
+                                    <div className="flex items-center gap-3 select-none">
+                                        <input type="checkbox" name="cijena" id="cijena" 
+                                            onClick={() => {
+                                                if(document.getElementById("cijena").checked) 
+                                                    handleFilter("cijena")
+                                            }}/>
                                         <label htmlFor="cijena"> Sa unesenom cijenom</label>
-                                    </div>
-                                    <div className="flex items-center gap-3">
-                                        <input type="checkbox" name="olxShop" id="olxShop" />
-                                        <label htmlFor="olxShop"> Samo iz OLX shop-a</label>
-                                    </div>
-                                    <div className="flex items-center gap-3">
-                                        <input type="checkbox" name="akcija" id="akcija" />
-                                        <label htmlFor="akcija"> Akcijske Ponude</label>
-                                    </div>
-                                    <div className="flex items-center gap-3">
-                                        <input type="checkbox" name="izdvojeni" id="izdvojeni" />
-                                        <label htmlFor="izdvojeni"> Samo izdvojeni</label>
-                                    </div>
-                                    <div className="flex items-center gap-3">
-                                        <input type="checkbox" name="olxdostava" id="olxdostava" />
-                                        <label htmlFor="olxdostava"> OLX brza dostava</label>
-                                    </div>              
+                                    </div>          
                                 </div>
+                                <button 
+                                    className="bg-[var(--pcolor)] text-center w-full text-white py-2 rounded"
+                                    onClick={() => {
+                                        setResult(copyResult);setFilter(false)
+                                        document.getElementById("cijena").checked = false
+                                        document.getElementById("dostupnoOdmah").checked = false
+                                    }}>
+                                    Reset filters
+                                </button>
                             </div>
                         </div>
                         <div className="relative">
@@ -146,6 +175,13 @@ const SearchArticles = () => {
                         </div>
                     </div>
                 </div>
+                {!result.length > 0 && !loading && 
+                <div className="grid place-items-center py-28 text-[#002f34] bg-[#f1f4f5] text-xl gap-4">
+                    <img src={noResultIcon} alt="" className="max-w-[80px] max-h-[80px]"/>
+                    <p>Nema rezultata za traženi pojam</p>
+                </div>
+                }
+                {result.length > 0 && !loading && 
                 <div className="p-5 bg-[#f1f4f5] grid grid-cols-[repeat(auto-fill,minmax(233px,1fr))] gap-4">
                         {result.map((article) => (
                                 <Article 
@@ -158,9 +194,9 @@ const SearchArticles = () => {
                                     tags={[article.lokacija,article.stanje]} 
                                     available={article.dostupno}/>
                             ))}
-                </div>
+                </div>}
             </div>
-            }
+            
         </UserLayout>
      );
 }
