@@ -19,7 +19,8 @@ router.post('/', async (req, res) => {
         where: {
             naslov: {
                 [Op.or]: searchValue
-            }
+            },
+            proces: "Aktivan"
         },
         include : [
             {

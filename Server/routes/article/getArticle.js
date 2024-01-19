@@ -17,7 +17,7 @@ router.get('/automobili/:id', async (req,res) => {
     
     const articleData = await Artikal.findAll({
         where:{
-            idA:carId
+            idA:carId,
         },
         include:[
             {
@@ -59,7 +59,8 @@ router.get('/:userId/items/:itemNum', async (req,res) => {
 
     const articleData = await Artikal.findAll({
         where:{
-            idK:userId
+            idK:userId,
+            proces: "Aktivan"
         },
         limit:numberOfItems || false,
         include:[  
@@ -89,6 +90,9 @@ router.get('/all/article/:numberOfArticle', async (req,res) => {
     }
 
     const articleData = await Artikal.findAll({
+        where : {
+            proces: "Aktivan"
+        },
         limit:numberOfArticle,
         include:[  
             {

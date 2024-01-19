@@ -27,6 +27,7 @@ import brojVrataIcon from '../../assets/carIcon/broj vrata.svg'
 import deleteIcon from '../../assets/articleImg/delete.png'
 import editIcon from '../../assets/articleImg/edit.png'
 import questionIcon from '../../assets/question.png'
+import finishIcon from '../../assets/articleImg/Article-finish.png'
 
 import 'swiper/css';
 import 'swiper/css/pagination';
@@ -222,6 +223,29 @@ const ArticlePage = () => {
         }
     }
 
+    const handleFinishCar = async (idA) => {
+        try {
+            const response = await fetch(`http://localhost:8080/api/update/automobili/${idA}/finish`,{
+                method:"POST",
+                headers: {
+                    "Content-Type": "application/json", 
+                },
+                body : JSON.stringify({
+                    idA : idA
+                })
+            })
+
+            if(!response.ok)
+                throw Error(response)
+
+            navigate("/")
+
+        } catch (error) {
+            console.error(error)
+            alert("Error removing car")
+        }
+    }
+
     useEffect(() => {
         getCarInformation()
         window.scrollTo({top:0,behavior: 'smooth'})
@@ -357,7 +381,7 @@ const ArticlePage = () => {
                     {!otherArticleloading && otherArticles && <div className="bg-white p-4">
                         <h2 className="text-2xl pb-1">Ostali oglasi korisnika</h2>
                         <div className="flex max-w-3xl gap-4 py-4 [&>*]:max-w-[192px]">
-                            {otherArticles.map((article) => (
+                            {otherArticles.filter((a) => a.idA != articleInfo[0].idA).map((article) => (
                                 <Article 
                                     key={article.idA}
                                     id={article.idA}
@@ -410,6 +434,16 @@ const ArticlePage = () => {
                                 <button className="bg-yellow-500 border-2 border-yellow-500 flex gap-2 items-center justify-center py-3 px-6 rounded-md flex-1 text-white">
                                     <img src={editIcon} alt="" width={17}/>
                                     Uredi
+                                </button>
+                            </div>
+                        }
+                        {articleInfo[0].Korisnik.idK === user.idK && articleInfo[0].proces === "Aktivan" &&
+                            <div className="flex bg-white p-3 mt-3">
+                                <button className=" bg-green-600 border-2 border-green-600 flex gap-2 items-center justify-center py-3 px-6 rounded-md flex-1 text-white"
+                                    onClick={() => handleFinishCar(articleInfo[0].idA)}
+                                >
+                                        <img src={finishIcon} alt="" width={17}/>
+                                        Završi
                                 </button>
                             </div>
                         }

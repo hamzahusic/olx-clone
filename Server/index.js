@@ -11,7 +11,7 @@ const saveArticle = require("./routes/article/saveArticle")
 const removeArticle = require("./routes/article/removeSavedArticle")
 const getSavedArticle = require("./routes/article/getSavedArticle")
 const searchArticle = require("./routes/article/searchArticle")
-
+const updateArticle = require("./routes/article/updateArticle")
 const app = express()
 
 app.use(cors())
@@ -24,6 +24,7 @@ const port = process.env.PORT || 4000
 app.use("/api/auth",userAuth)
 app.use("/api/create",createArticle)
 app.use("/api/get/",getArticle)
+app.use("/api/update/",updateArticle)
 app.use("/api/delete/",deleteArticle)
 app.use("/api/data/",getUserData)
 app.use("/api/save/",saveArticle)
