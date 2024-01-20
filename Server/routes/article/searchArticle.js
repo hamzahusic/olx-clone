@@ -2,6 +2,7 @@ const express = require('express');
 const { Op } = require('sequelize');
 const Artikal = require('../../models/artikal');
 const Slika = require('../../models/Slika');
+const KategorijaVozilo = require('../../models/KategorijaVozilo');
 const router = express.Router();
 
 router.post('/', async (req, res) => {
@@ -17,16 +18,21 @@ router.post('/', async (req, res) => {
 
     const result = await Artikal.findAll({
         where: {
-            naslov: {
-                [Op.or]: searchValue
-            },
-            proces: "Aktivan"
+            [Op.or] : [
+                {naslov: {[Op.or]: searchValue}},
+                {'$KategorijaVozilo.proizvodjac$': {[Op.or]: searchValue}},
+                {'$KategorijaVozilo.model$': {[Op.or]: searchValue}},
+            ],
+            proces : "Aktivan"
         },
         include : [
             {
                 model : Slika
+            },
+            {
+                model: KategorijaVozilo,
             }
-        ]
+        ],
     });
 
 

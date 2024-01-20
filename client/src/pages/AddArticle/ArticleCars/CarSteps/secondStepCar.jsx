@@ -1,14 +1,17 @@
 import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 
 const SecondStepCar = ({setLocation,location,setAvailable,available,condition,setCondition,price,setPrice}) => {
 
     const [showPrice,setShowPrice] = useState(true);
-
+    const user = useSelector(state => state.isLogged)
     useEffect(() => {
         if(price == 0)
             setShowPrice(false)
         else
             setShowPrice(true)
+        if(location === '')
+            setLocation(user.adresa)
     },[])
 
     return ( 
