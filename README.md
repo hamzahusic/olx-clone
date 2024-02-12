@@ -12,11 +12,11 @@ Make sure you have the following installed on your machine:
 -   [npm](https://www.npmjs.com/) (Node Package Manager)
 -   [PostgreSQL](https://www.postgresql.org/)
 
-Whole installation guide will be published soon...
+The whole installation guide will be published soon...
 
 # Images of application
 
-Here are some images of OLX.ba clone application
+Here are some images of the OLX.ba clone application
 
 ![landingpage_OLX](https://github.com/hamzahusic/olx-clone/assets/73586845/c3d5a907-0a68-477d-bfc3-119105154d16)
 ![login_page_OLX](https://github.com/hamzahusic/olx-clone/assets/73586845/a3902df2-fbc0-4e34-bc8a-f3fb97f9f9f8)
@@ -25,9 +25,8 @@ Here are some images of OLX.ba clone application
 ![car_page_OLX](https://github.com/hamzahusic/olx-clone/assets/73586845/ebd10a38-c319-4536-be6f-8a145e55941b)
 ![car_details_OLX](https://github.com/hamzahusic/olx-clone/assets/73586845/89228c1c-ec07-49f4-96f1-eee5176edab0)
 ![my_article_active_OLX](https://github.com/hamzahusic/olx-clone/assets/73586845/d3217f20-d3f4-4d48-8e55-2e0029551543)
-![Uploading search_OLX.png…]()
-![Uploading create_oglas_OLX.png…]()
+![search_OLX](https://github.com/hamzahusic/olx-clone/assets/73586845/df724c1b-11ff-44b9-9f09-9bfe8692e37e)
+![create_oglas_OLX](https://github.com/hamzahusic/olx-clone/assets/73586845/f694c764-cf25-4203-a06a-ba3aa4fb8578)
 
-
-# Diagram of posgreSQL database
+# Diagram of PostgreSQL database
 ![database_diagram_OLX](https://github.com/hamzahusic/olx-clone/assets/73586845/6d21f1c7-9a90-4e55-ba4e-97a8e3ff724b)
