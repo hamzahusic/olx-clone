@@ -263,8 +263,8 @@ const ArticlePage = () => {
                     </div>
                 </div>
             </PopUp>}
-            {!loading && Object.keys(articleInfo[0]).length > 0 && <div className="flex max-w-[1180] p-4 items-start justify-center gap-4 bg-[#f1f4f5]">
-                <div className=" flex flex-col gap-4">
+            {!loading && Object.keys(articleInfo[0]).length > 0 && <div className="flex mx-auto max-w-[1180] p-4 items-start justify-center gap-4 bg-[#f1f4f5]">
+                <div className=" flex flex-col gap-4 max-w-[832px]">
                     <div className="bg-white p-4">
                         <h1 className="text-[26px] font-light">{articleInfo[0].naslov}</h1>
                         <div className="flex gap-2 items-center justify-between pb-3">
@@ -378,7 +378,7 @@ const ArticlePage = () => {
                             <button className="txt-color border-2 border-[#002f34] py-3 px-4 rounded-md text-sm">Postavi pitanje</button>
                         </div>}
                     </div>
-                    {!otherArticleloading && otherArticles && <div className="bg-white p-4">
+                    {!otherArticleloading && otherArticles && otherArticles.length > 1 && <div className="bg-white p-4">
                         <h2 className="text-2xl pb-1">Ostali oglasi korisnika</h2>
                         <div className="flex max-w-3xl gap-4 py-4 [&>*]:max-w-[192px]">
                             {otherArticles.filter((a) => a.idA != articleInfo[0].idA).map((article) => (
